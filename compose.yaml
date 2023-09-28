@@ -1,0 +1,54 @@
+version: "2.1"
+
+services:
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: SAEroot
+      MYSQL_DATABASE: dolibarrSAE
+      MYSQL_USER: Admin1
+      MYSQL_PASSWORD: minetest1234=+
+    volumes:
+      - mariadb_data:/var/lib/mysql
+  
+  phpmyadmin:
+        image: phpmyadmin
+        environment:
+            PMA_HOST: mariadb
+        depends_on:
+            - mariadb
+        ports:
+            - "8080:80"
+
+  web:
+        image: tuxgasy/dolibarr
+        environment:
+            DOLI_DB_HOST: mariadb
+            DOLI_DB_USER: Admin1
+            DOLI_DB_PASSWORD: minetest1234=+
+            DOLI_DB_NAME: dolibarrSAE
+            DOLI_URL_ROOT: 'localhost'
+            PHP_INI_DATE_TIMEZONE: 'Europe/Paris'
+        ports:
+            - "80:80"
+        links:
+            - mariadb
+
+  minetest:
+    image: lscr.io/linuxserver/minetest:latest
+    container_name: minetest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/CET
+      - "CLI_ARGS=--gameid minetest --port 30000" #optional
+    volumes:
+      - minetest_data:/config/.minetest
+    ports:
+      - 30000:30000/udp
+    restart: unless-stopped
+
+volumes:
+  mariadb_data:
+  dolibarr_data:
+  minetest_data:
