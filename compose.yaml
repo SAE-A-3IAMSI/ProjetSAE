@@ -27,7 +27,7 @@ services:
             DOLI_DB_USER: Admin1
             DOLI_DB_PASSWORD: minetest1234=+
             DOLI_DB_NAME: dolibarrSAE
-            DOLI_URL_ROOT: 'localhost'
+            DOLI_URL_ROOT: 'http://localhost'
             PHP_INI_DATE_TIMEZONE: 'Europe/Paris'
         ports:
             - "80:80"
