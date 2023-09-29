@@ -73,9 +73,12 @@ local function save_inventory(player_name)
     if not player then
         return false, "Joueur introuvable."
     end
+
     local inventory = player:get_inventory()
     local main_inventory = inventory:get_list("main")
+
     local item_list = {}  -- Tableau pour stocker les noms des objets
+
     for _, itemstack in pairs(main_inventory) do
         if not itemstack:is_empty() then
             local item_name = itemstack:get_name()
@@ -83,20 +86,28 @@ local function save_inventory(player_name)
             table.insert(item_list, item_name .. " (" .. item_count .. ")")
         end
     end
+
     if #item_list > 0 then
         -- Créez une table avec le nom du joueur et l'inventaire
         local player_inventory = {
             player_name = player_name,
             inventory = item_list
         }
+
         -- Planifiez l'enregistrement dans 5 secondes
         local json_str = minetest.write_json(player_inventory)  -- Convertir la table en chaîne JSON
+
         -- Enregistrement dans un fichier avec le nom du joueur dans le nom du fichier
         local file_path = minetest.get_worldpath() .. "/inventory_" .. player_name .. ".json"
         local file = io.open(file_path, "w")
         if file then
             file:write(json_str)
             file:close()
+
+            --! -- Affichez l'inventaire dans le chat global
+            -- local inventory_str = table.concat(item_list, ", ")
+            -- minetest.chat_send_all("Inventaire de " .. player_name .. ": " .. inventory_str)
+
             return true, "Objets dans l'inventaire du joueur enregistrés dans inventory.json."
         else
             return false, "Impossible d'ouvrir le fichier pour enregistrement."
@@ -106,17 +117,26 @@ local function save_inventory(player_name)
     end
 end
 
+-- -- Hook pour gérer lorsqu'un joueur fais un clique gauche
+-- minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
+-- 	local player_name = puncher:get_player_name()
+-- 	save_inventory(player_name)
+-- end)
 
-
--- Hook pour gérer lorsqu'un joueur fais un clique gauche
-minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
-	local player_name = puncher:get_player_name()
+-- Hook pour gérer lorsqu'un joueur casse un block
+minetest.register_on_dignode(function(pos, oldnode, digger)
+	local player_name = digger:get_player_name()
 	save_inventory(player_name)
 end)
 
+-- Hook pour gérer lorsqu'un joueur place un block
+minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
+	local player_name = placer:get_player_name()
+	save_inventory(player_name)
+end)
 
 -- Hook pour gérer lorsqu'un joueur fabrique un item
 minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv)
-    local player_name = puncher:get_player_name()
-    save_inventory(player_name)
+	local player_name = player:get_player_name()
+	save_inventory(player_name)
 end)
