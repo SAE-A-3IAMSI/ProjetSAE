@@ -108,11 +108,12 @@ end
 
 
 
--- Hook pour gérer lorsqu'un joueur tape/brise un item
+-- Hook pour gérer lorsqu'un joueur fais un clique gauche
 minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
-    local player_name = puncher:get_player_name()
-    save_inventory(player_name)
+	local player_name = puncher:get_player_name()
+	save_inventory(player_name)
 end)
+
 
 -- Hook pour gérer lorsqu'un joueur fabrique un item
 minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv)
