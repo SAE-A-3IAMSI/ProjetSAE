@@ -37,9 +37,9 @@ services:
         - dolibarr_data:/var/lib/dolibarr
 
   minetest:
-    build: 
+    build:
+      context : .
       dockerfile: minetest.Dockerfile
-    image: linuxserver/minetest:latest
     container_name: minetest
     environment:
       - PUID=1000
