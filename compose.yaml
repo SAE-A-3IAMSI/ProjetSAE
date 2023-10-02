@@ -20,7 +20,7 @@ services:
         ports:
             - "8080:80"
 
-  web:
+  dolibarr:
         image: tuxgasy/dolibarr
         environment:
             DOLI_DB_HOST: mariadb
@@ -33,9 +33,13 @@ services:
             - "80:80"
         links:
             - mariadb
+        volumes :
+        - dolibarr_data: /var/lib/dolibarr
 
   minetest:
-    image: lscr.io/linuxserver/minetest:latest
+    build: 
+      dockerfile: minetest.Dockerfile
+    image: linuxserver/minetest:latest
     container_name: minetest
     environment:
       - PUID=1000
