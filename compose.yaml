@@ -47,8 +47,18 @@ services:
     ports:
       - 30000:30000/udp
     restart: unless-stopped
+    networks:
+        - minetest_network
+    
+  apache:
+    image: httpd
+    networks:
+        - minetest_network
 
 volumes:
   mariadb_data:
   dolibarr_data:
   minetest_data:
+
+networks:
+    minetest_network:
