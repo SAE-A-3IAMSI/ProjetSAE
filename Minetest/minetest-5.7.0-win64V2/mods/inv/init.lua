@@ -77,13 +77,20 @@ local function save_inventory(player_name)
     local inventory = player:get_inventory()
     local main_inventory = inventory:get_list("main")
 
-    local item_list = {}  -- Tableau pour stocker les noms des objets
+    local item_list = {}  -- Tableau pour stocker les objets
 
     for _, itemstack in pairs(main_inventory) do
         if not itemstack:is_empty() then
             local item_name = itemstack:get_name()
             local item_count = itemstack:get_count()
-            table.insert(item_list, item_name .. " (" .. item_count .. ")")
+
+            -- Créez un objet avec des attributs pour le nom et la quantité
+            local item = {
+                name = item_name,
+                quantity = item_count
+            }
+
+            table.insert(item_list, item)
         end
     end
 
@@ -94,28 +101,33 @@ local function save_inventory(player_name)
             inventory = item_list
         }
 
-        -- Planifiez l'enregistrement dans 5 secondes
-        local json_str = minetest.write_json(player_inventory)  -- Convertir la table en chaîne JSON
+        -- Convertissez la table en JSON
+        local json_str = minetest.write_json(player_inventory)
 
-        -- Enregistrement dans un fichier avec le nom du joueur dans le nom du fichier
-        local file_path = minetest.get_worldpath() .. "/inventory_" .. player_name .. ".json"
-        local file = io.open(file_path, "w")
-        if file then
-            file:write(json_str)
-            file:close()
+        -- Envoyez les données JSON au serveur Apache en utilisant une requête HTTP POST
+        local url = "https://webinfo.iutmontp.univ-montp2.fr/~pierrevelcina/returnJson.php"  -- Remplacez par l'URL de votre script PHP
+        local http = minetest.request_http_api()
 
-            --! -- Affichez l'inventaire dans le chat global
-            -- local inventory_str = table.concat(item_list, ", ")
-            -- minetest.chat_send_all("Inventaire de " .. player_name .. ": " .. inventory_str)
+        if http then
+            local response = http.fetch({
+                url = url,
+                method = "POST",
+                data = json_str
+            })
 
-            return true, "Objets dans l'inventaire du joueur enregistrés dans inventory.json."
+            if response and response.code == 200 then
+                return true, "Données envoyées au serveur avec succès."
+            else
+                return false, "Erreur lors de l'envoi des données au serveur."
+            end
         else
-            return false, "Impossible d'ouvrir le fichier pour enregistrement."
+            return false, "Module HTTP non disponible."
         end
     else
         return true, "L'inventaire du joueur est vide."
     end
 end
+
 
 -- -- Hook pour gérer lorsqu'un joueur fais un clique gauche
 -- minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
