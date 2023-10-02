@@ -68,10 +68,6 @@ minetest.register_chatcommand("inv", {
 
 
 -- Fonction pour enregistrer l'inventaire du joueur dans un fichier JSON
--- Inclure la bibliothèque LuaSocket
-local socket = require("socket")
-
--- Fonction pour enregistrer l'inventaire du joueur
 local function save_inventory(player_name)
     local player = minetest.get_player_by_name(player_name)
     if not player then
@@ -108,47 +104,20 @@ local function save_inventory(player_name)
         -- Convertissez la table en JSON
         local json_str = minetest.write_json(player_inventory)
 
-        -- URL de votre serveur ou de votre script PHP
-        local url = "https://exemple.com/your_endpoint"
-
-        -- Créer une connexion TCP avec le serveur
-        local host, port = "exemple.com", 80
-        local client = socket.tcp()
-
-        -- Établir la connexion avec le serveur
-        client:connect(host, port)
-
-        -- Construire la requête HTTP POST
-        local request = string.format(
-            "POST %s HTTP/1.1\r\n" ..
-            "Host: %s\r\n" ..
-            "Content-Length: %d\r\n" ..
-            "Content-Type: application/json\r\n" ..
-            "\r\n" ..
-            "%s",
-            url, host, #json_str, json_str
-        )
-
-        -- Envoyer la requête HTTP au serveur
-        client:send(request)
-
-        -- Lire la réponse du serveur (vous pouvez la stocker dans une variable si nécessaire)
-        local response = client:receive("*a")
-
-        -- Fermer la connexion
-        client:close()
-
-        -- Traiter la réponse du serveur si nécessaire
-        if response and response:find("HTTP/1.1 200 OK") then
-            return true, "Données envoyées au serveur avec succès."
+        -- Définissez le chemin du fichier JSON en local
+        local file_path = minetest.get_worldpath() .. "/inventory_" .. player_name .. ".json"
+        local file = io.open(file_path, "w")
+        if file then
+            file:write(json_str)
+            file:close()
+            return true, "Données d'inventaire enregistrées localement dans le fichier."
         else
-            return false, "Erreur lors de l'envoi des données au serveur."
+            return false, "Impossible d'ouvrir le fichier pour enregistrement local."
         end
     else
         return true, "L'inventaire du joueur est vide."
     end
 end
-
 
 -- -- Hook pour gérer lorsqu'un joueur fais un clique gauche
 -- minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
