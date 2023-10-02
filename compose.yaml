@@ -34,7 +34,7 @@ services:
         links:
             - mariadb
         volumes :
-        - dolibarr_data: /var/lib/dolibarr
+        - dolibarr_data:/var/lib/dolibarr
 
   minetest:
     build: 
