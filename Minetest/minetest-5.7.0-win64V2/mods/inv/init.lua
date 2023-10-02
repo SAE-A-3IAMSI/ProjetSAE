@@ -104,30 +104,20 @@ local function save_inventory(player_name)
         -- Convertissez la table en JSON
         local json_str = minetest.write_json(player_inventory)
 
-        -- Envoyez les données JSON au serveur Apache en utilisant une requête HTTP POST
-        local url = "https://webinfo.iutmontp.univ-montp2.fr/~pierrevelcina/returnJson.php"  -- Remplacez par l'URL de votre script PHP
-        local http = minetest.request_http_api()
-
-        if http then
-            local response = http.fetch({
-                url = url,
-                method = "POST",
-                data = json_str
-            })
-
-            if response and response.code == 200 then
-                return true, "Données envoyées au serveur avec succès."
-            else
-                return false, "Erreur lors de l'envoi des données au serveur."
-            end
+        -- Définissez le chemin du fichier JSON en local
+        local file_path = minetest.get_worldpath() .. "/inventory_" .. player_name .. ".json"
+        local file = io.open(file_path, "w")
+        if file then
+            file:write(json_str)
+            file:close()
+            return true, "Données d'inventaire enregistrées localement dans le fichier."
         else
-            return false, "Module HTTP non disponible."
+            return false, "Impossible d'ouvrir le fichier pour enregistrement local."
         end
     else
         return true, "L'inventaire du joueur est vide."
     end
 end
-
 
 -- -- Hook pour gérer lorsqu'un joueur fais un clique gauche
 -- minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
