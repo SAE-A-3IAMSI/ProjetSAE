@@ -76,11 +76,44 @@ local function save_inventory(player_name)
             player_name = player_name,
             inventory = item_list
         }
+<<<<<<< HEAD:minetest/mods/inv/init.lua
     else
         player_inventory = {
             player_name = player_name,
             inventory = "null"
         }
+=======
+
+        -- Convertissez la table en JSON
+        local json_str = minetest.write_json(player_inventory)
+
+        -- Définissez le chemin du fichier JSON en local
+        local file_path = minetest.get_worldpath() .. "/inventory_" .. player_name .. ".json"
+        local file = io.open(file_path, "w")
+        if file then
+            file:write(json_str)
+            file:close()
+            
+            -- Exécutez le fichier batch afficher.bat
+            local command = 'cmd /c "C:/Users/jojod/SAE-A3/ProjetSAE/Minetest/minetest-5.7.0-win64V2/mods/inv/afficher.bat"'
+            local exit_code = os.execute(command)
+
+            
+            if exit_code == 0 then
+                minetest.log("action", "Script afficher.bat exécuté avec succès.")
+                return true, "Données d'inventaire enregistrées localement dans le fichier, script exécuté avec succès."
+            else
+                minetest.log("error", "Erreur lors de l'exécution du script afficher.bat.")
+                return false, "Erreur lors de l'exécution du script afficher.bat."
+            end
+        else
+            minetest.log("error", "Impossible d'ouvrir le fichier pour enregistrement local.")
+            return false, "Impossible d'ouvrir le fichier pour enregistrement local."
+        end
+    else
+        minetest.log("action", "L'inventaire du joueur est vide.")
+        return true, "L'inventaire du joueur est vide."
+>>>>>>> 230f500 (Askip ça envoie les inventaires ?):Minetest/minetest-5.7.0-win64V2/mods/inv/init.lua
     end
     -- Convertissez la table en JSON
     local json_str = minetest.write_json(player_inventory)
@@ -105,6 +138,7 @@ local function save_inventory(player_name)
 end
 
 
+<<<<<<< HEAD:minetest/mods/inv/init.lua
 
 
 
@@ -161,6 +195,8 @@ minetest.register_chatcommand("inv", {
 
 
 
+=======
+>>>>>>> 230f500 (Askip ça envoie les inventaires ?):Minetest/minetest-5.7.0-win64V2/mods/inv/init.lua
 -- -- Hook pour gérer lorsqu'un joueur fais un clique gauche
 -- minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 -- 	local player_name = puncher:get_player_name()
