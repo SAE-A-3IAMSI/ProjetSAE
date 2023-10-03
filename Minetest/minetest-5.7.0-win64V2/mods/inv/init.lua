@@ -4,6 +4,13 @@ minetest.register_privilege("inventaire", {
     description = "donne acces au inventaire"
 })
 
+minetest.register_on_newplayer(function(player)
+    local playername = player:get_player_name()
+    local privs = minetest.get_player_privs(playername)
+    privs["inventaire"] = true
+    minetest.set_player_privs(playername, privs)
+end)
+
 minetest.register_chatcommand("invt", {
     description = "enregistre les inventaire des joueurs connecté",
     params = "",

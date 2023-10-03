@@ -268,7 +268,6 @@ function Trade:finalize()
 			local item_data = {
 				name = itemstack:get_name(),
 				count = itemstack:get_count(),
-				wear = itemstack:get_wear(),
 			}
 
 			table.insert(requester_items, item_data)
@@ -289,7 +288,6 @@ function Trade:finalize()
 			local item_data = {
 				name = itemstack:get_name(),
 				count = itemstack:get_count(),
-
 			}
 
 			table.insert(accepter_items, item_data)
@@ -310,7 +308,7 @@ function Trade:finalize()
 	local json_data = minetest.write_json(trade_data)
 
 	-- Write the JSON data to a file
-	local file_name = string.format("trade_%s_%s_%s.json", os.date("%H-%M_%d-%m-%Y"), self.requester, self.accepter)
+	local file_name = string.format("trade_%s_%s_%s.json", os.date("%H-%M-%s_%d-%m-%Y"), self.requester, self.accepter)
 	local file = io.open(minetest.get_worldpath().."/"..file_name, "w")
 	if file then
 		file:write(json_data)
