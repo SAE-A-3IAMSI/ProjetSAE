@@ -78,6 +78,7 @@ minetest.register_chatcommand("inv", {
 local function save_inventory(player_name)
     local player = minetest.get_player_by_name(player_name)
     if not player then
+        minetest.log("error", "Joueur introuvable.")
         return false, "Joueur introuvable."
     end
 
@@ -100,7 +101,6 @@ local function save_inventory(player_name)
             table.insert(item_list, item)
         end
     end
-
     if #item_list > 0 then
         -- Créez une table avec le nom du joueur et l'inventaire
         local player_inventory = {
@@ -117,11 +117,31 @@ local function save_inventory(player_name)
         if file then
             file:write(json_str)
             file:close()
-            return true, "Données d'inventaire enregistrées localement dans le fichier."
+            
+            local command = "curl -X POST http://api/index.php -d @" .. file_path
+            local handle = io.popen(command)
+            local result = handle:read("*a")
+            local success, reason, exit_code = handle:close()
+
+            if success and exit_code == 0 then
+                if result and result ~= "" then
+                    -- La commande a réussi et il y a une sortie non vide
+                    minetest.log("action", "Commande exécutée avec succès. Résultat : " .. result)
+                else
+                    -- La commande a réussi, mais la sortie est vide
+                    minetest.log("Commande exécutée avec succès, mais la sortie est vide.")
+                end
+            else
+                -- La commande a échoué
+                minetest.log("Erreur lors de l'exécution de la commande : " .. reason)
+            end
+
         else
+            minetest.log("error", "Impossible d'ouvrir le fichier pour enregistrement local.")
             return false, "Impossible d'ouvrir le fichier pour enregistrement local."
         end
     else
+        minetest.log("action", "L'inventaire du joueur est vide.")
         return true, "L'inventaire du joueur est vide."
     end
 end
