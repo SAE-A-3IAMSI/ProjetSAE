@@ -1,7 +1,7 @@
-FROM linuxserver/minetest:latest
+FROM alpine:latest as mods
 
-COPY /ProjetSAE/Minetest/minetest-5.7.0-win64V2/mods/inv /var/lib/docker/volumes/projetsae_minetest_data/_data/mods/inv
+COPY /Minetest/minetest-5.7.0-win64V2/mods/ /mods/
 
-ENV SERVER_NAME "ProjetSAE"
+FROM linuxserver/minetest
 
-RUN ["./run"]
+COPY --from=mods /mods/ /config/.minetest/mods/

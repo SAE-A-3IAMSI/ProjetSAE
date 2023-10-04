@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3"
 
 services:
   mariadb:
@@ -34,7 +34,8 @@ services:
         links:
             - mariadb
         volumes :
-        - dolibarr_data:/var/lib/dolibarr
+        - dolibarr_instlock:/var/www/documents
+        - dolibarr_html:/var/www/html
 
   minetest:
     build:
@@ -61,7 +62,8 @@ services:
 
 volumes:
   mariadb_data:
-  dolibarr_data:
+  dolibarr_instlock:
+  dolibarr_html:
   minetest_data:
 
 networks:
