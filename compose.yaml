@@ -108,7 +108,7 @@ services:
     # Cnstruction de l'image à partir d'un DockerFile
     build:
       context: .
-      dockerfile: api.DockerFile
+      dockerfile: api.Dockerfile
     # Nom du conteneur
     container_name: api
     # Sous-réseaux auxquels le conteneur API est connecté
