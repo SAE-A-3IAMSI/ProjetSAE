@@ -62,6 +62,8 @@ services:
       DOLI_DB_NAME: dolibarrSAE
       # Url surlaquelle Dolibarr est accessible
       DOLI_URL_ROOT: 'http://localhost'
+      # Secret Salt for Encryption
+      DOLI_INSTANCE_UNIQUE_ID: 'Mg2zBK2Yj5B528mOlz74Hdvi14GZCemA'
       # Timezone utilisée par PHP
       PHP_INI_DATE_TIMEZONE: 'Europe/Paris'
     # Port surlequel Dolibarr écoute
