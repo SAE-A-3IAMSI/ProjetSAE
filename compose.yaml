@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3"
 
 services:
   mariadb:
@@ -20,7 +20,7 @@ services:
         ports:
             - "8080:80"
 
-  web:
+  dolibarr:
         image: tuxgasy/dolibarr
         environment:
             DOLI_DB_HOST: mariadb
@@ -33,9 +33,14 @@ services:
             - "80:80"
         links:
             - mariadb
+        volumes :
+        - dolibarr_instlock:/var/www/documents
+        - dolibarr_html:/var/www/html
 
   minetest:
-    image: lscr.io/linuxserver/minetest:latest
+    build:
+      context : .
+      dockerfile: minetest.Dockerfile
     container_name: minetest
     environment:
       - PUID=1000
@@ -48,8 +53,8 @@ services:
       - 30000:30000/udp
     restart: unless-stopped
     networks:
-        - minetest_network
-    
+        - minetest_network       
+  
   api:
     build:
       context: .
@@ -65,12 +70,14 @@ services:
         - api_data:/var/www/html
     ports:
         - 8081:80
+  
     
 
 
 volumes:
   mariadb_data:
-  dolibarr_data:
+  dolibarr_instlock:
+  dolibarr_html:
   minetest_data:
   api_data:
 
