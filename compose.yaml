@@ -76,6 +76,7 @@ services:
     volumes:
       - dolibarr_instlock:/var/www/documents
       - dolibarr_html:/var/www/html
+      - dolibarr_custom:/var/www/html/custom
 
   # Conteneur Minetest
   minetest:
@@ -123,6 +124,7 @@ volumes:
   mariadb_data:
   dolibarr_instlock:
   dolibarr_html:
+  dolibarr_custom:
   minetest_data:
   api_data:
 
