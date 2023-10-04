@@ -1,62 +1,109 @@
-version: "3"
+version: '3'
 
 services:
-
+  # Conteneur du SGBD MariaDB
   mariadb:
+    # Image utilisée par le conteneur
     image: mariadb:latest
+    # Nom du conteneur
+    container_name: mariadb
+    # Variables d'environnement du conteneur
     environment:
+      # Mot de passe de l'utilisateur "root" sur MariaDB
       MYSQL_ROOT_PASSWORD: SAEroot
+      # Nom de la base de données créée
       MYSQL_DATABASE: dolibarrSAE
+      # Utilisateur de la BD créé
       MYSQL_USER: Admin1
+      # Mot de passe de l'utilisateur
       MYSQL_PASSWORD: minetest1234=+
+    # Volume pour stocker les données du conteneur MariaDB
     volumes:
       - mariadb_data:/var/lib/mysql
-  
+    # Sous-réseaux auxquels le conteneur est connecté
+    networks:
+      - mariadb_network
+
+  # Conteneur de PHPMyAdmin
   phpmyadmin:
-        image: phpmyadmin
-        environment:
-            PMA_HOST: mariadb
-        depends_on:
-            - mariadb
-        ports:
-            - "8080:80"
+    # Image utilisée par le conteneur
+    image: phpmyadmin
+    # Nom du conteneur
+    container_name: phpmyadmin
+    # Variables d'environnement du conteneur
+    environment:
+      # SGBD Hôte sur lequel PhpMyAdmin va se connecter.
+      PMA_HOST: mariadb
+    # Dépendances du conteneur - PhpMyAdmin attend que que le conteneur "mariadb" soit lancé pour se lancer.
+    depends_on:
+      - mariadb
+    # Port surlequel PhpMyAdmin écoute
+    ports:
+      - '8080:80'
+    # Sous-réseaux auxquels PhpMyAdmin est connecté.
+    networks:
+      - mariadb_network
 
+  # Conteneur de Dolibarr
   dolibarr:
-        image: tuxgasy/dolibarr
-        environment:
-            DOLI_DB_HOST: mariadb
-            DOLI_DB_USER: Admin1
-            DOLI_DB_PASSWORD: minetest1234=+
-            DOLI_DB_NAME: dolibarrSAE
-            DOLI_URL_ROOT: 'http://localhost'
-            PHP_INI_DATE_TIMEZONE: 'Europe/Paris'
-        ports:
-            - "80:80"
-        links:
-            - mariadb
-        volumes :
-        - dolibarr_instlock:/var/www/documents
-        - dolibarr_html:/var/www/html
+    # Image utilisée par le conteneur
+    image: tuxgasy/dolibarr
+    # Nom du conteneur
+    container_name: dolibarr
+    # Variables d'environnement du conteneur
+    environment:
+      # SGBD utilisé par Dolibarr
+      DOLI_DB_HOST: mariadb
+      # Nom d'utilisateur de Dolibarr sur la BD
+      DOLI_DB_USER: Admin1
+      # Mot de passe de Dolibarr sur la BD
+      DOLI_DB_PASSWORD: minetest1234=+
+      # Nom de la base de données que Dolibarr utilise
+      DOLI_DB_NAME: dolibarrSAE
+      # Url surlaquelle Dolibarr est accessible
+      DOLI_URL_ROOT: 'http://localhost'
+      # Timezone utilisée par PHP
+      PHP_INI_DATE_TIMEZONE: 'Europe/Paris'
+    # Port surlequel Dolibarr écoute
+    ports:
+      - '80:80'
+    # Sous-réseaux auxquels Dolibarr est connecté
+    networks:
+      - mariadb_network
+    # Volumes du conteneur
+    volumes:
+      - dolibarr_instlock:/var/www/documents
+      - dolibarr_html:/var/www/html
 
+  # Conteneur Minetest
   minetest:
+    # Construction du l'image Minetest à partir d'un DockerFile
     build:
-      context : .
+      context: .
       dockerfile: minetest.Dockerfile
+    # Nom du conteneur
     container_name: minetest
+    # Variables d'environnement du conteneur
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/CET
-      - "CLI_ARGS=--gameid minetest --port 30000" #optional
+      - 'CLI_ARGS=--gameid minetest --port 30000' #optional
+    # Volumes du conteneur
     volumes:
       - minetest_data:/config/.minetest
+    # Ports surlesquels Minetest écoute.
     ports:
       - 30000:30000/udp
+    # Redémarre automatiquement ce conteneur.
     restart: unless-stopped
+    # Sous-réseaux auxquels Minetest est connecté.
     networks:
-        - minetest_network       
-  
+      - minetest_network
+
+  # Conteneur de l'API sour Apache
   api:
+    # Cnstruction de l'image à partir d'un DockerFile
     build:
       context: .
       dockerfile_inline: |
@@ -65,13 +112,16 @@ services:
         RUN ln -s ../mods-available/{expires,headers,rewrite}.load /etc/apache2/mods-enabled/
         RUN sed -e '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' -i /etc/apache2/apache2.conf
         COPY php.ini /usr/local/etc/php/
+    # Nom du conteneur
+    container_name: api
+    # Sous-réseaux auxquels le conteneur API est connecté
     networks:
-        - minetest_network
+      - minetest_network
+    # Volumes du conteneur
     volumes:
-        - api_data:/var/www/html
-    ports:
-        - 8081:80
+      - api_data:/var/www/html
 
+# Volumes définis
 volumes:
   mariadb_data:
   dolibarr_instlock:
@@ -79,5 +129,7 @@ volumes:
   minetest_data:
   api_data:
 
+# Sous-réseaux définis
 networks:
-    minetest_network:
+  minetest_network:
+  mariadb_network:
