@@ -1,0 +1,17 @@
+{
+    "inventory": [
+        {
+            "name": "default:fern_1",
+            "quantity": 1
+        },
+        {
+            "name": "default:dirt",
+            "quantity": 40
+        },
+        {
+            "name": "default:pine_tree",
+            "quantity": 3
+        }
+    ],
+    "player_name": "test"
+}
