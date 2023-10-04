@@ -72,6 +72,7 @@ services:
     # Sous-réseaux auxquels Dolibarr est connecté
     networks:
       - mariadb_network
+      - dolibarr_network
     # Volumes du conteneur
     volumes:
       - dolibarr_instlock:/var/www/documents
@@ -115,6 +116,7 @@ services:
     # Sous-réseaux auxquels le conteneur API est connecté
     networks:
       - minetest_network
+      - dolibarr_network
     # Volumes du conteneur
     volumes:
       - api_data:/var/www/html
@@ -132,3 +134,4 @@ volumes:
 networks:
   minetest_network:
   mariadb_network:
+  dolibarr_network:
