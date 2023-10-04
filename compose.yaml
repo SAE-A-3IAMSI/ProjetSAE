@@ -53,18 +53,30 @@ services:
       - 30000:30000/udp
     restart: unless-stopped
     networks:
-        - minetest_network
-    
-  apache:
-    image: httpd
+        - minetest_network       
+  
+  api:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM php:apache
+        SHELL ["/bin/bash", "-c"]
+        RUN ln -s ../mods-available/{expires,headers,rewrite}.load /etc/apache2/mods-enabled/
+        RUN sed -e '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' -i /etc/apache2/apache2.conf
+        COPY php.ini /usr/local/etc/php/
     networks:
         - minetest_network
+    volumes:
+        - api_data:/var/www/html
+    ports:
+        - 8081:80
 
 volumes:
   mariadb_data:
   dolibarr_instlock:
   dolibarr_html:
   minetest_data:
+  api_data:
 
 networks:
     minetest_network:
