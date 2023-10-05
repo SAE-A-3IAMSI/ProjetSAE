@@ -82,7 +82,7 @@ function debug_to_console($data) {
 function readAllUsers()
 {
     $ch = curl_init();
-    $url = "http://localhost/api/index.php/users";
+    $url = "http://dolibarr/api/index.php/users";
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
     $headers = array(
@@ -99,7 +99,7 @@ function readAllUsers()
 function readAllProducts()
 {
     $ch = curl_init();
-    $url = "http://localhost/api/index.php/products?sortfield=t.ref&sortorder=ASC&limit=100&ids_only=true";
+    $url = "http://dolibarr/api/index.php/products?sortfield=t.ref&sortorder=ASC&limit=100&ids_only=true";
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
     $headers = array(
@@ -115,7 +115,7 @@ function readAllProducts()
 
 function getObjectByName($class, $name)
 {
-    $url = "http://localhost/api/index.php/".$class."?sortfield=t.rowid&sortorder=ASC&limit=100&sqlfilters=(t.ref%3Alike%3A'".$name."')";
+    $url = "http://dolibarr/api/index.php/".$class."?sortfield=t.rowid&sortorder=ASC&limit=100&sqlfilters=(t.ref%3Alike%3A'".$name."')";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
@@ -174,7 +174,7 @@ function getProductQtyByName($name)
 
 function addItemToStock($productName, $warehouseName, $qty)
 {
-    $url = "http://localhost/api/index.php/stockmovements";
+    $url = "http://dolibarr/api/index.php/stockmovements";
     $data = array(
         'product_id' => getProductIdByName($productName),
         'warehouse_id' => getWarehouseIdByName($warehouseName),
@@ -197,7 +197,7 @@ function addItemToStock($productName, $warehouseName, $qty)
 
 function createObject($class, $data)
 {
-    $url = "http://localhost/api/index.php/".$class;
+    $url = "http://dolibarr/api/index.php/".$class;
     $data_json = json_encode($data);
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -236,7 +236,7 @@ function createNewProduct($name)
 function deleteProduct($id)
 {
     $ch = curl_init();
-    $url = "http://localhost/api/index.php/products/".$id;
+    $url = "http://dolibarr/api/index.php/products/".$id;
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
     $headers = array(
@@ -289,7 +289,7 @@ function getItemStock($productName, $warehouseName)
     $productId = getProductIdByName($productName);
     $warehouseId = getWarehouseIdByName($warehouseName);
 
-    $url = "http://localhost/api/index.php/products/".$productId."/stock?selected_warehouse_id=".$warehouseId;
+    $url = "http://dolibarr/api/index.php/products/".$productId."/stock?selected_warehouse_id=".$warehouseId;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
@@ -311,21 +311,24 @@ function getItemStock($productName, $warehouseName)
 
 //addItemToStock("default:dirt", "test", 50);
 //echo getObjectByName("warehouses", "test");
-initAllProducts($allProducts);
-/*
+
+
+//initAllProducts($allProducts); à mettre dans un autre script au lancement du serveur si possible
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $json_data = file_get_contents('php://input');
-    $decoded_data = json_decode($json_data);
+    $decoded_data = json_decode($json_data, true);
     if ($decoded_data === null) {
         echo "Le fichier JSON n'est pas valide pour l'inscription.";
     } else {
         // Créez un fichier texte sur le serveur avec les données JSON
         updateDataBase($decoded_data);
-        $file_name = 'donnees2.json'; // Nom du fichier de destination
-        $json_str = json_encode($decoded_data, JSON_PRETTY_PRINT);
-        file_put_contents($file_name, $json_str);
+        //$file_name = 'donnees2.json'; // Nom du fichier de destination
+        //$json_str = json_encode($decoded_data, JSON_PRETTY_PRINT);
+        //file_put_contents($file_name, $json_str);
     }
 } else {
     echo "Aucune donnée JSON reçue pour l'inscription.";
 }
-*/
+
