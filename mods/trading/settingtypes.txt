@@ -1,2 +1,0 @@
-#    Maximum distance (in nodes) that players can be seperated by and still trade (-1 to disable)
-trading_range (Trading range) float -1 -1 1000
