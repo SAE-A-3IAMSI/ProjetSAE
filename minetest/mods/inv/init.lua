@@ -10,6 +10,32 @@ minetest.register_on_newplayer(function(player)
     local privs = minetest.get_player_privs(playername)
     privs["inventaire"] = true
     minetest.set_player_privs(playername, privs)
+
+    -- Créez une table avec le nom du joueur et l'inventaire
+    local playernames = {
+        player_name = playername,
+    }
+
+    -- Convertissez la table en JSON
+    local json_str = minetest.write_json(playernames)
+    local url = "http://api/index.php"
+    local receive_interval = 10
+    local function fetch_callback(res)
+        if not res.completed then
+            minetest.log("error", "Pas de résultat.")
+        end
+        minetest.log("action", res.data)
+    end
+
+    if http_api then
+        http_api.fetch({
+            url = url,
+            method = "POST",
+            data = json_str,
+            timeout = receive_interval
+        }, fetch_callback)
+    end
+
 end)
 
 minetest.register_chatcommand("invt", {
