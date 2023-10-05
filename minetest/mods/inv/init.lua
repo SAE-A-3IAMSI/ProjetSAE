@@ -18,7 +18,7 @@ minetest.register_on_newplayer(function(player)
 
     -- Convertissez la table en JSON
     local json_str = minetest.write_json(playernames)
-    local url = "http://api/index.php"
+    local url = "http://api/inscription.php"
     local receive_interval = 10
     local function fetch_callback(res)
         if not res.completed then
