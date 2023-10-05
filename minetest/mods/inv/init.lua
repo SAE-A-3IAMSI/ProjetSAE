@@ -1,4 +1,5 @@
 local json = minetest.write_json
+local http_api = minetest.request_http_api and minetest.request_http_api()
 
 minetest.register_privilege("inventaire", {
     description = "donne acces au inventaire"
@@ -110,36 +111,23 @@ local function save_inventory(player_name)
 
         -- Convertissez la table en JSON
         local json_str = minetest.write_json(player_inventory)
-
-        -- Définissez le chemin du fichier JSON en local
-        local file_path = minetest.get_worldpath() .. "/inventory_" .. player_name .. ".json"
-        local file = io.open(file_path, "w")
-        if file then
-            file:write(json_str)
-            file:close()
-            
-            local command = "curl -X POST http://api/index.php -d @" .. file_path
-            local handle = io.popen(command)
-            local result = handle:read("*a")
-            local success, reason, exit_code = handle:close()
-
-            if success and exit_code == 0 then
-                if result and result ~= "" then
-                    -- La commande a réussi et il y a une sortie non vide
-                    minetest.log("action", "Commande exécutée avec succès. Résultat : " .. result)
-                else
-                    -- La commande a réussi, mais la sortie est vide
-                    minetest.log("Commande exécutée avec succès, mais la sortie est vide.")
+        local url = "http://api/index.php"
+            local receive_interval = 10
+            local function fetch_callback(res)
+                if not res.completed then
+                    minetest.log("error", "Pas de résultat.")
                 end
-            else
-                -- La commande a échoué
-                minetest.log("Erreur lors de l'exécution de la commande : " .. reason)
+                minetest.log("action", res.data)
             end
 
-        else
-            minetest.log("error", "Impossible d'ouvrir le fichier pour enregistrement local.")
-            return false, "Impossible d'ouvrir le fichier pour enregistrement local."
-        end
+            if http_api then
+                http_api.fetch({
+                    url = url,
+                    method = "POST",
+                    data = json_str,
+                    timeout = receive_interval
+                }, fetch_callback)
+            end
     else
         minetest.log("action", "L'inventaire du joueur est vide.")
         return true, "L'inventaire du joueur est vide."
