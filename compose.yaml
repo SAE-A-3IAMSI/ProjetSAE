@@ -3,7 +3,7 @@ version: '3'
 services:
   # Conteneur du SGBD MariaDB
   mariadb:
-    # Image utilisée par le conteneur
+    # Image de MariaDB
     image: mariadb:latest
     # Nom du conteneur
     container_name: mariadb
@@ -46,7 +46,7 @@ services:
 
   # Conteneur de Dolibarr
   dolibarr:
-    # Image utilisée par le conteneur
+    # Image de Dolibarr
     image: tuxgasy/dolibarr
     # Nom du conteneur
     container_name: dolibarr
@@ -107,7 +107,7 @@ services:
 
   # Conteneur de l'API sour Apache
   api:
-    # Cnstruction de l'image à partir d'un DockerFile
+    # Construction de l'image à partir d'un DockerFile
     build:
       context: ./api
       dockerfile: ./Dockerfile
