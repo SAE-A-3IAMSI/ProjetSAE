@@ -84,7 +84,7 @@ services:
     # Construction du l'image Minetest à partir d'un DockerFile
     build:
       context: .
-      dockerfile: minetest.Dockerfile
+      dockerfile: ./minetest/Dockerfile
     # Nom du conteneur
     container_name: minetest
     # Variables d'environnement du conteneur
@@ -110,7 +110,7 @@ services:
     # Cnstruction de l'image à partir d'un DockerFile
     build:
       context: .
-      dockerfile: api.Dockerfile
+      dockerfile: ./api/Dockerfile
     # Nom du conteneur
     container_name: api
     # Sous-réseaux auxquels le conteneur API est connecté
