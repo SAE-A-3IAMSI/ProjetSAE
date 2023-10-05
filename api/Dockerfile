@@ -11,5 +11,7 @@ RUN ln -s ../mods-available/{expires,headers,rewrite}.load /etc/apache2/mods-ena
 RUN sed -e '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' -i /etc/apache2/apache2.conf
 
 # Copie le fichier php.ini personnalisé dans le répertoire de configuration PHP
-COPY ./api/php.ini /usr/local/etc/php/
-COPY ./api/html /var/www/html
+COPY ./php.ini /usr/local/etc/php/
+
+# Copie des scripts PHP sur le serveur Apache
+COPY ./html /var/www/html
