@@ -1,7 +1,7 @@
 Docker:
 
 -Vérifier que Docker soit installé
--Clonez le dépot github
+-Clonez le dépôt github
 -lancez les conteuneurs du projet avec un : docker compose up,
   (ajoutez un -d pour le lancer en arrière plan)
 -Si vous voulez supprimez les conteneurs actifs, faites un : docker compose down
