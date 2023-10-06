@@ -18,66 +18,6 @@
 - faire un appel api: pour la création des entrepôts lorsque nouveau joueur créé
 */
 
-$allProducts = array(
-    "default:stone",
-    "default:dirt",
-    "default:wood",
-    "default:leaves",
-    "default:sand",
-    "default:water_source",
-    "default:lava_source",
-    "default:coalblock",
-    "default:ironblock",
-    "default:cobble",
-    "default:brick",
-    "default:glass",
-    "default:torch",
-    "default:chest",
-    "default:furnace",
-    "default:crafting_table",
-    "default:ladder",
-    "default:bookshelf",
-    "default:sign_wall",
-    "default:apple",
-    "default:stick",
-    "default:paper",
-    "default:book",
-    "default:coal_lump",
-    "default:iron_lump",
-    "default:copper_lump",
-    "default:gold_lump",
-    "default:mese_crystal",
-    "default:diamond",
-    "default:obsidian",
-    "default:tree",
-    "default:sapling",
-    "default:junglegrass",
-    "default:fern",
-    "default:rose",
-    "default:dandelion",
-    "default:bush_leaves",
-    "default:acacia_leaves",
-    "default:pine_needles",
-    "default:jungleleaves",
-    "default:water_flowing",
-    "default:lava_flowing",
-    "default:snowblock",
-    "default:snow",
-    "default:cloud",
-    "default:wooden_fence",
-    "default:rail",
-    "default:ladder_steel",
-    "default:sign_wall_steel",
-);
-
-/*
-function debug_to_console($data) {
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
-
-    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-}*/
 
 function readAllUsers()
 {
@@ -208,7 +148,7 @@ function createObject($class, $data)
         'Accept: application/json',
         'DOLAPIKEY: bVs76AE8sUyw2Hh5D3QAS3Wki70gNy5q' // clef à changer
     ));
-    //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
     curl_close($ch);
 }
@@ -222,16 +162,6 @@ function createNewWarehouse($name)
     createObject("warehouses", $data);
 }
 
-function createNewProduct($name)
-{
-    $data = array(
-        'ref' => $name,
-        'label' => $name,
-        'status' => 1,
-        'status_buy' => 1
-    );
-    createObject("products", $data);
-}
 
 function deleteProduct($id)
 {
@@ -264,13 +194,7 @@ function deleteAllProducts()
     }
 }
 
-function initAllProducts($productList)
-{
-    foreach ($productList as $entry) {
-        createNewProduct($entry);
-        echo "product: ".$entry." has been created\n";
-    }
-}
+
 
 function updateDataBase($jsonData)
 {
@@ -309,11 +233,6 @@ function getItemStock($productName, $warehouseName)
     }
 }
 
-//addItemToStock("default:dirt", "test", 50);
-//echo getObjectByName("warehouses", "test");
-
-
-//initAllProducts($allProducts); à mettre dans un autre script au lancement du serveur si possible
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
