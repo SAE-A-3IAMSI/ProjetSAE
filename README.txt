@@ -6,9 +6,8 @@ Docker:
   (ajoutez un -d pour le lancer en arrière plan)
 -Si vous voulez supprimez les conteneurs actifs, faites un : docker compose down
 
-Une fois l'installation et le lancement du docker, ouvrez Dolibarr sur votre port (80:80 en localhost) puis faite ceci:
-
-Dans la configuration des modules, cochez :
+Une fois l'installation et le lancement du docker, ouvrez Dolibarr sur votre port (80:80 en localhost) puis faite ceci,
+Cliquez sur Setup -> Modules/Applications , cochez :
 -Stock
 -API REST
 Dans API REST activez le mode production.
