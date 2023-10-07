@@ -1,3 +1,8 @@
+Connexion Dolibarr:
+admin
+admin
+
+
 Docker:
 
 -Vérifier que Docker soit installé
