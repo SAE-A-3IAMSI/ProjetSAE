@@ -1,1 +1,0 @@
-minetest.exe --server --worldname testmonde
