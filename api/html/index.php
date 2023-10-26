@@ -27,7 +27,7 @@ function readAllUsers()
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
     $headers = array(
         "Accept: application/json",
-        "DOLAPIKEY: Z35STg78bC2kPB8AIXke4rof3MlXqj17" // clef à changer
+        "DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA" // clef à changer
     );
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);    
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -171,7 +171,7 @@ function deleteProduct($id)
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
     $headers = array(
         "Accept: application/json",
-        "DOLAPIKEY: bVs76AE8sUyw2Hh5D3QAS3Wki70gNy5q" // clef à changer
+        "DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA" // clef à changer
     );
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);    
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
