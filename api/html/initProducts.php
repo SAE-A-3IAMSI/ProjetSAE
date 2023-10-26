@@ -107,342 +107,96 @@ function createPrice($name)
      *  lors de craft certain prix on un +1 supplémentaire du prix total des objets craft surtout les outils comme bénéfice au craft
      */
 
-    $price = -1; // debug du prix si probleme dans les items craft // exemple -> axe dirt
 
-    $name = separateWord($name);
+    $prices = [
+        "axe wooden" => 4,
+        "axe stone" => 8,
+        "axe bronze" => 20,
+        "axe steel" => 32,
+        "axe mese" => 302,
+        "axe diamond" => 62,
+        "sword wooden" => 3,
+        "sword stone" => 5.5,
+        "sword bronze" => 13.5,
+        "sword steel" => 21.5,
+        "sword mese" => 201.5,
+        "sword diamond" => 41.5,
+        "hoe wooden" => 4,
+        "hoe stone" => 6,
+        "hoe steel" => 22,
+        "shovel wooden" => 3,
+        "shovel stone" => 5,
+        "shovel bronze" => 8,
+        "shovel steel" => 13,
+        "shovel mese" => 102,
+        "shovel diamond" => 22,
+        "trapdoor steel bar" => 13,
+        "trapdoor steel" => 41,
+        "trapdoor" => 6,
+        "door steel bar" => 19,
+        "door steel" => 61,
+        "door obsidian glass" => 7,
+        "door glass" => 7,
+        "wood" => 0.25,
+        "fence rail" => 0.25,
+        "fence" => 1.25,
+        "gate" => 7,
+        "walls" => 1,
+        "bar flat" => 3,
+        "pane flat" => 0.4,
+        "stick" => 1,
+        "stone" => 2,
+        "coal lump" => 3,
+        "copper lump" => 4,
+        "clay lump" => 2,
+        "iron lump" => 5,
+        "tin lump" => 6,
+        "gold lumb" => 8,
+        "mese crystal fragment" => 11,
+        "mese crystal" => 100,
+        "mese" => 900,
+        "clay brick" => 2,
+        "flint and steel" => 12,
+        "diamondblock" => 180,
+        "golddblock" => 108,
+        "coalblock" => 3,
+        "bronzeblock" => 54,
+        "copperblock" => 45,
+        "copper" => 5,
+        "iron" => 10,
+        "tin" => 7,
+        "bronze" => 6,
+        "gold" => 12,
+        "diamond" => 20,
+        "paper" => 3,
+        "book" => 3,
+        "bookshelf" => 16,
+        "bucket" => 31,
+        "screwdriver" => 12,
+        "torch" => 1,
+        "key" => 8,
+        "binoculars" => 21,
+        "mapping kit" => 27,
+        "bug net" => 6,
+        "boat" => 6,
+        "cart" => 51,
+        "gunpowder" => 1,
+        "tnt stick" => 4,
+        "tnt" => 30,
+        "obsidian shard" => 1,
+        "obsidian glass" => 1,
+        "obsidian" => 9,
+        "chest" => 8,
+        "chest locked" => 18,
+    ];
 
-// items fait de minerai
-
-    if (strpos($name, "pick") !== false || strpos($name, "axe") !== false) {
-        if (strpos($name, "wood") !== false) {
-            $price = 3 + 1 + 1;
-        } elseif (strpos($name, "stone") !== false) {
-            $price = 6 + 1 + 1;
-        } elseif (strpos($name, "bronze") !== false) {
-            $price = 18 + 1 + 1;
-        } elseif (strpos($name, "steel") !== false) {
-            $price = 30 + 1 + 1;
-        } elseif (strpos($name, "mese") !== false) {
-            $price = 300 + 1 + 1;
-        } elseif (strpos($name, "diamond") !== false) {
-            $price = 60 + 1 + 1;
+    foreach ($prices as $key => $value) {
+        if (strpos($name, $key) !== false) {
+            return $value;
         }
-        return $price;
     }
-
-
-    if (strpos($name, "sword") !== false) {
-        if (strpos($name, "wood") !== false) {
-            $price = 2 + 1 + 1;
-        } elseif (strpos($name, "stone") !== false) {
-            $price = 4 + 0.5 + 1;
-        } elseif (strpos($name, "bronze") !== false) {
-            $price = 12 + 0.5 + 1;
-        } elseif (strpos($name, "steel") !== false) {
-            $price = 20 + 0.5 + 1;
-        } elseif (strpos($name, "mese") !== false) {
-            $price = 200 + 0.5 + 1;
-        } elseif (strpos($name, "diamond") !== false) {
-            $price = 40 + 0.5 + 1;
-        }
-        return $price;
-    }
-
-
-    if (strpos($name, "hoe") !== false) {
-        if (strpos($name, "wood") !== false) {
-            $price = 2 + 1 + 1;
-        } elseif (strpos($name, "stone") !== false) {
-            $price = 4 + 1 + 1;
-        } elseif (strpos($name, "steel") !== false) {
-            $price = 20 + 1 + 1;
-        }
-        return $price;
-    }
-
-
-    if (strpos($name, "shovel") !== false) {
-        if (strpos($name, "wood") !== false) {
-            $price = 1 + 1 + 1;
-        } elseif (strpos($name, "stone") !== false) {
-            $price = 2 + 1 + 1;
-        } elseif (strpos($name, "bronze") !== false) {
-            $price = 6 + 1 + 1;
-        } elseif (strpos($name, "steel") !== false) {
-            $price = 10 + 1 + 1;
-        } elseif (strpos($name, "mese") !== false) {
-            $price = 100 + 1 + 1;
-        } elseif (strpos($name, "diamond") !== false) {
-            $price = 20 + 1 + 1;
-        }
-        return $price;
-    }
-
-
-// porte , trapdoor,  mur , ...
-
-    if (strpos($name, "trapdoor") !== false) {
-        if (strpos($name, "steel bar") !== false) {
-            $price = 12 + 1;
-        } elseif (strpos($name, "steel") !== false) {
-            $price = 41;
-        } else {
-            $price = 6 + 1;
-        }
-        return $price;
-    }
-
-
-    if (strpos($name, "door") !== false) {
-        if (strpos($name, "steel bar") !== false) {
-            $price = 19;
-        } elseif (strpos($name, "steel") !== false) {
-            $price = 61;
-        } elseif (strpos($name, "obsidian") !== false) {
-
-            $price = 6 + 1;
-        } elseif (strpos($name, "glass") !== false) {
-            $price = 6 + 1;
-        } else {
-            $price = 6 + 1;
-        }
-        return $price;
-    }
-
-    if (strpos($name, "fence rail") !== false) {
-        $price = 0.25;
-        return $price;
-    }
-
-    if (strpos($name, "fence") !== false) {
-        $price = 1.25;
-        return $price;
-    }
-
-    if (strpos($name, "gate") !== false) {
-        $price = 6 + 1;
-        return $price;
-    }
-
-    if (strpos($name, "walls") !== false) {
-        $price = 1;
-        return $price;
-    }
-
-    if (strpos($name, "bar flat") !== false) {
-        $price = 3;
-        return $price;
-    }
-
-    if (strpos($name, "pane flat") !== false) {
-        $price = 0.4;
-        return $price;
-    }
-
-
-// block et item  basique
-
-
-    if (strpos($name, "stick") !== false) {
-        $price = 1;
-        return $price;
-    }
-
-    if (strpos($name, "stone") !== false) {
-        $price = 2;
-        return $price;
-    }
-
-
-    if (strpos($name, "coal lump") !== false) {
-        $price = 3;
-        return $price;
-    }
-
-    if (strpos($name, "copper lump") !== false) {
-        $price = 4;
-        return $price;
-    }
-
-    if (strpos($name, "clay lump") !== false) {
-        $price = 2;
-        return $price;
-    }
-
-
-    if (strpos($name, "iron lump") !== false) {
-        $price = 5;
-        return $price;
-    }
-
-    if (strpos($name, "tin lump") !== false) {
-        $price = 6;
-        return $price;
-    }
-
-    if (strpos($name, "gold lumb") !== false) {
-        $price = 8;
-        return $price;
-    }
-
-    if (strpos($name, "mese crystal fragment") !== false) {
-        $price = 11;
-        return $price;
-    }
-
-
-    if (strpos($name, "mese crystal") !== false) {
-        $price = 100;
-        return $price;
-    }
-
-    if (strpos($name, "clay brick") !== false) {
-        $price = 2;
-        return $price;
-    }
-
-
-    if (strpos($name, "flint and steel") !== false) {
-        $price = 12;
-        return $price;
-    }
-
-    if (strpos($name, "steel") !== false) {
-        $price = 10;
-        return $price;
-    }
-
-    if (strpos($name, "copper") !== false) {
-        $price = 5;
-        return $price;
-    }
-
-    if (strpos($name, "tin") !== false) {
-        $price = 7;
-        return $price;
-    }
-
-    if (strpos($name, "bronze") !== false) {
-        $price = 6;
-        return $price;
-    }
-
-    if (strpos($name, "gold") !== false) {
-        $price = 12;
-        return $price;
-    }
-
-    if (strpos($name, "diamond") !== false) {
-        $price = 20;
-        return $price;
-    }
-
-
-    if (strpos($name, "mese") !== false) {
-        $price = 900;
-        return $price;
-    }
-
-
-// items particuliers
-
-
-    if (strpos($name, "paper") !== false) {
-        $price = 3;
-        return $price;
-    }
-
-    if (strpos($name, "book") !== false) {
-        $price = 3;
-        return $price;
-    }
-
-    if (strpos($name, "bookshelf") !== false) {
-        $price = 15 + 1;
-        return $price;
-    }
-
-    if (strpos($name, "bucket") !== false) {
-        $price = 30 + 1;
-        return $price;
-    }
-
-    if (strpos($name, "screwdriver") !== false) {
-        $price = 12;
-        return $price;
-    }
-
-    if (strpos($name, "torch") !== false) {
-        $price = 1;
-        return $price;
-    }
-
-    if (strpos($name, "key") !== false) {
-        $price = 8;
-        return $price;
-    }
-
-    if (strpos($name, "binoculars") !== false) {
-        $price = 4 + 16 + 1;
-        return $price;
-    }
-
-    if (strpos($name, "mapping kit") !== false) {
-        $price = 27;
-        return $price;
-    }
-
-    if (strpos($name, "bug net") !== false) {
-        $price = 5 + 1;
-        return $price;
-    }
-
-    if (strpos($name, "boat") !== false) {
-        $price = 5 + 1;
-        return $price;
-    }
-
-    if (strpos($name, "cart") !== false) {
-        $price = 50 + 1;
-        return $price;
-    }
-
-
-    if (strpos($name, "gunpowder") !== false) {
-        $price = 1;
-        return $price;
-    }
-
-    if (strpos($name, "tnt stick") !== false) {
-        $price = 4;
-        return $price;
-    }
-
-    if (strpos($name, "tnt") !== false) {
-        $price = 30;
-        return $price;
-    }
-
-
-    if (strpos($name, "obsidian shard") !== false) {
-        $price = 1;
-        return $price;
-    }
-
-    if (strpos($name, "obsidian glass") !== false) {
-        $price = 1;
-        return $price;
-    }
-
-    if (strpos($name, "obsidian") !== false) {
-        $price = 9;
-        return $price;
-    }
-
-
-    $price = 1;
-    return $price;
-
+    // Default price
+    return 1;
 }
 
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
