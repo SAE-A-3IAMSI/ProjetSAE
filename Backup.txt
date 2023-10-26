@@ -1,0 +1,67 @@
+function translate_text($text, $source_lang, $target_lang)
+// {
+//     $api_url = "https://api.mymemory.translated.net/get";
+//     $params = [
+//         'q' => $text,
+//         'langpair' => $source_lang . '|' . $target_lang,
+//     ];
+
+//     $api_url = $api_url . '?' . http_build_query($params);
+//     $response = file_get_contents($api_url);
+
+//     if ($response !== false) {
+//         $translation = json_decode($response, true);
+//         if (isset($translation['responseData']['translatedText'])) {
+//             return $translation['responseData']['translatedText'];
+//         }
+//     }
+
+//     return null;
+// }
+
+// function translate_tab($productList, $source_lang, $target_lang)
+// {
+//     $words = array(); // Initialisez le tableau en dehors de la boucle
+
+//     foreach ($productList as $entry) {
+//         echo translate_text($entry, $source_lang, $target_lang);
+//     }
+
+//     // return $words;
+// }
+
+// var_dump(translate_tab($allProducts, "en", "fr"));
+
+// var_dump(enleverDoublons($allProducts));
+
+// removeDuplicates($allProducts);
+// var_dump(separateWords($allProducts));
+
+
+// if ($allProducts === null) {
+//     echo "Erreur lors du décodage du JSON.";
+// } else {
+//     // Parcourir et afficher les éléments
+//     foreach ($allProducts as $product) {
+//         echo $product."\n";
+//     }
+// }
+
+// Création du json avec l'ancien tableau de produits
+// $data = json_encode($allProducts);
+// file_put_contents('allProducts.json', $data);
+
+function showTranslatedWords ($productListTranslated)
+{
+    $words = array(); // Initialisez le tableau en dehors de la boucle
+
+    foreach ($productListTranslated as $entry) {
+        $words_temp = $entry['french']; // Stockez le résultat dans un tableau temporaire
+
+        $words[] = $words_temp;
+    }
+
+    return $words;
+}
+
+var_dump(showTranslatedWords($allProductsTranslate));
