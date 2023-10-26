@@ -109,6 +109,7 @@ function createPrice($name)
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     $name = separateWord($name);
 
 // items fait de minerai
@@ -196,6 +197,90 @@ function createPrice($name)
     ];
 >>>>>>> 11f70d7 (refactor price)
 
+=======
+    $prices = [
+        "axe copper" => 4,
+        "axe stone" => 8,
+        "axe bronze" => 20,
+        "axe steel" => 32,
+        "axe mese" => 302,
+        "axe diamond" => 62,
+        "sword copper" => 3,
+        "sword stone" => 5.5,
+        "sword bronze" => 13.5,
+        "sword steel" => 21.5,
+        "sword mese" => 201.5,
+        "sword diamond" => 41.5,
+        "hoe copper" => 4,
+        "hoe stone" => 6,
+        "hoe steel" => 22,
+        "shovel copper" => 3,
+        "shovel stone" => 5,
+        "shovel bronze" => 8,
+        "shovel steel" => 13,
+        "shovel mese" => 102,
+        "shovel diamond" => 22,
+        "trapdoor steel bar" => 13,
+        "trapdoor steel" => 41,
+        "trapdoor" => 6,
+        "door steel bar" => 19,
+        "door steel" => 61,
+        "door obsidian glass" => 7,
+        "door glass" => 7,
+        "wood" => 0.25,
+        "fence rail" => 0.25,
+        "fence" => 1.25,
+        "gate" => 7,
+        "walls" => 1,
+        "bar flat" => 3,
+        "pane flat" => 0.4,
+        "stick" => 1,
+        "stone" => 2,
+        "coal lump" => 3,
+        "copper lump" => 4,
+        "clay lump" => 2,
+        "iron lump" => 5,
+        "tin lump" => 6,
+        "gold lumb" => 8,
+        "mese crystal fragment" => 11,
+        "mese crystal" => 100,
+        "mese" => 900,
+        "clay brick" => 2,
+        "flint and steel" => 12,
+        "diamondblock" => 180,
+        "golddblock" => 108,
+        "coalblock" => 3,
+        "bronzeblock" => 54,
+        "copperblock" => 45,
+        "copper" => 5,
+        "iron" => 10,
+        "tin" => 7,
+        "bronze" => 6,
+        "gold" => 12,
+        "diamond" => 20,
+        "paper" => 3,
+        "book" => 3,
+        "bookshelf" => 16,
+        "bucket" => 31,
+        "screwdriver" => 12,
+        "torch" => 1,
+        "key" => 8,
+        "binoculars" => 21,
+        "mapping kit" => 27,
+        "bug net" => 6,
+        "boat" => 6,
+        "cart" => 51,
+        "gunpowder" => 1,
+        "tnt stick" => 4,
+        "tnt" => 30,
+        "obsidian shard" => 1,
+        "obsidian glass" => 1,
+        "obsidian" => 9,
+        "chest" => 8,
+        "chest locked" => 18,
+    ];
+
+>>>>>>> 33738e0 (refactor price)
     foreach ($prices as $key => $value) {
         if (strpos($name, $key) !== false) {
             return $value;
