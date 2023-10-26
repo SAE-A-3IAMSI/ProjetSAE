@@ -186,7 +186,7 @@ minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv
 end)
 
 minetest.register_chatcommand("php", {
-    description = "test php",
+    description = "commande pour initialiser les produits",
     params = "",
     privs = { inventaire = true },
     func = function(name, param)

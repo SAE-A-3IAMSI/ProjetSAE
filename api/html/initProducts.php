@@ -9,7 +9,7 @@ $allProducts = array_unique($allProducts);
 
 function createObject($class, $data)
 {
-    $url = "http://localhost/api/index.php/" . $class;
+    $url = "http://dolibarr/api/index.php/" . $class; //mettre localhost (si sur machine) ou dolibarr (si avec minetest)
     $data_json = json_encode($data);
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -18,7 +18,7 @@ function createObject($class, $data)
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json',
         'Accept: application/json',
-        'DOLAPIKEY: Z35STg78bC2kPB8AIXke4rof3MlXqj17' // clef à changer
+        'DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA' // clef à changer
     ));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
@@ -445,10 +445,44 @@ function createPrice($name)
 
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = json_decode(file_get_contents('php://input'), true);
-    $allProducts = $data['allProducts'];
-    initAllProducts($allProducts);
-}
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     $data = json_decode(file_get_contents('php://input'), true);
+//     $allProducts = $data['allProducts'];
+//     initAllProducts($allProducts);
+// }
 
 // initAllProducts($allProducts);
+
+function read1Products()
+{
+    $ch = curl_init();
+    $url = "http://localhost/api/index.php/products?sortfield=t.ref&sortorder=ASC&limit=1&ids_only=true";
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+    $headers = array(
+        "Accept: application/json",
+        "DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA" // clef à changer
+    );
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $dataList = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($dataList);
+}
+
+function isDolibarrProductListEmpty()
+{
+    $data = read1Products();
+    if (empty($data)) {
+        return true;
+    }
+    return false;
+}
+
+if (isDolibarrProductListEmpty()) {
+    echo "Dolibarr product list is empty\n";
+    initAllProducts($allProducts);
+}
+else {
+    echo "Dolibarr product list is not empty\n";
+}
