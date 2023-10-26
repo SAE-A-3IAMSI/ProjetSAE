@@ -109,6 +109,8 @@ function createPrice($name)
 
     $price = -1; // debug du prix si probleme dans les items craft // exemple -> axe dirt
 
+    $name = separateWord($name);
+
 // items fait de minerai
 
     if (strpos($name, "pick") !== false || strpos($name, "axe") !== false) {
@@ -443,4 +445,10 @@ function createPrice($name)
 
 }
 
-initAllProducts($allProducts);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $allProducts = $data['allProducts'];
+    initAllProducts($allProducts);
+}
+
+// initAllProducts($allProducts);

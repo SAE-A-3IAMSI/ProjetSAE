@@ -76,12 +76,16 @@ local function save_inventory(player_name)
             player_name = player_name,
             inventory = item_list
         }
+<<<<<<< HEAD
 <<<<<<< HEAD:minetest/mods/inv/init.lua
+=======
+>>>>>>> 98a0dd3 (Commande pour appeler l'api pour initProducts (?))
     else
         player_inventory = {
             player_name = player_name,
             inventory = "null"
         }
+<<<<<<< HEAD
 =======
 
         -- Convertissez la table en JSON
@@ -114,6 +118,8 @@ local function save_inventory(player_name)
         minetest.log("action", "L'inventaire du joueur est vide.")
         return true, "L'inventaire du joueur est vide."
 >>>>>>> 230f500 (Askip ça envoie les inventaires ?):Minetest/minetest-5.7.0-win64V2/mods/inv/init.lua
+=======
+>>>>>>> 98a0dd3 (Commande pour appeler l'api pour initProducts (?))
     end
     -- Convertissez la table en JSON
     local json_str = minetest.write_json(player_inventory)
@@ -138,7 +144,10 @@ local function save_inventory(player_name)
 end
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD:minetest/mods/inv/init.lua
+=======
+>>>>>>> 98a0dd3 (Commande pour appeler l'api pour initProducts (?))
 
 
 
@@ -195,8 +204,11 @@ minetest.register_chatcommand("inv", {
 
 
 
+<<<<<<< HEAD
 =======
 >>>>>>> 230f500 (Askip ça envoie les inventaires ?):Minetest/minetest-5.7.0-win64V2/mods/inv/init.lua
+=======
+>>>>>>> 98a0dd3 (Commande pour appeler l'api pour initProducts (?))
 -- -- Hook pour gérer lorsqu'un joueur fais un clique gauche
 -- minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
 -- 	local player_name = puncher:get_player_name()
@@ -220,3 +232,28 @@ minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv
 	local player_name = player:get_player_name()
 	save_inventory(player_name)
 end)
+
+minetest.register_chatcommand("php", {
+    description = "test php",
+    params = "",
+    privs = { inventaire = true },
+    func = function(name, param)
+        local url = "http://api/initProducts.php"
+        local receive_interval = 10
+        local function fetch_callback(res)
+            if not res.completed then
+                minetest.log("error", "Pas de résultat.")
+            end
+            minetest.log("action", res.data)
+        end
+
+        if http_api then
+            http_api.fetch({
+                url = url,
+                method = "POST",
+                data = "test",
+                timeout = receive_interval
+            }, fetch_callback)
+        end
+    end,
+})
