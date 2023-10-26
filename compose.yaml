@@ -60,13 +60,13 @@ services:
       DOLI_DB_PASSWORD: minetest1234=+
       # Nom de la base de données que Dolibarr utilise
       DOLI_DB_NAME: dolibarrSAE
-      # Url surlaquelle Dolibarr est accessible
+      # Url sur laquelle Dolibarr est accessible
       DOLI_URL_ROOT: 'http://localhost'
       # Secret Salt for Encryption
       DOLI_INSTANCE_UNIQUE_ID: 'Mg2zBK2Yj5B528mOlz74Hdvi14GZCemA'
       # Timezone utilisée par PHP
       PHP_INI_DATE_TIMEZONE: 'Europe/Paris'
-    # Port surlequel Dolibarr écoute
+    # Port sur lequel Dolibarr écoute
     ports:
       - '80:80'
     # Sous-réseaux auxquels Dolibarr est connecté
@@ -108,10 +108,10 @@ services:
   # Conteneur de l'API sour Apache
   api:
     # Construction de l'image à partir d'un DockerFile
-    build:
-      context: ./api
-      dockerfile: ./Dockerfile
+    build: api
     # Nom du conteneur
+    ports:
+      - "8741:80"
     container_name: api
     # Sous-réseaux auxquels le conteneur API est connecté
     networks:
@@ -120,6 +120,7 @@ services:
     # Volumes du conteneur
     volumes:
       - api_data:/var/www/html
+      - ./php/vhosts:/etc/apache2/sites-enabled
 
 # Volumes définis
 volumes:
