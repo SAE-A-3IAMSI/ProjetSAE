@@ -233,27 +233,24 @@ minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv
 	save_inventory(player_name)
 end)
 
-minetest.register_chatcommand("php", {
-    description = "commande pour initialiser les produits",
-    params = "",
-    privs = { inventaire = true },
-    func = function(name, param)
-        local url = "http://api/initProducts.php"
-        local receive_interval = 10
-        local function fetch_callback(res)
-            if not res.completed then
-                minetest.log("error", "Pas de résultat.")
-            end
-            minetest.log("action", res.data)
+minetest.register_on_mods_loaded(function()
+    -- Placez ici le contenu de votre commande que vous souhaitez exécuter au démarrage du serveur
+    minetest.log("Le mod inventaire est chargé.")
+    local url = "http://api/initProducts.php"
+    local receive_interval = 10
+    local function fetch_callback(res)
+        if not res.completed then
+            minetest.log("error", "Pas de résultat.")
         end
+        minetest.log("action", res.data)
+    end
 
-        if http_api then
-            http_api.fetch({
-                url = url,
-                method = "POST",
-                data = "test",
-                timeout = receive_interval
-            }, fetch_callback)
-        end
-    end,
-})
+    if http_api then
+        http_api.fetch({
+            url = url,
+            method = "POST",
+            data = "test",
+            timeout = receive_interval
+        }, fetch_callback)
+    end
+end)
