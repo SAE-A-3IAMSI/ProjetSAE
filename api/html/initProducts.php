@@ -1,6 +1,10 @@
 <?php
 $data = file_get_contents('allProducts.json');
 $allProducts = json_decode($data, true); // Le deuxième argument permet de retourner un tableau associatif
+foreach ($allProducts as $key => $value) {
+    $allProducts[$key] = removeLastUnderscoreAndChar($value);
+}
+$allProducts = array_unique($allProducts);
 
 function createObject($class, $data)
 {
@@ -20,12 +24,12 @@ function createObject($class, $data)
     curl_close($ch);
 }
 
-function createNewProduct($name)
+function createNewProduct($name, $label)
 {
     $data = array(
         'ref' => $name,
-        'label' => $name,
-        // 'price' => $price,
+        'label' => $label,
+        'price' => addPriceToProduct($name),
         'status' => 1,
         'status_buy' => 1
     );
@@ -34,58 +38,87 @@ function createNewProduct($name)
 
 function initAllProducts($productList)
 {
+    $dataTranslate = file_get_contents('productsEN-FR.json');
+    $allProductsTranslate = json_decode($dataTranslate, true); // Le deuxième argument permet de retourner un tableau associatif
     foreach ($productList as $entry) {
-        createNewProduct($entry);
+        createNewProduct($entry, frenchName($entry, $allProductsTranslate));
         echo "product: " . $entry . " has been created\n";
     }
 }
 
-// initAllProducts($allProducts);
-
-function separerMot($productList)
+function separateWords($productList)
 {
-    $mots = array(); // Initialisez le tableau en dehors de la boucle
+    $words = array(); // Initialisez le tableau en dehors de la boucle
 
     foreach ($productList as $entry) {
-        $mots_temp = explode(":", $entry); // Stockez le résultat dans un tableau temporaire
+        $words_temp = explode(":", $entry); // Stockez le résultat dans un tableau temporaire
 
-        $mot_avant_deux_points = $mots_temp[0];
+        $words_after_colon = $words_temp[1];
+        $words_after_colon_without_ = str_replace('_', ' ', $words_after_colon);
 
         // Vérifiez si le mot existe déjà dans le tableau
-        if (!in_array($mot_avant_deux_points, $mots)) {
-            $mots[] = $mot_avant_deux_points; // Ajoutez le mot au tableau
+        if (!in_array($words_after_colon_without_, $words)) {
+            $words[] = $words_after_colon_without_; // Ajoutez le mot au tableau
         }
     }
 
-    var_dump($mots);
+    return $words;
+}
+
+function separateWord($product)
+{
+    $words_temp = explode(":", $product); // Stockez le résultat dans un tableau temporaire
+
+    $words_after_colon = $words_temp[1];
+    $words_after_colon_without_ = str_replace('_', ' ', $words_after_colon);
+
+    return $words_after_colon_without_;
 }
 
 // echo separerMot($allProducts);
 
-function enleverDoublons($productList)
+function addPriceToProduct($product)
 {
-    $mots = array(); // Initialisez le tableau en dehors de la boucle
+    $price = 0;
+    if (strpos($product, "iron") !== false) {
+        return $price += 10;
+    }
+    return $price;
+}
 
-    foreach ($productList as $entry) {
-        if (!in_array($entry, $mots)) {
-            $mots[] = $entry; // Ajoutez le mot au tableau
+function addPriceToProducts($allProducts)
+{
+    $price = 0;
+    foreach ($allProducts as $product) {
+        if (strpos($product, "iron") !== false) {
+            echo $product . " contains iron\n";
+            $price += 10;
+        }
+    }
+    return $price;
+}
+
+function frenchName($searchString, $allProductsTranslate)
+{
+    $separateWord = separateWord($searchString);
+    foreach ($allProductsTranslate as $item) {
+    if (isset($item['english']) && $item['english'] === $separateWord) {
+            $englishName = $item['english'];
+            break; // La chaîne a été trouvée, pas besoin de continuer la recherche
         }
     }
 
-    var_dump($mots);
+    if (!empty($englishName)) {
+        // echo "Le nom en anglais de '$searchString' est : $englishName\n";
+        return $item['french'];
+    } else {
+        echo "La chaîne '$searchString' n'a pas été trouvée dans le tableau.\n";
+    }
 }
 
-enleverDoublons($allProducts);
+function removeLastUnderscoreAndChar($input)
+{
+    return preg_replace('/_[a-zA-Z0-9]$/', '', $input);
+}
 
-// if ($allProducts === null) {
-//     echo "Erreur lors du décodage du JSON.";
-// } else {
-//     // Parcourir et afficher les éléments
-//     foreach ($allProducts as $product) {
-//         echo $product."\n";
-//     }
-// }
-
-// Création du json avec l'ancien tableau de produits
-// $data = json_encode($allProducts);
-// file_put_contents('allProducts.json', $data);
+initAllProducts($allProducts);
