@@ -44,7 +44,7 @@ function readAllProducts()
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
     $headers = array(
         "Accept: application/json",
-        "DOLAPIKEY: bVs76AE8sUyw2Hh5D3QAS3Wki70gNy5q" // clef à changer
+        "DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA" // clef à changer
     );
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);    
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -61,7 +61,7 @@ function getObjectByName($class, $name)
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Accept: application/json',
-        'DOLAPIKEY: bVs76AE8sUyw2Hh5D3QAS3Wki70gNy5q' // clef à changer
+        'DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA' // clef à changer
     ));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
@@ -128,7 +128,7 @@ function addItemToStock($productName, $warehouseName, $qty)
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json',
         'Accept: application/json',
-        'DOLAPIKEY: bVs76AE8sUyw2Hh5D3QAS3Wki70gNy5q' // clef à changer
+        'DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA' // clef à changer
     ));
     //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
@@ -146,7 +146,7 @@ function createObject($class, $data)
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json',
         'Accept: application/json',
-        'DOLAPIKEY: bVs76AE8sUyw2Hh5D3QAS3Wki70gNy5q' // clef à changer
+        'DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA' // clef à changer
     ));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
@@ -219,7 +219,7 @@ function getItemStock($productName, $warehouseName)
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Accept: application/json',
-        'DOLAPIKEY: bVs76AE8sUyw2Hh5D3QAS3Wki70gNy5q' // clef à changer
+        'DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA' // clef à changer
     ));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);

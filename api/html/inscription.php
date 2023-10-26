@@ -25,7 +25,7 @@ function createObject($class, $data)
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json',
         'Accept: application/json',
-        'DOLAPIKEY: bVs76AE8sUyw2Hh5D3QAS3Wki70gNy5q' // Clef à changer si différente 
+        'DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA' // Clef à changer si différente 
     ));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
