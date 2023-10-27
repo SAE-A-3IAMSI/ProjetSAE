@@ -302,7 +302,7 @@ function createPrice($name)
 function read1Products()
 {
     $ch = curl_init();
-    $url = "http://localhost/api/index.php/products?sortfield=t.ref&sortorder=ASC&limit=1&ids_only=true";
+    $url = "http://dolibarr/api/index.php/products?sortfield=t.ref&sortorder=ASC&limit=1&ids_only=true"; //mettre localhost (si sur machine) ou dolibarr (si avec minetest)
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
     $headers = array(
