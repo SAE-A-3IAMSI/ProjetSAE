@@ -20,6 +20,9 @@ services:
     # Volume pour stocker les données du conteneur MariaDB
     volumes:
       - mariadb_data:/var/lib/mysql
+      
+    ports:
+      - "3306:3306"
     # Sous-réseaux auxquels le conteneur est connecté
     networks:
       - mariadb_network
@@ -108,10 +111,10 @@ services:
   # Conteneur de l'API sour Apache
   api:
     # Construction de l'image à partir d'un DockerFile
-    build: api
+    build: 
+     context: ./api
+     dockerfile: ./Dockerfile
     # Nom du conteneur
-    ports:
-      - "8741:80"
     container_name: api
     # Sous-réseaux auxquels le conteneur API est connecté
     networks:
@@ -120,7 +123,22 @@ services:
     # Volumes du conteneur
     volumes:
       - api_data:/var/www/html
-      - ./php/vhosts:/etc/apache2/sites-enabled
+
+  website:
+    build : website
+    ports:
+      - "8000:80"
+    container_name: symfony_website
+    restart: always
+    networks:
+      - minetest_network
+      - dolibarr_network
+    depends_on:
+      - mariadb
+    user: 1000:1000
+    volumes:
+      - ./website/vhosts:/etc/apache2/sites-enabled
+      - ./:/var/www
 
 # Volumes définis
 volumes:

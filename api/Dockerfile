@@ -10,8 +10,6 @@ RUN ln -s ../mods-available/{expires,headers,rewrite}.load /etc/apache2/mods-ena
 # Modifie la configuration d'Apache pour autoriser les directives d'override dans le répertoire /var/www/
 RUN sed -e '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' -i /etc/apache2/apache2.conf
 
-
-
 # Copie le fichier php.ini personnalisé dans le répertoire de configuration PHP
 COPY ./php.ini /usr/local/etc/php/
 
