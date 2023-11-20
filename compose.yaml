@@ -124,18 +124,25 @@ services:
     volumes:
       - api_data:/var/www/html
 
+  #Conteneur du site Symfony
   website:
+  # Construction de l'image à partir d'un DockerFile
     build : website
     ports:
       - "8000:80"
+    # Nom du conteneur
     container_name: symfony_website
     restart: always
+    # Sous-réseaux auxquels le conteneur website est connecté
     networks:
       - minetest_network
       - dolibarr_network
+    # Dépendances du conteneur - Il attend que que le conteneur "mariadb" soit lancé pour se lancer.
     depends_on:
       - mariadb
+    # On set le user id à 1000 et le group ID à 1000 (variables d'environnement du conteneur)
     user: 1000:1000
+    # Volumes de conteneurs pour configurer le vhost
     volumes:
       - ./website/vhosts:/etc/apache2/sites-enabled
       - ./:/var/www

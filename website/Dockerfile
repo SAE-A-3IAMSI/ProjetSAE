@@ -1,6 +1,7 @@
 # Utilise l'image de base php:apache pour Symfony
 FROM php:8.1-apache
 
+# Installe les dépendances nécessaires et lie le fichier de configuration du web server.
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
   \
   &&  apt-get update \
@@ -24,5 +25,6 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
   \
   &&  pecl install apcu && docker-php-ext-enable apcu
 
+#Défini l'espace de travail pour symfony
 WORKDIR /var/www
 
