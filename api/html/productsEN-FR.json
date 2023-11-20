@@ -1,1970 +1,2457 @@
 [
     {
         "english": "slab silver sandstone",
-        "french": "dalle en grès argenté"
+        "french": "dalle en grès argenté",
+        "price": 10.99
     },
     {
         "english": "slab desert stonebrick",
-        "french": "dalle en brique de pierre du désert"
+        "french": "dalle en brique de pierre du désert",
+        "price": 12.99
     },
     {
         "english": "stair silver sandstone brick",
-        "french": "escalier en brique de grès argenté"
+        "french": "escalier en brique de grès argenté",
+        "price": 15.99
     },
     {
         "english": "stair desert stone block",
-        "french": "escalier en bloc de pierre du désert"
+        "french": "escalier en bloc de pierre du désert",
+        "price": 18.99
     },
-    
     {
         "english": "stair outer sandstone block",
-        "french": "escalier extérieur en bloc de grès"
+        "french": "escalier extérieur en bloc de grès",
+        "price": 20.99
     },
     {
         "english": "tulip black",
-        "french": "tulipe noire"
+        "french": "tulipe noire",
+        "price": 5.99
     },
-    
     {
         "english": "stair inner desert stone block",
-        "french": "escalier intérieur en bloc de pierre du désert"
+        "french": "escalier intérieur en bloc de pierre du désert",
+        "price": 22.99
     },
     {
         "english": "grass",
-        "french": "herbe"
+        "french": "herbe",
+        "price": 2.99
     },
     {
         "english": "stair outer silver sandstone brick",
-        "french": "escalier extérieur en brique de grès argenté"
+        "french": "escalier extérieur en brique de grès argenté",
+        "price": 25.99
     },
     {
         "english": "stair outer desert stone block",
-        "french": "escalier extérieur en bloc de pierre du désert"
+        "french": "escalier extérieur en bloc de pierre du désert",
+        "price": 28.99
     },
     {
         "english": "slab silver sandstone brick",
-        "french": "dalle en brique de grès argenté"
+        "french": "dalle en brique de grès argenté",
+        "price": 14.99
     },
     {
         "english": "dry grass",
-        "french": "herbe sèche"
+        "french": "herbe sèche",
+        "price": 3.99
     },
     {
         "english": "door glass a",
-        "french": "porte en verre a"
+        "french": "porte en verre a",
+        "price": 30.99
     },
     {
         "english": "stair inner desert sandstone",
-        "french": "escalier intérieur en grès du désert"
+        "french": "escalier intérieur en grès du désert",
+        "price": 24.99
     },
     {
         "english": "stair silver sandstone block",
-        "french": "escalier en bloc de grès argenté"
+        "french": "escalier en bloc de grès argenté",
+        "price": 17.99
     },
     {
         "english": "stair sandstone",
-        "french": "escalier en grès"
+        "french": "escalier en grès",
+        "price": 19.99
     },
     {
         "english": "dry grass",
-        "french": "herbe sèche"
+        "french": "herbe sèche",
+        "price": 3.99
     },
     {
         "english": "drinking glass",
-        "french": "verre à boire"
+        "french": "verre à boire",
+        "price": 8.99
     },
     {
         "english": "stair outer desert sandstone",
-        "french": "escalier extérieur en grès du désert"
+        "french": "escalier extérieur en grès du désert",
+        "price": 21.99
     },
     {
         "english": "dry grass",
-        "french": "herbe sèche"
+        "french": "herbe sèche",
+        "price": 3.99
     },
     {
         "english": "stair inner silver sandstone block",
-        "french": "escalier intérieur en bloc de grès argenté"
+        "french": "escalier intérieur en bloc de grès argenté",
+        "price": 23.99
     },
     {
         "english": "stair inner sandstone",
-        "french": "escalier intérieur en grès"
+        "french": "escalier intérieur en grès",
+        "price": 16.99
     },
     {
         "english": "slab desert sandstone",
-        "french": "dalle en grès du désert"
+        "french": "dalle en grès du désert",
+        "price": 13.99
     },
     {
         "english": "fern",
-        "french": "fougère"
+        "french": "fougère",
+        "price": 6.99
     },
     {
         "english": "stair outer silver sandstone block",
-        "french": "escalier extérieur en bloc de grès argenté"
+        "french": "escalier extérieur en bloc de grès argenté",
+        "price": 25.99
     },
     {
         "english": "stair desert stone brick",
-        "french": "escalier en brique de pierre du désert"
+        "french": "escalier en brique de pierre du désert",
+        "price": 18.99
     },
     {
         "english": "door obsidian glass a",
-        "french": "porte en verre d'obsidienne a"
+        "french": "porte en verre d'obsidienne a",
+        "price": 30.99
     },
     {
         "english": "slab silver sandstone block",
-        "french": "dalle en bloc de grès argenté"
+        "french": "dalle en bloc de grès argenté",
+        "price": 20.99
     },
     {
         "english": "slab sandstone",
-        "french": "dalle en grès"
+        "french": "dalle en grès",
+        "price": 15.99
     },
     {
         "english": "marram grass",
-        "french": "herbe de marram"
+        "french": "herbe de marram",
+        "price": 3.99
     },
     {
         "english": "stair obsidian",
-        "french": "escalier en obsidienne"
+        "french": "escalier en obsidienne",
+        "price": 35.99
     },
     {
         "english": "stair sandstonebrick",
-        "french": "escalier en brique de grès"
+        "french": "escalier en brique de grès",
+        "price": 22.99
     },
     {
         "english": "marram grass",
-        "french": "herbe de marram"
+        "french": "herbe de marram",
+        "price": 3.99
     },
     {
         "english": "trapdoor open",
-        "french": "trappe ouverte"
+        "french": "trappe ouverte",
+        "price": 10.99
     },
     {
         "english": "stair outer desert sandstone brick",
-        "french": "escalier extérieur en brique de grès du désert"
+        "french": "escalier extérieur en brique de grès du désert",
+        "price": 28.99
     },
     {
         "english": "stair inner obsidian",
-        "french": "escalier intérieur en obsidienne"
+        "french": "escalier intérieur en obsidienne",
+        "price": 33.99
     },
     {
         "english": "stair inner sandstonebrick",
-        "french": "escalier intérieur en brique de grès"
+        "french": "escalier intérieur en brique de grès",
+        "price": 24.99
     },
     {
         "english": "slab desert sandstone brick",
-        "french": "dalle en brique de grès du désert"
+        "french": "dalle en brique de grès du désert",
+        "price": 26.99
     },
     {
         "english": "stair outer obsidian",
-        "french": "escalier extérieur en obsidienne"
+        "french": "escalier extérieur en obsidienne",
+        "price": 31.99
     },
     {
         "english": "stair outer sandstonebrick",
-        "french": "escalier extérieur en brique de grès"
+        "french": "escalier extérieur en brique de grès",
+        "price": 27.99
     },
     {
         "english": "trapdoor steel open",
-        "french": "trappe en acier ouverte"
+        "french": "trappe en acier ouverte",
+        "price": 12.99
     },
     {
         "english": "slab obsidian",
-        "french": "dalle en obsidienne"
+        "french": "dalle en obsidienne",
+        "price": 36.99
     },
     {
         "english": "slab sandstonebrick",
-        "french": "dalle en brique de grès"
+        "french": "dalle en brique de grès",
+        "price": 23.99
     },
     {
         "english": "stair obsidianbrick",
-        "french": "escalier en brique d'obsidienne"
+        "french": "escalier en brique d'obsidienne",
+        "price": 32.99
     },
     {
         "english": "stair goldblock",
-        "french": "escalier en bloc d'or"
+        "french": "escalier en bloc d'or",
+        "price": 40.99
     },
     {
         "english": "gate wood open",
-        "french": "porte en bois ouverte"
+        "french": "porte en bois ouverte",
+        "price": 15.99
     },
     {
         "english": "stair inner sandstone block",
-        "french": "escalier intérieur en bloc de grès"
+        "french": "escalier intérieur en bloc de grès",
+        "price": 22.99
     },
     {
         "english": "stair inner goldblock",
-        "french": "escalier intérieur en bloc d'or"
+        "french": "escalier intérieur en bloc d'or",
+        "price": 45.99
     },
     {
         "english": "gate acacia wood open",
-        "french": "porte en bois d'acacia ouverte"
+        "french": "porte en bois d'acacia ouverte",
+        "price": 18.99
     },
     {
         "english": "permanent flame",
-        "french": "flamme permanente"
+        "french": "flamme permanente",
+        "price": 50.99
     },
     {
         "english": "stair wood",
-        "french": "escalier en bois"
+        "french": "escalier en bois",
+        "price": 20.99
     },
     {
         "english": "chest",
-        "french": "coffre"
+        "french": "coffre",
+        "price": 30.99
     },
     {
         "english": "slab obsidianbrick",
-        "french": "dalle en brique d'obsidienne"
+        "french": "dalle en brique d'obsidienne",
+        "price": 38.99
     },
     {
         "english": "slab goldblock",
-        "french": "dalle en bloc d'or"
+        "french": "dalle en bloc d'or",
+        "price": 42.99
     },
     {
         "english": "stair inner wood",
-        "french": "escalier intérieur en bois"
+        "french": "escalier intérieur en bois",
+        "price": 25.99
     },
     {
         "english": "stair obsidian block",
-        "french": "escalier en bloc d'obsidienne"
+        "french": "escalier en bloc d'obsidienne",
+        "price": 35.99
     },
     {
         "english": "gate aspen wood open",
-        "french": "porte en bois d'aulne ouverte"
+        "french": "porte en bois d'aulne ouverte",
+        "price": 19.99
     },
     {
         "english": "stair outer wood",
-        "french": "escalier extérieur en bois"
+        "french": "escalier extérieur en bois",
+        "price": 28.99
     },
     {
         "english": "stair inner obsidian block",
-        "french": "escalier intérieur en bloc d'obsidienne"
+        "french": "escalier intérieur en bloc d'obsidienne",
+        "price": 37.99
     },
     {
         "english": "chest locked",
-        "french": "coffre verrouillé"
+        "french": "coffre verrouillé",
+        "price": 32.99
     },
     {
         "english": "slab wood",
-        "french": "dalle en bois"
+        "french": "dalle en bois",
+        "price": 23.99
     },
     {
         "english": "stair outer obsidian block",
-        "french": "escalier extérieur en bloc d'obsidienne"
+        "french": "escalier extérieur en bloc d'obsidienne",
+        "price": 36.99
     },
     {
         "english": "stair junglewood",
-        "french": "escalier en bois de la jungle"
+        "french": "escalier en bois de la jungle",
+        "price": 26.99
     },
     {
         "english": "snow",
-        "french": "neige"
+        "french": "neige",
+        "price": 5.99
     },
     {
         "english": "slab obsidian block",
-        "french": "dalle en bloc d'obsidienne"
+        "french": "dalle en bloc d'obsidienne",
+        "price": 38.99
     },
     {
         "english": "dirt with snow",
-        "french": "terre avec de la neige"
+        "french": "terre avec de la neige",
+        "price": 5.99
     },
     {
         "english": "stair brick",
-        "french": "escalier en brique"
+        "french": "escalier en brique",
+        "price": 20.99
     },
     {
         "english": "stair outer junglewood",
-        "french": "escalier extérieur en bois de la jungle"
+        "french": "escalier extérieur en bois de la jungle",
+        "price": 26.99
     },
     {
         "english": "cobble",
-        "french": "pavé"
+        "french": "pavé",
+        "price": 10.99
     },
     {
         "english": "mossycobble",
-        "french": "pavé moussu"
+        "french": "pavé moussu",
+        "price": 12.99
     },
     {
         "english": "slab cobble",
-        "french": "dalle en pavé"
+        "french": "dalle en pavé",
+        "price": 15.99
     },
     {
         "english": "slab mossycobble",
-        "french": "dalle en pavé moussu"
+        "french": "dalle en pavé moussu",
+        "price": 18.99
     },
     {
         "english": "stair cobble",
-        "french": "escalier en pavé"
+        "french": "escalier en pavé",
+        "price": 22.99
     },
     {
         "english": "stair mossycobble",
-        "french": "escalier en pavé moussu"
+        "french": "escalier en pavé moussu",
+        "price": 25.99
     },
     {
         "english": "stair inner cobble",
-        "french": "escalier intérieur en pavé"
+        "french": "escalier intérieur en pavé",
+        "price": 28.99
     },
     {
         "english": "stair inner mossycobble",
-        "french": "escalier intérieur en pavé moussu"
+        "french": "escalier intérieur en pavé moussu",
+        "price": 30.99
     },
     {
         "english": "stair outer cobble",
-        "french": "escalier extérieur en pavé"
+        "french": "escalier extérieur en pavé",
+        "price": 32.99
     },
     {
         "english": "stair outer mossycobble",
-        "french": "escalier extérieur en pavé moussu"
+        "french": "escalier extérieur en pavé moussu",
+        "price": 35.99
     },
     {
         "english": "chest open",
-        "french": "coffre ouvert"
+        "french": "coffre ouvert",
+        "price": 30.99
     },
     {
         "english": "stair inner pine wood",
-        "french": "escalier intérieur en bois de pin"
+        "french": "escalier intérieur en bois de pin",
+        "price": 24.99
     },
     {
         "english": "stair steelblock",
-        "french": "escalier en bloc d'acier"
+        "french": "escalier en bloc d'acier",
+        "price": 40.99
     },
     {
         "english": "pane",
-        "french": "panneau"
+        "french": "panneau",
+        "price": 8.99
     },
     {
         "english": "trapdoor steel bar",
-        "french": "trappe en acier à barres"
+        "french": "trappe en acier à barres",
+        "price": 12.99
     },
     {
         "english": "stair outer pine wood",
-        "french": "escalier extérieur en bois de pin"
+        "french": "escalier extérieur en bois de pin",
+        "price": 28.99
     },
     {
         "english": "chest locked open",
-        "french": "coffre verrouillé ouvert"
+        "french": "coffre verrouillé ouvert",
+        "price": 35.99
     },
     {
         "english": "stonebrick",
-        "french": "brique de pierre"
+        "french": "brique de pierre",
+        "price": 18.99
     },
     {
         "english": "stair acacia wood",
-        "french": "escalier en bois d'acacia"
+        "french": "escalier en bois d'acacia",
+        "price": 27.99
     },
     {
         "english": "stone block",
-        "french": "bloc de pierre"
+        "french": "bloc de pierre",
+        "price": 15.99
     },
     {
         "english": "slab steelblock",
-        "french": "dalle en bloc d'acier"
+        "french": "dalle en bloc d'acier",
+        "price": 38.99
     },
     {
         "english": "desert stone",
-        "french": "pierre du désert"
+        "french": "pierre du désert",
+        "price": 16.99
     },
     {
         "english": "desert cobble",
-        "french": "pavé du désert"
+        "french": "pavé du désert",
+        "price": 10.99
     },
     {
         "english": "",
-        "french": ""
+        "french": "",
+        "price": 0.00
     },
     {
         "english": "desert stonebrick",
-        "french": "brique de pierre du désert"
+        "french": "brique de pierre du désert",
+        "price": 18.99
     },
     {
         "english": "sandstone",
-        "french": "grès"
+        "french": "grès",
+        "price": 12.99
     },
     {
         "english": "stair aspen wood",
-        "french": "escalier en bois de peuplier"
+        "french": "escalier en bois de peuplier",
+        "price": 25.99
     },
     {
         "english": "sandstonebrick",
-        "french": "brique de grès"
+        "french": "brique de grès",
+        "price": 15.99
     },
     {
         "english": "obsidian pane",
-        "french": "panneau d'obsidienne"
+        "french": "panneau d'obsidienne",
+        "price": 28.99
     },
     {
         "english": "stair inner aspen wood",
-        "french": "escalier intérieur en bois de peuplier"
+        "french": "escalier intérieur en bois de peuplier",
+        "price": 30.99
     },
     {
         "english": "goldblock",
-        "french": "bloc d'or"
+        "french": "bloc d'or",
+        "price": 40.99
     },
     {
         "english": "stair outer aspen wood",
-        "french": "escalier extérieur en bois de peuplier"
+        "french": "escalier extérieur en bois de peuplier",
+        "price": 32.99
     },
     {
         "english": "stone with diamond",
-        "french": "pierre avec diamant"
+        "french": "pierre avec diamant",
+        "price": 45.99
     },
     {
         "english": "slab aspen wood",
-        "french": "dalle en bois de peuplier"
+        "french": "dalle en bois de peuplier",
+        "price": 22.99
     },
     {
         "english": "diamondblock",
-        "french": "bloc de diamant"
+        "french": "bloc de diamant",
+        "price": 50.99
     },
     {
         "english": "silver sandstone",
-        "french": "grès argenté"
+        "french": "grès argenté",
+        "price": 16.99
     },
     {
         "english": "stair stone",
-        "french": "escalier en pierre"
+        "french": "escalier en pierre",
+        "price": 20.99
     },
     {
         "english": "silver sandstone brick",
-        "french": "brique de grès argenté"
+        "french": "brique de grès argenté",
+        "price": 18.99
     },
     {
         "english": "sapling",
-        "french": "pousse d'arbre"
+        "french": "pousse d'arbre",
+        "price": 5.99
     },
     {
         "english": "silver sandstone block",
-        "french": "bloc de grès argenté"
+        "french": "bloc de grès argenté",
+        "price": 22.99
     },
     {
         "english": "stair inner stone",
-        "french": "escalier intérieur en pierre"
+        "french": "escalier intérieur en pierre",
+        "price": 24.99
     },
     {
         "english": "junglesapling",
-        "french": "pousse de jungle"
+        "french": "pousse de jungle",
+        "price": 5.99
     },
     {
         "english": "obsidianbrick",
-        "french": "brique d'obsidienne"
+        "french": "brique d'obsidienne",
+        "price": 38.99
     },
     {
         "english": "stair outer stone",
-        "french": "escalier extérieur en pierre"
+        "french": "escalier extérieur en pierre",
+        "price": 26.99
     },
     {
         "english": "pine sapling",
-        "french": "pousse de pin"
+        "french": "pousse de pin",
+        "price": 5.99
     },
     {
         "english": "obsidian block",
-        "french": "bloc d'obsidienne"
+        "french": "bloc d'obsidienne",
+        "price": 35.99
     },
     {
         "english": "tnt burning",
-        "french": "TNT en feu"
+        "french": "TNT en feu",
+        "price": 60.99
     },
     {
         "english": "slab stone",
-        "french": "dalle en pierre"
+        "french": "dalle en pierre",
+        "price": 15.99
     },
     {
         "english": "boom",
-        "french": "explosion"
+        "french": "explosion",
+        "price": 100.99
     },
     {
         "english": "acacia sapling",
-        "french": "pousse d'acacia"
+        "french": "pousse d'acacia",
+        "price": 5.99
     },
     {
         "english": "lava source",
-        "french": "source de lave"
+        "french": "source de lave",
+        "price": 8.99
     },
     {
         "english": "aspen sapling",
-        "french": "pousse de peuplier"
+        "french": "pousse de peuplier",
+        "price": 5.99
     },
     {
         "english": "stone",
-        "french": "pierre"
+        "french": "pierre",
+        "price": 10.99
     },
     {
         "english": "dirt with grass footsteps",
-        "french": "terre avec empreintes d'herbe"
+        "french": "terre avec empreintes d'herbe",
+        "price": 5.99
     },
     {
         "english": "bush sapling",
-        "french": "pousse de buisson"
+        "french": "pousse de buisson",
+        "price": 5.99
     },
     {
         "english": "trapdoor steel bar open",
-        "french": "trappe en acier à barres ouverte"
+        "french": "trappe en acier à barres ouverte",
+        "price": 12.99
     },
     {
         "english": "blueberry bush sapling",
-        "french": "pousse de buisson de myrtilles"
+        "french": "pousse de buisson de myrtilles",
+        "price": 6.99
     },
     {
         "english": "acacia bush sapling",
-        "french": "pousse de buisson d'acacia"
+        "french": "pousse de buisson d'acacia",
+        "price": 6.99
     },
     {
         "english": "gunpowder",
-        "french": "poudre à canon"
+        "french": "poudre à canon",
+        "price": 4.99
     },
     {
         "english": "pine bush sapling",
-        "french": "pousse de buisson de pin"
+        "french": "pousse de buisson de pin",
+        "price": 5.99
     },
     {
         "english": "cactus",
-        "french": "cactus"
+        "french": "cactus",
+        "price": 3.49
     },
     {
         "english": "dirt",
-        "french": "terre"
+        "french": "terre",
+        "price": 1.99
     },
     {
         "english": "dirt with grass",
-        "french": "terre avec de l'herbe"
+        "french": "terre avec de l'herbe",
+        "price": 2.49
     },
     {
         "english": "dirt with dry grass",
-        "french": "terre avec de l'herbe sèche"
+        "french": "terre avec de l'herbe sèche",
+        "price": 2.49
     },
     {
         "english": "dirt with rainforest litter",
-        "french": "terre avec débris de forêt tropicale"
+        "french": "terre avec débris de forêt tropicale",
+        "price": 3.99
     },
     {
         "english": "dry dirt",
-        "french": "terre sèche"
+        "french": "terre sèche",
+        "price": 2.99
     },
     {
         "english": "dry dirt with dry grass",
-        "french": "terre sèche avec de l'herbe sèche"
+        "french": "terre sèche avec de l'herbe sèche",
+        "price": 3.49
     },
     {
         "english": "permafrost",
-        "french": "pergélisol"
+        "french": "pergélisol",
+        "price": 4.99
     },
     {
         "english": "stair desert stone",
-        "french": "escalier en pierre du désert"
+        "french": "escalier en pierre du désert",
+        "price": 7.99
     },
     {
         "english": "permafrost with stones",
-        "french": "pergélisol avec des pierres"
+        "french": "pergélisol avec des pierres",
+        "price": 6.99
     },
     {
         "english": "stair stonebrick",
-        "french": "escalier en brique de pierre"
+        "french": "escalier en brique de pierre",
+        "price": 8.99
     },
     {
         "english": "permafrost with moss",
-        "french": "pergélisol avec de la mousse"
+        "french": "pergélisol avec de la mousse",
+        "price": 7.49
     },
     {
         "english": "bush leaves",
-        "french": "feuilles de buisson"
+        "french": "feuilles de buisson",
+        "price": 3.99
     },
     {
         "english": "stair inner stonebrick",
-        "french": "escalier intérieur en brique de pierre"
+        "french": "escalier intérieur en brique de pierre",
+        "price": 9.99
     },
     {
         "english": "cotton",
-        "french": "coton"
+        "french": "coton",
+        "price": 5.49
     },
     {
         "english": "desert sand",
-        "french": "sable du désert"
+        "french": "sable du désert",
+        "price": 2.99
     },
     {
         "english": "stair outer stonebrick",
-        "french": "escalier extérieur en brique de pierre"
+        "french": "escalier extérieur en brique de pierre",
+        "price": 10.99
     },
     {
         "english": "silver sand",
-        "french": "sable argenté"
+        "french": "sable argenté",
+        "price": 4.99
     },
     {
         "english": "blueberry bush leaves",
-        "french": "feuilles de buisson de myrtilles"
+        "french": "feuilles de buisson de myrtilles",
+        "price": 6.99
     },
     {
         "english": "gravel",
-        "french": "gravier"
+        "french": "gravier",
+        "price": 3.49
     },
     {
         "english": "tree",
-        "french": "arbre"
+        "french": "arbre",
+        "price": 12.99
     },
     {
         "english": "leaves",
-        "french": "feuilles"
+        "french": "feuilles",
+        "price": 2.49
     },
     {
         "english": "acacia bush stem",
-        "french": "tronc de buisson d'acacia"
+        "french": "tronc de buisson d'acacia",
+        "price": 5.99
     },
     {
         "english": "bookshelf",
-        "french": "étagère à livres"
+        "french": "étagère à livres",
+        "price": 15.99
     },
     {
         "english": "stair outer tinblock",
-        "french": "escalier extérieur en bloc d'étain"
+        "french": "escalier extérieur en bloc d'étain",
+        "price": 11.99
     },
     {
         "english": "acacia bush leaves",
-        "french": "feuilles de buisson d'acacia"
+        "french": "feuilles de buisson d'acacia",
+        "price": 6.99
     },
     {
         "english": "stair outer goldblock",
-        "french": "escalier extérieur en bloc d'or"
+        "french": "escalier extérieur en bloc d'or",
+        "price": 13.99
     },
     {
         "english": "fence pine wood",
-        "french": "clôture en bois de pin"
+        "french": "clôture en bois de pin",
+        "price": 8.99
     },
     {
         "english": "glass",
-        "french": "verre"
+        "french": "verre",
+        "price": 5.99
     },
     {
         "english": "snowblock",
-        "french": "bloc de neige"
+        "french": "bloc de neige",
+        "price": 4.49
     },
     {
         "english": "dark grey",
-        "french": "gris foncé"
+        "french": "gris foncé",
+        "price": 3.99
     },
     {
         "english": "fence aspen wood",
-        "french": "clôture en bois de peuplier"
+        "french": "clôture en bois de peuplier",
+        "price": 9.99
     },
     {
         "english": "ice",
-        "french": "glace"
+        "french": "glace",
+        "price": 2.99
     },
     {
         "english": "slab ice",
-        "french": "dalle de glace"
+        "french": "dalle de glace",
+        "price": 1.99
     },
     {
         "english": "fence rail wood",
-        "french": "clôture de rail en bois"
+        "french": "clôture de rail en bois",
+        "price": 4.49
     },
     {
         "english": "sand with kelp",
-        "french": "sable avec des laminaires"
+        "french": "sable avec des laminaires",
+        "price": 3.99
     },
     {
         "english": "pine tree",
-        "french": "arbre de pin"
+        "french": "arbre de pin",
+        "price": 7.99
     },
     {
         "english": "pine needles",
-        "french": "aiguilles de pin"
+        "french": "aiguilles de pin",
+        "price": 2.49
     },
     {
         "english": "fence rail acacia wood",
-        "french": "clôture de rail en bois d'acacia"
+        "french": "clôture de rail en bois d'acacia",
+        "price": 5.99
     },
     {
         "english": "wood",
-        "french": "bois"
+        "french": "bois",
+        "price": 2.99
     },
     {
         "english": "stair inner junglewood",
-        "french": "escalier intérieur en bois de la jungle"
+        "french": "escalier intérieur en bois de la jungle",
+        "price": 6.99
     },
     {
         "english": "stair desert sandstone block",
-        "french": "escalier en bloc de grès du désert"
+        "french": "escalier en bloc de grès du désert",
+        "price": 8.99
     },
     {
         "english": "fence rail junglewood",
-        "french": "clôture de rail en bois de la jungle"
+        "french": "clôture de rail en bois de la jungle",
+        "price": 7.49
     },
     {
         "english": "fence rail pine wood",
-        "french": "clôture de rail en bois de pin"
+        "french": "clôture de rail en bois de pin",
+        "price": 6.99
     },
     {
         "english": "cyan",
-        "french": "cyan"
+        "french": "cyan",
+        "price": 3.99
     },
     {
         "english": "gate pine wood open",
-        "french": "porte en bois de pin ouverte"
+        "french": "porte en bois de pin ouverte",
+        "price": 5.99
     },
     {
         "english": "coral skeleton",
-        "french": "corail squelette"
+        "french": "corail squelette",
+        "price": 9.99
     },
     {
         "english": "water source",
-        "french": "source d'eau"
+        "french": "source d'eau",
+        "price": 1.99
     },
     {
         "english": "wheat",
-        "french": "blé"
+        "french": "blé",
+        "price": 4.99
     },
     {
         "english": "dark green",
-        "french": "vert foncé"
+        "french": "vert foncé",
+        "price": 3.49
     },
     {
         "english": "coral green",
-        "french": "corail vert"
+        "french": "corail vert",
+        "price": 8.99
     },
     {
         "english": "coral pink",
-        "french": "corail rose"
+        "french": "corail rose",
+        "price": 8.99
     },
     {
         "english": "obsidian glass",
-        "french": "verre d'obsidienne"
+        "french": "verre d'obsidienne",
+        "price": 6.99
     },
     {
         "english": "coral cyan",
-        "french": "corail cyan"
+        "french": "corail cyan",
+        "price": 9.99
     },
     {
         "english": "coral brown",
-        "french": "corail brun"
+        "french": "corail brun",
+        "price": 8.99
     },
     {
         "english": "seed wheat",
-        "french": "graine de blé"
+        "french": "graine de blé",
+        "price": 2.49
     },
     {
         "english": "coral orange",
-        "french": "corail orange"
+        "french": "corail orange",
+        "price": 8.99
     },
     {
         "english": "meselamp",
-        "french": "lampe à base de mese"
+        "french": "lampe à base de mese",
+        "price": 12.99
     },
     {
         "english": "door steel bar b",
-        "french": "porte en acier à barres B"
+        "french": "porte en acier à barres B",
+        "price": 14.99
     },
     {
         "english": "stair outer straw",
-        "french": "escalier extérieur en paille"
+        "french": "escalier extérieur en paille",
+        "price": 6.99
     },
     {
         "english": "stair inner straw",
-        "french": "escalier intérieur en paille"
+        "french": "escalier intérieur en paille",
+        "price": 7.99
     },
     {
         "english": "mese post light",
-        "french": "lampe à base de mese"
+        "french": "lampe à base de mese",
+        "price": 12.99
     },
     {
         "english": "stair straw",
-        "french": "escalier en paille"
+        "french": "escalier en paille",
+        "price": 6.99
     },
     {
         "english": "mese post light acacia wood",
-        "french": "lampe à base de mese en bois d'acacia"
+        "french": "lampe à base de mese en bois d'acacia",
+        "price": 16.99
     },
     {
         "english": "pane flat",
-        "french": "panneau plat"
+        "french": "panneau plat",
+        "price": 5.99
     },
     {
         "english": "mese post light junglewood",
-        "french": "lampe à base de mese en bois de la jungle"
+        "french": "lampe à base de mese en bois de la jungle",
+        "price": 18.99
     },
     {
         "english": "red",
-        "french": "rouge"
+        "french": "rouge",
+        "price": 3.99
     },
     {
         "english": "mese post light pine wood",
-        "french": "lampe à base de mese en bois de pin"
+        "french": "lampe à base de mese en bois de pin",
+        "price": 17.99
     },
     {
         "english": "water flowing",
-        "french": "eau en mouvement"
+        "french": "eau en mouvement",
+        "price": 2.99
     },
     {
         "english": "mese post light aspen wood",
-        "french": "lampe à base de mese en bois de peuplier"
+        "french": "lampe à base de mese en bois de peuplier",
+        "price": 15.99
     },
     {
         "english": "pine wood",
-        "french": "bois de pin"
+        "french": "bois de pin",
+        "price": 2.99
     },
     {
         "english": "cloud",
-        "french": "nuage"
+        "french": "nuage",
+        "price": 1.99
     },
     {
         "english": "river water source",
-        "french": "source d'eau de rivière"
+        "french": "source d'eau de rivière",
+        "price": 4.99
     },
     {
         "english": "orange",
-        "french": "orange"
+        "french": "orange",
+        "price": 3.99
     },
     {
         "english": "desert sand soil",
-        "french": "sol de sable du désert"
+        "french": "sol de sable du désert",
+        "price": 5.99
     },
     {
         "english": "river water flowing",
-        "french": "eau de rivière en mouvement"
+        "french": "eau de rivière en mouvement",
+        "price": 3.99
     },
     {
         "english": "pink",
-        "french": "rose"
+        "french": "rose",
+        "price": 4.99
     },
     {
         "english": "acacia tree",
-        "french": "arbre d'acacia"
+        "french": "arbre d'acacia",
+        "price": 7.99
     },
     {
         "english": "stair pine wood",
-        "french": "escalier en bois de pin"
+        "french": "escalier en bois de pin",
+        "price": 6.99
     },
     {
         "english": "dry soil wet",
-        "french": "sol sec mouillé"
+        "french": "sol sec mouillé",
+        "price": 4.99
     },
     {
         "english": "slab pine wood",
-        "french": "dalle en bois de pin"
+        "french": "dalle en bois de pin",
+        "price": 3.99
     },
     {
         "english": "acacia wood",
-        "french": "bois d'acacia"
+        "french": "bois d'acacia",
+        "price": 2.99
     },
     {
         "english": "white",
-        "french": "blanc"
+        "french": "blanc",
+        "price": 2.99
     },
     {
         "english": "dry soil",
-        "french": "sol sec"
+        "french": "sol sec",
+        "price": 3.99
     },
     {
         "english": "acacia leaves",
-        "french": "feuilles d'acacia"
+        "french": "feuilles d'acacia",
+        "price": 2.49
     },
     {
         "english": "soil wet",
-        "french": "sol mouillé"
+        "french": "sol mouillé",
+        "price": 4.99
     },
     {
         "english": "glass bottle",
-        "french": "bouteille en verre"
+        "french": "bouteille en verre",
+        "price": 1.99
     },
     {
         "english": "soil",
-        "french": "sol"
+        "french": "sol",
+        "price": 2.99
     },
     {
         "english": "dandelion yellow",
-        "french": "pissenlit jaune"
+        "french": "pissenlit jaune",
+        "price": 1.99
     },
     {
         "english": "magenta",
-        "french": "magenta"
+        "french": "magenta",
+        "price": 3.99
     },
     {
         "english": "aspen tree",
-        "french": "arbre de peuplier"
+        "french": "arbre de peuplier",
+        "price": 7.99
     },
     {
         "english": "desert sand soil wet",
-        "french": "sol mouillé de sable du désert"
+        "french": "sol mouillé de sable du désert",
+        "price": 6.99
     },
     {
         "english": "brown",
-        "french": "marron"
+        "french": "marron",
+        "price": 2.99
     },
     {
         "english": "yellow",
-        "french": "jaune"
+        "french": "jaune",
+        "price": 2.99
     },
     {
         "english": "aspen wood",
-        "french": "bois de peuplier"
+        "french": "bois de peuplier",
+        "price": 2.99
     },
     {
         "english": "green",
-        "french": "vert"
+        "french": "vert",
+        "price": 3.99
     },
     {
         "english": "blue",
-        "french": "bleu"
+        "french": "bleu",
+        "price": 3.99
     },
     {
         "english": "aspen leaves",
-        "french": "feuilles de peuplier"
+        "french": "feuilles de peuplier",
+        "price": 2.49
     },
     {
         "english": "violet",
-        "french": "violet"
+        "french": "violet",
+        "price": 3.99
     },
     {
         "english": "black",
-        "french": "noir"
+        "french": "noir",
+        "price": 2.99
     },
     {
         "english": "powerrail",
-        "french": "rail d'alimentation"
+        "french": "rail d'alimentation",
+        "price": 5.99
     },
     {
         "english": "grey",
-        "french": "gris"
+        "french": "gris",
+        "price": 2.99
     },
     {
         "english": "stone with coal",
-        "french": "pierre avec du charbon"
+        "french": "pierre avec du charbon",
+        "price": 3.99
     },
     {
         "english": "bones",
-        "french": "os"
+        "french": "os",
+        "price": 1.99
     },
     {
         "english": "door steel bar d",
-        "french": "porte en acier à barres D"
+        "french": "porte en acier à barres D",
+        "price": 14.99
     },
     {
         "english": "coalblock",
-        "french": "bloc de charbon"
+        "french": "bloc de charbon",
+        "price": 2.99
     },
     {
         "english": "door steel bar c",
-        "french": "porte en acier à barres C"
+        "french": "porte en acier à barres C",
+        "price": 14.99
     },
     {
         "english": "brakerail",
-        "french": "rail de freinage"
+        "french": "rail de freinage",
+        "price": 6.99
     },
     {
         "english": "stone with iron",
-        "french": "pierre avec du fer"
+        "french": "pierre avec du fer",
+        "price": 4.99
     },
     {
         "english": "cotton wild",
-        "french": "coton sauvage"
+        "french": "coton sauvage",
+        "price": 2.49
     },
     {
         "english": "door steel bar a",
-        "french": "porte en acier à barres A"
+        "french": "porte en acier à barres A",
+        "price": 14.99
     },
     {
         "english": "bar",
-        "french": "barre"
+        "french": "barre",
+        "price": 1.99
     },
     {
         "english": "steelblock",
-        "french": "bloc d'acier"
+        "french": "bloc d'acier",
+        "price": 3.99
     },
     {
         "english": "bar flat",
-        "french": "barre plate"
+        "french": "barre plate",
+        "price": 2.49
     },
     {
         "english": "obsidian pane flat",
-        "french": "panneau plat d'obsidienne"
+        "french": "panneau plat d'obsidienne",
+        "price": 6.99
     },
     {
         "english": "stone with copper",
-        "french": "pierre avec du cuivre"
+        "french": "pierre avec du cuivre",
+        "price": 4.99
     },
     {
         "english": "straw",
-        "french": "paille"
+        "french": "paille",
+        "price": 1.99
     },
     {
         "english": "desert sandstone block",
-        "french": "bloc de grès du désert"
+        "french": "bloc de grès du désert",
+        "price": 5.99
     },
     {
         "english": "seed cotton",
-        "french": "graine de coton"
+        "french": "graine de coton",
+        "price": 1.99
     },
     {
         "english": "copperblock",
-        "french": "bloc de cuivre"
+        "french": "bloc de cuivre",
+        "price": 2.99
     },
     {
         "english": "gate pine wood closed",
-        "french": "porte en bois de pin fermée"
+        "french": "porte en bois de pin fermée",
+        "price": 5.99
     },
     {
         "english": "gate junglewood open",
-        "french": "porte en bois de la jungle ouverte"
+        "french": "porte en bois de la jungle ouverte",
+        "price": 7.99
     },
     {
         "english": "stone with tin",
-        "french": "pierre avec de l'étain"
+        "french": "pierre avec de l'étain",
+        "price": 4.99
     },
     {
         "english": "gate junglewood closed",
-        "french": "porte en bois de la jungle fermée"
+        "french": "porte en bois de la jungle fermée",
+        "price": 7.99
     },
     {
         "english": "dry shrub",
-        "french": "arbuste sec"
+        "french": "arbuste sec",
+        "price": 2.49
     },
     {
         "english": "tinblock",
-        "french": "bloc d'étain"
+        "french": "bloc d'étain",
+        "price": 3.99
     },
     {
         "english": "jungleleaves",
-        "french": "feuilles de la jungle"
+        "french": "feuilles de la jungle",
+        "price": 2.49
     },
     {
         "english": "jungletree",
-        "french": "arbre de la jungle"
+        "french": "arbre de la jungle",
+        "price": 7.99
     },
     {
         "english": "bronzeblock",
-        "french": "bloc de bronze"
+        "french": "bloc de bronze",
+        "price": 4.99
     },
     {
         "english": "door obsidian glass d",
-        "french": "porte en verre d'obsidienne D"
+        "french": "porte en verre d'obsidienne D",
+        "price": 16.99
     },
     {
         "english": "door obsidian glass c",
-        "french": "porte en verre d'obsidienne C"
+        "french": "porte en verre d'obsidienne C",
+        "price": 16.99
     },
     {
         "english": "stone with mese",
-        "french": "pierre avec du mese"
+        "french": "pierre avec du mese",
+        "price": 4.99
     },
     {
         "english": "ladder wood",
-        "french": "échelle en bois"
+        "french": "échelle en bois",
+        "price": 5.99
     },
     {
         "english": "torch",
-        "french": "torche"
+        "french": "torche",
+        "price": 1.99
     },
     {
         "english": "mese",
-        "french": "mese"
+        "french": "mese",
+        "price": 3.99
     },
     {
         "english": "ladder steel",
-        "french": "échelle en acier"
+        "french": "échelle en acier",
+        "price": 8.99
     },
     {
         "english": "stair obsidian glass",
-        "french": "escalier en verre d'obsidienne"
+        "french": "escalier en verre d'obsidienne",
+        "price": 12.99
     },
     {
         "english": "stone with gold",
-        "french": "pierre avec de l'or"
+        "french": "pierre avec de l'or",
+        "price": 6.99
     },
     {
         "english": "fence wood",
-        "french": "clôture en bois"
+        "french": "clôture en bois",
+        "price": 3.99
     },
     {
         "english": "door obsidian glass b",
-        "french": "porte en verre d'obsidienne B"
+        "french": "porte en verre d'obsidienne B",
+        "price": 14.99
     },
     {
         "english": "furnace",
-        "french": "fourneau"
+        "french": "fourneau",
+        "price": 9.99
     },
     {
         "english": "torch ceiling",
-        "french": "torche au plafond"
+        "french": "torche au plafond",
+        "price": 2.49
     },
     {
         "english": "torch wall",
-        "french": "torche murale"
+        "french": "torche murale",
+        "price": 2.49
     },
     {
         "english": "fence acacia wood",
-        "french": "clôture en bois d'acacia"
+        "french": "clôture en bois d'acacia",
+        "price": 5.99
     },
     {
         "english": "door glass d",
-        "french": "porte en verre D"
+        "french": "porte en verre D",
+        "price": 12.99
     },
     {
         "english": "stair inner obsidian glass",
-        "french": "escalier intérieur en verre d'obsidienne"
+        "french": "escalier intérieur en verre d'obsidienne",
+        "price": 14.99
     },
     {
         "english": "door glass c",
-        "french": "porte en verre C"
+        "french": "porte en verre C",
+        "price": 12.99
     },
     {
         "english": "fence junglewood",
-        "french": "clôture en bois de la jungle"
+        "french": "clôture en bois de la jungle",
+        "price": 5.99
     },
     {
         "english": "door glass b",
-        "french": "porte en verre B"
+        "french": "porte en verre B",
+        "price": 12.99
     },
     {
         "english": "stair outer obsidian glass",
-        "french": "escalier extérieur en verre d'obsidienne"
+        "french": "escalier extérieur en verre d'obsidienne",
+        "price": 14.99
     },
     {
         "english": "door steel d",
-        "french": "porte en acier D"
+        "french": "porte en acier D",
+        "price": 16.99
     },
     {
         "english": "door steel c",
-        "french": "porte en acier C"
+        "french": "porte en acier C",
+        "price": 16.99
     },
     {
         "english": "door steel b",
-        "french": "porte en acier B"
+        "french": "porte en acier B",
+        "price": 16.99
     },
     {
         "english": "door steel a",
-        "french": "porte en acier A"
+        "french": "porte en acier A",
+        "price": 16.99
     },
     {
         "english": "stair inner desert sandstone brick",
-        "french": "escalier intérieur en brique de grès du désert"
+        "french": "escalier intérieur en brique de grès du désert",
+        "price": 10.99
     },
     {
         "english": "slab sandstone block",
-        "french": "dalle en bloc de grès"
+        "french": "dalle en bloc de grès",
+        "price": 3.99
     },
     {
         "english": "door wood b",
-        "french": "porte en bois B"
+        "french": "porte en bois B",
+        "price": 8.99
     },
     {
         "english": "door wood a",
-        "french": "porte en bois A"
+        "french": "porte en bois A",
+        "price": 8.99
     },
     {
         "english": "hidden",
-        "french": "caché"
+        "french": "caché",
+        "price": 0.99
     },
     {
         "english": "rail",
-        "french": "rail"
+        "french": "rail",
+        "price": 2.99
     },
     {
         "english": "firefly bottle",
-        "french": "bouteille de lucioles"
+        "french": "bouteille de lucioles",
+        "price": 4.99
     },
     {
         "english": "hidden firefly",
-        "french": "luciole cachée"
+        "french": "luciole cachée",
+        "price": 2.99
     },
     {
         "english": "firefly",
-        "french": "luciole"
+        "french": "luciole",
+        "price": 3.99
     },
     {
         "english": "steel bottle",
-        "french": "bouteille en acier"
+        "french": "bouteille en acier",
+        "price": 5.99
     },
     {
         "english": "shelf",
-        "french": "étagère"
+        "french": "étagère",
+        "price": 4.99
     },
     {
         "english": "gunpowder burning",
-        "french": "poudre à canon en combustion"
+        "french": "poudre à canon en combustion",
+        "price": 6.99
     },
     {
         "english": "basic flame",
-        "french": "flamme basique"
+        "french": "flamme basique",
+        "price": 2.99
     },
     {
         "english": "hidden butterfly violet",
-        "french": "papillon violet caché"
+        "french": "papillon violet caché",
+        "price": 3.99
     },
     {
         "english": "butterfly violet",
-        "french": "papillon violet"
+        "french": "papillon violet",
+        "price": 4.99
     },
     {
         "english": "hidden butterfly red",
-        "french": "papillon rouge caché"
+        "french": "papillon rouge caché",
+        "price": 3.99
     },
     {
         "english": "butterfly red",
-        "french": "papillon rouge"
+        "french": "papillon rouge",
+        "price": 4.99
     },
     {
         "english": "hidden butterfly white",
-        "french": "papillon blanc caché"
+        "french": "papillon blanc caché",
+        "price": 3.99
     },
     {
         "english": "butterfly white",
-        "french": "papillon blanc"
+        "french": "papillon blanc",
+        "price": 4.99
     },
     {
         "english": "slab desert stone block",
-        "french": "dalle en bloc de pierre du désert"
+        "french": "dalle en bloc de pierre du désert",
+        "price": 3.99
     },
     {
         "english": "furnace active",
-        "french": "fourneau actif"
+        "french": "fourneau actif",
+        "price": 11.99
     },
     {
         "english": "brick",
-        "french": "brique"
+        "french": "brique",
+        "price": 2.99
     },
     {
         "english": "papyrus",
-        "french": "papyrus"
+        "french": "papyrus",
+        "price": 1.99
     },
     {
         "english": "stair inner tinblock",
-        "french": "escalier intérieur en bloc d'étain"
+        "french": "escalier intérieur en bloc d'étain",
+        "price": 7.99
     },
     {
         "english": "slab tinblock",
-        "french": "dalle en bloc d'étain"
+        "french": "dalle en bloc d'étain",
+        "price": 3.99
     },
     {
         "english": "stair inner copperblock",
-        "french": "escalier intérieur en bloc de cuivre"
+        "french": "escalier intérieur en bloc de cuivre",
+        "price": 8.99
     },
     {
         "english": "chrysanthemum green",
-        "french": "chrysanthème vert"
+        "french": "chrysanthème vert",
+        "price": 4.99
     },
     {
         "english": "stair bronzeblock",
-        "french": "escalier en bloc de bronze"
+        "french": "escalier en bloc de bronze",
+        "price": 9.99
     },
     {
         "english": "stair outer bronzeblock",
-        "french": "escalier extérieur en bloc de bronze"
+        "french": "escalier extérieur en bloc de bronze",
+        "price": 11.99
     },
     {
         "english": "slab obsidian glass",
-        "french": "dalle en verre d'obsidienne"
+        "french": "dalle en verre d'obsidienne",
+        "price": 6.99
     },
     {
         "english": "stair outer glass",
-        "french": "escalier extérieur en verre"
+        "french": "escalier extérieur en verre",
+        "price": 12.99
     },
     {
         "english": "stair inner glass",
-        "french": "escalier intérieur en verre"
+        "french": "escalier intérieur en verre",
+        "price": 14.99
     },
     {
         "english": "dry grass",
-        "french": "herbe sèche"
+        "french": "herbe sèche",
+        "price": 1.99
     },
     {
         "english": "stair inner brick",
-        "french": "escalier intérieur en brique"
+        "french": "escalier intérieur en brique",
+        "price": 5.99
     },
     {
         "english": "stair inner steelblock",
-        "french": "escalier intérieur en bloc d'acier"
+        "french": "escalier intérieur en bloc d'acier",
+        "price": 9.99
     },
     {
         "english": "bed bottom",
-        "french": "bas de lit"
+        "french": "bas de lit",
+        "price": 19.99
     },
     {
         "english": "slab copperblock",
-        "french": "dalle en bloc de cuivre"
+        "french": "dalle en bloc de cuivre",
+        "price": 8.99
     },
     {
         "english": "bed top",
-        "french": "haut de lit"
+        "french": "haut de lit",
+        "price": 24.99
     },
     {
         "english": "fancy bed bottom",
-        "french": "bas de lit élégant"
+        "french": "bas de lit élégant",
+        "price": 29.99
     },
     {
         "english": "stair outer ice",
-        "french": "escalier extérieur en glace"
+        "french": "escalier extérieur en glace",
+        "price": 14.99
     },
     {
         "english": "stair inner ice",
-        "french": "escalier intérieur en glace"
+        "french": "escalier intérieur en glace",
+        "price": 14.99
     },
     {
         "english": "stair snowblock",
-        "french": "escalier en bloc de neige"
+        "french": "escalier en bloc de neige",
+        "price": 12.99
     },
     {
         "english": "fancy bed top",
-        "french": "haut de lit élégant"
+        "french": "haut de lit élégant",
+        "price": 34.99
     },
     {
         "english": "slab bronzeblock",
-        "french": "dalle en bloc de bronze"
+        "french": "dalle en bloc de bronze",
+        "price": 10.99
     },
     {
         "english": "rose",
-        "french": "rose"
+        "french": "rose",
+        "price": 4.99
     },
     {
         "english": "stair inner bronzeblock",
-        "french": "escalier intérieur en bloc de bronze"
+        "french": "escalier intérieur en bloc de bronze",
+        "price": 16.99
     },
     {
         "english": "tulip",
-        "french": "tulipe"
+        "french": "tulipe",
+        "price": 4.99
     },
     {
         "english": "stair inner snowblock",
-        "french": "escalier intérieur en bloc de neige"
+        "french": "escalier intérieur en bloc de neige",
+        "price": 12.99
     },
     {
         "english": "stair outer copperblock",
-        "french": "escalier extérieur en bloc de cuivre"
+        "french": "escalier extérieur en bloc de cuivre",
+        "price": 16.99
     },
     {
         "english": "geranium",
-        "french": "géranium"
+        "french": "géranium",
+        "price": 5.99
     },
     {
         "english": "stair copperblock",
-        "french": "escalier en bloc de cuivre"
+        "french": "escalier en bloc de cuivre",
+        "price": 14.99
     },
     {
         "english": "viola",
-        "french": "violette"
+        "french": "violette",
+        "price": 5.99
     },
     {
         "english": "stair outer snowblock",
-        "french": "escalier extérieur en bloc de neige"
+        "french": "escalier extérieur en bloc de neige",
+        "price": 16.99
     },
     {
         "english": "dandelion white",
-        "french": "pissenlit blanc"
+        "french": "pissenlit blanc",
+        "price": 4.99
     },
     {
         "english": "stair tinblock",
-        "french": "escalier en bloc d'étain"
+        "french": "escalier en bloc d'étain",
+        "price": 10.99
     },
     {
         "english": "stair outer steelblock",
-        "french": "escalier extérieur en bloc d'acier"
+        "french": "escalier extérieur en bloc d'acier",
+        "price": 18.99
     },
     {
         "english": "slab snowblock",
-        "french": "dalle en bloc de neige"
+        "french": "dalle en bloc de neige",
+        "price": 8.99
     },
     {
         "english": "slab brick",
-        "french": "dalle en brique"
+        "french": "dalle en brique",
+        "price": 7.99
     },
     {
         "english": "slab stonebrick",
-        "french": "dalle en pierre taillée"
+        "french": "dalle en pierre taillée",
+        "price": 9.99
     },
     {
         "english": "stair outer brick",
-        "french": "escalier extérieur en brique"
+        "french": "escalier extérieur en brique",
+        "price": 14.99
     },
     {
         "english": "stair glass",
-        "french": "escalier en verre"
+        "french": "escalier en verre",
+        "price": 11.99
     },
     {
         "english": "stair outer obsidianbrick",
-        "french": "escalier extérieur en brique d'obsidienne"
+        "french": "escalier extérieur en brique d'obsidienne",
+        "price": 19.99
     },
     {
         "english": "stair inner obsidianbrick",
-        "french": "escalier intérieur en brique d'obsidienne"
+        "french": "escalier intérieur en brique d'obsidienne",
+        "price": 19.99
     },
     {
         "english": "stair stone block",
-        "french": "escalier en bloc de pierre"
+        "french": "escalier en bloc de pierre",
+        "price": 12.99
     },
     {
         "english": "apple mark",
-        "french": "marque de pomme"
+        "french": "marque de pomme",
+        "price": 2.99
     },
     {
         "english": "slab glass",
-        "french": "dalle en verre"
+        "french": "dalle en verre",
+        "price": 11.99
     },
     {
         "english": "cave ice",
-        "french": "glace de grotte"
+        "french": "glace de grotte",
+        "price": 13.99
     },
-    
     {
         "english": "cotton",
-        "french": "coton"
+        "french": "coton",
+        "price": 6.99
     },
     {
         "english": "stair inner stone block",
-        "french": "escalier intérieur en bloc de pierre"
+        "french": "escalier intérieur en bloc de pierre",
+        "price": 13.99
     },
     {
         "english": "pine bush needles",
-        "french": "aiguilles de brousse de pin"
+        "french": "aiguilles de brousse de pin",
+        "price": 5.99
     },
     {
         "english": "cotton",
-        "french": "coton"
+        "french": "coton",
+        "price": 6.99
     },
     {
         "english": "pine bush stem",
-        "french": "tige de brousse de pin"
+        "french": "tige de brousse de pin",
+        "price": 5.99
     },
     {
         "english": "trapdoor",
-        "french": "trappe"
+        "french": "trappe",
+        "price": 9.99
     },
     {
         "english": "stair outer stone block",
-        "french": "escalier extérieur en bloc de pierre"
+        "french": "escalier extérieur en bloc de pierre",
+        "price": 13.99
     },
     {
         "english": "stair outer acacia wood",
-        "french": "escalier extérieur en bois d'acacia"
+        "french": "escalier extérieur en bois d'acacia",
+        "price": 15.99
     },
     {
         "english": "clay",
-        "french": "argile"
+        "french": "argile",
+        "price": 3.99
     },
     {
         "english": "trapdoor steel",
-        "french": "trappe en acier"
+        "french": "trappe en acier",
+        "price": 11.99
     },
     {
         "english": "slab stone block",
-        "french": "dalle en bloc de pierre"
+        "french": "dalle en bloc de pierre",
+        "price": 10.99
     },
     {
         "english": "sign wall wood",
-        "french": "panneau mural en bois"
+        "french": "panneau mural en bois",
+        "price": 7.99
     },
     {
         "english": "desertcobble",
-        "french": "pavé du désert"
+        "french": "pavé du désert",
+        "price": 4.99
     },
     {
         "english": "emergent jungle sapling",
-        "french": "pousse d'arbre de la jungle émergente"
+        "french": "pousse d'arbre de la jungle émergente",
+        "price": 8.99
     },
     {
         "english": "blueberry bush leaves with berries",
-        "french": "feuilles de myrtille avec baies"
+        "french": "feuilles de myrtille avec baies",
+        "price": 11.99
     },
     {
         "english": "obsidian",
-        "french": "obsidienne"
+        "french": "obsidienne",
+        "price": 15.99
     },
     {
         "english": "sign wall steel",
-        "french": "panneau mural en acier"
+        "french": "panneau mural en acier",
+        "price": 11.99
     },
-    
     {
         "english": "sand",
-        "french": "sable"
+        "french": "sable",
+        "price": 2.99
     },
     {
         "english": "stair inner desert stone",
-        "french": "escalier intérieur en pierre du désert"
+        "french": "escalier intérieur en pierre du désert",
+        "price": 13.99
     },
     {
         "english": "dirt with coniferous litter",
-        "french": "terre avec de la litière de conifères"
+        "french": "terre avec de la litière de conifères",
+        "price": 7.99
     },
     {
         "english": "bush stem",
-        "french": "tige de buisson"
+        "french": "tige de buisson",
+        "price": 4.99
     },
     {
         "english": "large cactus seedling",
-        "french": "grande pousse de cactus"
+        "french": "grande pousse de cactus",
+        "price": 16.99
     },
     {
         "english": "apple",
-        "french": "pomme"
+        "french": "pomme",
+        "price": 1.99
     },
     {
         "english": "stair outer desert stone",
-        "french": "escalier extérieur en pierre du désert"
+        "french": "escalier extérieur en pierre du désert",
+        "price": 15.99
     },
     {
         "english": "junglewood",
-        "french": "bois de la jungle"
+        "french": "bois de la jungle",
+        "price": 9.99
     },
     {
         "english": "stair ice",
-        "french": "escalier en glace"
+        "french": "escalier en glace",
+        "price": 11.99
     },
     {
         "english": "marram grass",
-        "french": "herbe marram"
+        "french": "herbe marram",
+        "price": 4.99
     },
     {
         "english": "slab desert stone",
-        "french": "dalle en pierre du désert"
+        "french": "dalle en pierre du désert",
+        "price": 7.99
     },
     {
         "english": "mushroom red",
-        "french": "champignon rouge"
+        "french": "champignon rouge",
+        "price": 3.99
     },
     {
         "english": "lava flowing",
-        "french": "lave en écoulement"
+        "french": "lave en écoulement",
+        "price": 13.99
     },
     {
         "english": "fence rail aspen wood",
-        "french": "clôture en bois de peuplier"
+        "french": "clôture en bois de peuplier",
+        "price": 8.99
     },
     {
         "english": "stair desert cobble",
-        "french": "escalier en pavé du désert"
+        "french": "escalier en pavé du désert",
+        "price": 9.99
     },
     {
         "english": "mushroom brown",
-        "french": "champignon brun"
+        "french": "champignon brun",
+        "price": 3.99
     },
     {
         "english": "junglegrass",
-        "french": "herbe de la jungle"
+        "french": "herbe de la jungle",
+        "price": 5.99
     },
     {
         "english": "gate wood closed",
-        "french": "porte en bois fermée"
+        "french": "porte en bois fermée",
+        "price": 10.99
     },
     {
         "english": "gate acacia wood closed",
-        "french": "porte en bois d'acacia fermée"
+        "french": "porte en bois d'acacia fermée",
+        "price": 11.99
     },
     {
         "english": "stair inner desert sandstone block",
-        "french": "escalier intérieur en bloc de grès du désert"
+        "french": "escalier intérieur en bloc de grès du désert",
+        "price": 12.99
     },
     {
         "english": "stair inner desert cobble",
-        "french": "escalier intérieur en pavé du désert"
+        "french": "escalier intérieur en pavé du désert",
+        "price": 10.99
     },
     {
         "english": "gate aspen wood closed",
-        "french": "porte en bois de peuplier fermée"
+        "french": "porte en bois de peuplier fermée",
+        "price": 11.99
     },
     {
         "english": "slab junglewood",
-        "french": "dalle en bois de la jungle"
+        "french": "dalle en bois de la jungle",
+        "price": 8.99
     },
     {
         "english": "desert sandstone brick",
-        "french": "brique de grès du désert"
+        "french": "brique de grès du désert",
+        "price": 6.99
     },
     {
         "english": "stair outer desert sandstone block",
-        "french": "escalier extérieur en bloc de grès du désert"
+        "french": "escalier extérieur en bloc de grès du désert",
+        "price": 14.99
     },
     {
         "english": "stair outer desert cobble",
-        "french": "escalier extérieur en pavé du désert"
+        "french": "escalier extérieur en pavé du désert",
+        "price": 12.99
     },
     {
         "english": "stair inner acacia wood",
-        "french": "escalier intérieur en bois d'acacia"
+        "french": "escalier intérieur en bois d'acacia",
+        "price": 11.99
     },
     {
         "english": "desert sandstone",
-        "french": "grès du désert"
+        "french": "grès du désert",
+        "price": 5.99
     },
     {
         "english": "slab desert sandstone block",
-        "french": "dalle en bloc de grès du désert"
+        "french": "dalle en bloc de grès du désert",
+        "price": 7.99
     },
     {
         "english": "slab desert cobble",
-        "french": "dalle en pavé du désert"
+        "french": "dalle en pavé du désert",
+        "price": 6.99
     },
     {
         "english": "slab acacia wood",
-        "french": "dalle en bois d'acacia"
+        "french": "dalle en bois d'acacia",
+        "price": 8.99
     },
     {
         "english": "sandstone block",
-        "french": "bloc de grès"
+        "french": "bloc de grès",
+        "price": 4.99
     },
     {
         "english": "stair silver sandstone",
-        "french": "escalier en grès argenté"
+        "french": "escalier en grès argenté",
+        "price": 15.99
     },
     {
         "english": "stair desert stonebrick",
-        "french": "escalier en brique de pierre du désert"
+        "french": "escalier en brique de pierre du désert",
+        "price": 13.99
     },
     {
         "english": "waterlily",
-        "french": "nénuphar"
+        "french": "nénuphar",
+        "price": 6.99
     },
     {
         "english": "stair outer sandstone",
-        "french": "escalier extérieur en grès"
+        "french": "escalier extérieur en grès",
+        "price": 14.99
     },
     {
         "english": "stair sandstone block",
-        "french": "escalier en bloc de grès"
+        "french": "escalier en bloc de grès",
+        "price": 10.99
     },
     {
         "english": "waterlily waving",
-        "french": "nénuphar ondulant"
+        "french": "nénuphar ondulant",
+        "price": 8.99
     },
     {
         "english": "stair inner silver sandstone",
-        "french": "escalier intérieur en grès argenté"
+        "french": "escalier intérieur en grès argenté",
+        "price": 15.99
     },
     {
         "english": "stair inner desert stonebrick",
-        "french": "escalier intérieur en brique de pierre du désert"
+        "french": "escalier intérieur en brique de pierre du désert",
+        "price": 13.99
     },
     {
         "english": "door wood c",
-        "french": "porte en bois c"
+        "french": "porte en bois c",
+        "price": 5.99
     },
     {
         "english": "stair desert sandstone",
-        "french": "escalier en grès du désert"
+        "french": "escalier en grès du désert",
+        "price": 9.99
     },
     {
         "english": "door wood d",
-        "french": "porte en bois d"
+        "french": "porte en bois d",
+        "price": 5.99
     },
     {
         "english": "stair outer silver sandstone",
-        "french": "escalier extérieur en grès argenté"
+        "french": "escalier extérieur en grès argenté",
+        "price": 16.99
     },
     {
         "english": "stair outer desert stonebrick",
-        "french": "escalier extérieur en brique de pierre du désert"
+        "french": "escalier extérieur en brique de pierre du désert",
+        "price": 14.99
     },
     {
         "english": "dry grass",
-        "french": "herbe sèche"
+        "french": "herbe sèche",
+        "price": 3.99
     },
     {
         "english": "stair inner silver sandstone brick",
-        "french": "escalier intérieur en brique de grès argenté"
+        "french": "escalier intérieur en brique de grès argenté",
+        "price": 15.99
     },
     {
         "english": "door glass",
-        "french": "porte en verre"
+        "french": "porte en verre",
+        "price": 8.99
     },
     {
         "english": "flint and steel",
-        "french": "silex et acier"
+        "french": "silex et acier",
+        "price": 5.99
     },
     {
         "english": "tnt stick",
-        "french": "bâton de TNT"
+        "french": "bâton de TNT",
+        "price": 7.99
     },
     {
         "english": "bug net",
-        "french": "filet à insectes"
+        "french": "filet à insectes",
+        "price": 4.99
     },
     {
         "english": "mese crystal",
-        "french": "cristal mese"
+        "french": "cristal mese",
+        "price": 14.99
     },
     {
         "english": "bucket empty",
-        "french": "seau vide"
+        "french": "seau vide",
+        "price": 2.99
     },
     {
         "english": "bucket water",
-        "french": "seau d'eau"
+        "french": "seau d'eau",
+        "price": 3.99
     },
     {
         "english": "bucket lava",
-        "french": "seau de lave"
+        "french": "seau de lave",
+        "price": 9.99
     },
     {
         "english": "bucket river water",
-        "french": "seau d'eau de rivière"
+        "french": "seau d'eau de rivière",
+        "price": 5.99
     },
     {
         "english": "sword mese",
-        "french": "épée en mese"
+        "french": "épée en mese",
+        "price": 12.99
     },
     {
         "english": "sword diamond",
-        "french": "épée en diamant"
+        "french": "épée en diamant",
+        "price": 17.99
     },
     {
         "english": "coal lump",
-        "french": "boulette de charbon"
+        "french": "boulette de charbon",
+        "price": 2.99
     },
     {
         "english": "cart",
-        "french": "chariot"
+        "french": "chariot",
+        "price": 8.99
     },
     {
         "english": "skeleton key",
-        "french": "clé de squelette"
+        "french": "clé de squelette",
+        "price": 10.99
     },
     {
         "english": "key",
-        "french": "clé"
+        "french": "clé",
+        "price": 7.99
     },
     {
         "english": "book",
-        "french": "livre"
+        "french": "livre",
+        "price": 5.99
     },
     {
         "english": "clay brick",
-        "french": "brique d'argile"
+        "french": "brique d'argile",
+        "price": 3.99
     },
     {
         "english": "gold ingot",
-        "french": "lingot d'or"
+        "french": "lingot d'or",
+        "price": 19.99
     },
     {
         "english": "obsidian shard",
-        "french": "éclat d'obsidienne"
+        "french": "éclat d'obsidienne",
+        "price": 14.99
     },
     {
         "english": "paper",
-        "french": "papier"
+        "french": "papier",
+        "price": 2.99
     },
     {
         "english": "stick",
-        "french": "bâton"
+        "french": "bâton",
+        "price": 1.99
     },
     {
         "english": "tin ingot",
-        "french": "lingot d'étain"
+        "french": "lingot d'étain",
+        "price": 6.99
     },
     {
         "english": "steel ingot",
-        "french": "lingot d'acier"
+        "french": "lingot d'acier",
+        "price": 8.99
     },
     {
         "english": "gold lump",
-        "french": "boulette d'or"
+        "french": "boulette d'or",
+        "price": 9.99
     },
     {
         "english": "hoe stone",
-        "french": "houe en pierre"
+        "french": "houe en pierre",
+        "price": 4.99
     },
     {
         "english": "hoe steel",
-        "french": "houe en acier"
+        "french": "houe en acier",
+        "price": 9.99
     },
     {
         "english": "hoe bronze",
-        "french": "houe en bronze"
+        "french": "houe en bronze",
+        "price": 6.99
     },
     {
         "english": "hoe mese",
-        "french": "houe en mese"
+        "french": "houe en mese",
+        "price": 12.99
     },
     {
         "english": "hoe diamond",
-        "french": "houe en diamant"
+        "french": "houe en diamant",
+        "price": 16.99
     },
     {
         "english": "blueberries",
-        "french": "myrtilles"
+        "french": "myrtilles",
+        "price": 6.99
     },
     {
         "english": "mapping kit",
-        "french": "kit de cartographie"
+        "french": "kit de cartographie",
+        "price": 19.99
     },
     {
         "english": "flint",
-        "french": "silex"
+        "french": "silex",
+        "price": 2.99
     },
     {
         "english": "boat",
-        "french": "bateau"
+        "french": "bateau",
+        "price": 14.99
     },
     {
         "english": "diamond",
-        "french": "diamant"
+        "french": "diamant",
+        "price": 24.99
     },
     {
         "english": "binoculars",
-        "french": "jumelles"
+        "french": "jumelles",
+        "price": 16.99
     },
     {
         "english": "string",
-        "french": "ficelle"
+        "french": "ficelle",
+        "price": 1.99
     },
     {
         "english": "flour",
-        "french": "farine"
+        "french": "farine",
+        "price": 3.99
     },
     {
         "english": "bread",
-        "french": "pain"
+        "french": "pain",
+        "price": 4.99
     },
     {
         "english": "iron lump",
-        "french": "boulette de fer"
+        "french": "boulette de fer",
+        "price": 5.99
     },
     {
         "english": "hoe wood",
-        "french": "houe en bois"
+        "french": "houe en bois",
+        "price": 4.99
     },
     {
         "english": "copper lump",
-        "french": "boulette de cuivre"
+        "french": "boulette de cuivre",
+        "price": 5.99
     },
     {
         "english": "tin lump",
-        "french": "boulette d'étain"
+        "french": "boulette d'étain",
+        "price": 6.99
     },
     {
         "english": "door steel bar",
-        "french": "porte à barre d'acier"
+        "french": "porte à barre d'acier",
+        "price": 11.99
     },
     {
         "english": "mese crystal fragment",
-        "french": "fragment de cristal mese"
+        "french": "fragment de cristal mese",
+        "price": 8.99
     },
     {
         "english": "door obsidian glass",
-        "french": "porte en verre d'obsidienne"
+        "french": "porte en verre d'obsidienne",
+        "price": 14.99
     },
     {
         "english": "sword steel",
-        "french": "épée en acier"
+        "french": "épée en acier",
+        "price": 17.99
     },
     {
         "english": "pick wood",
-        "french": "pioche en bois"
+        "french": "pioche en bois",
+        "price": 4.99
     },
     {
         "english": "pick stone",
-        "french": "pioche en pierre"
+        "french": "pioche en pierre",
+        "price": 6.99
     },
     {
         "english": "copper ingot",
-        "french": "lingot de cuivre"
+        "french": "lingot de cuivre",
+        "price": 8.99
     },
     {
         "english": "pick bronze",
-        "french": "pioche en bronze"
+        "french": "pioche en bronze",
+        "price": 9.99
     },
     {
         "english": "pick steel",
-        "french": "pioche en acier"
+        "french": "pioche en acier",
+        "price": 12.99
     },
     {
         "english": "clay lump",
-        "french": "boulette d'argile"
+        "french": "boulette d'argile",
+        "price": 3.99
     },
     {
         "english": "pick mese",
-        "french": "pioche en mese"
+        "french": "pioche en mese",
+        "price": 14.99
     },
     {
         "english": "pick diamond",
-        "french": "pioche en diamant"
+        "french": "pioche en diamant",
+        "price": 18.99
     },
     {
         "english": "screwdriver",
-        "french": "tournevis"
+        "french": "tournevis",
+        "price": 5.99
     },
     {
         "english": "shovel wood",
-        "french": "pelle en bois"
+        "french": "pelle en bois",
+        "price": 4.99
     },
     {
         "english": "book written",
-        "french": "livre écrit"
+        "french": "livre écrit",
+        "price": 7.99
     },
     {
         "english": "shovel stone",
-        "french": "pelle en pierre"
+        "french": "pelle en pierre",
+        "price": 6.99
     },
     {
         "english": "shovel bronze",
-        "french": "pelle en bronze"
+        "french": "pelle en bronze",
+        "price": 8.99
     },
     {
         "english": "shovel steel",
-        "french": "pelle en acier"
+        "french": "pelle en acier",
+        "price": 10.99
     },
     {
         "english": "shovel mese",
-        "french": "pelle en mese"
+        "french": "pelle en mese",
+        "price": 14.99
     },
     {
         "english": "shovel diamond",
-        "french": "pelle en diamant"
+        "french": "pelle en diamant",
+        "price": 19.99
     },
     {
         "english": "axe wood",
-        "french": "hache en bois"
+        "french": "hache en bois",
+        "price": 5.99
     },
     {
         "english": "axe stone",
-        "french": "hache en pierre"
+        "french": "hache en pierre",
+        "price": 7.99
     },
     {
         "english": "axe bronze",
-        "french": "hache en bronze"
+        "french": "hache en bronze",
+        "price": 9.99
     },
     {
         "english": "axe steel",
-        "french": "hache en acier"
+        "french": "hache en acier",
+        "price": 11.99
     },
     {
         "english": "axe mese",
-        "french": "hache en mese"
+        "french": "hache en mese",
+        "price": 14.99
     },
     {
         "english": "axe diamond",
-        "french": "hache en diamant"
+        "french": "hache en diamant",
+        "price": 19.99
     },
     {
         "english": "sword wood",
-        "french": "épée en bois"
+        "french": "épée en bois",
+        "price": 5.99
     },
     {
         "english": "sword stone",
-        "french": "épée en pierre"
+        "french": "épée en pierre",
+        "price": 8.99
     },
     {
         "english": "sword bronze",
-        "french": "épée en bronze"
+        "french": "épée en bronze",
+        "price": 10.99
     },
     {
         "english": "bronze ingot",
-        "french": "lingot de bronze"
+        "french": "lingot de bronze",
+        "price": 9.99
     },
     {
         "english": "door wood",
-        "french": "porte en bois"
+        "french": "porte en bois",
+        "price": 5.99
     },
     {
         "english": "door steel",
-        "french": "porte en acier"
+        "french": "porte en acier",
+        "price": 14.99
     },
     {
         "english": "glass fragments",
-        "french": "fragments de verre"
+        "french": "fragments de verre",
+        "price": 3.99
     },
     {
-        "english":"slab straw",
-        "french":"dalle paille"
+        "english": "slab straw",
+        "french": "dalle paille",
+        "price": 4.99
     },
     {
-        "english":"stair desert sandstone brick",
-        "french":"escalier brique de grès du désert"
+        "english": "stair desert sandstone brick",
+        "french": "escalier brique de grès du désert",
+        "price": 15.99
     },
     {
-        "english":"desert stone block",
-        "french":"bloc de pierre du désert"
+        "english": "desert stone block",
+        "french": "bloc de pierre du désert",
+        "price": 7.99
     }
 ]

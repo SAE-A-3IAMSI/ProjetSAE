@@ -18,7 +18,7 @@ function createObject($class, $data)
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json',
         'Accept: application/json',
-        'DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA' // clef à changer
+        'DOLAPIKEY: fcfvx5j1ptLP80I01U2xAZ520yrMQQES' // clef à changer
     ));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
@@ -29,8 +29,8 @@ function createNewProduct($name, $label)
 {
     $data = array(
         'ref' => $name,
-        'label' => $label,
-        'price' => createPrice($name),
+        'label' => $label['french'],
+        'price' => $label['price'],
         'status' => 1,
         'status_buy' => 1
     );
@@ -42,7 +42,7 @@ function initAllProducts($productList)
     $dataTranslate = file_get_contents('productsEN-FR.json');
     $allProductsTranslate = json_decode($dataTranslate, true); // Le deuxième argument permet de retourner un tableau associatif
     foreach ($productList as $entry) {
-        createNewProduct($entry, frenchName($entry, $allProductsTranslate));
+        createNewProduct($entry, frenchNameAndPrice($entry, $allProductsTranslate));
         echo "product: " . $entry . " has been created\n";
     }
 }
@@ -77,22 +77,29 @@ function separateWord($product)
 }
 
 
-function frenchName($searchString, $allProductsTranslate)
+function frenchNameAndPrice($searchString, $allProductsTranslate)
 {
     $separateWord = separateWord($searchString);
     foreach ($allProductsTranslate as $item) {
-    if (isset($item['english']) && $item['english'] === $separateWord) {
-            $englishName = $item['english'];
-            break; // La chaîne a été trouvée, pas besoin de continuer la recherche
+        if (isset($item['english']) && $item['english'] === $separateWord) {
+            // Correspondance trouvée, retourner le nom en français et le prix
+            echo "La chaîne '$searchString' a été trouvée dans le tableau.\n";
+            echo "Le prix est : " . $item['price'] . "\n";
+            return [
+                'french' => $item['french'],
+                'price' => $item['price'],
+            ];
         }
     }
 
-    if (!empty($englishName)) {
-        // echo "Le nom en anglais de '$searchString' est : $englishName\n";
-        return $item['french'];
-    } else {
-        echo "La chaîne '$searchString' n'a pas été trouvée dans le tableau.\n";
-    }
+    // Si la correspondance n'est pas trouvée
+    echo "La chaîne '$searchString' n'a pas été trouvée dans le tableau.\n";
+
+    // Retourner le mot en anglais et le prix par défaut
+    return [
+        'french' => $searchString, // Retourne le mot en anglais en l'absence de traduction française
+        'price' => 1,
+    ];
 }
 
 function removeLastUnderscoreAndChar($input)
@@ -100,6 +107,7 @@ function removeLastUnderscoreAndChar($input)
     return preg_replace('/_[a-zA-Z0-9]$/', '', $input);
 }
 
+<<<<<<< HEAD
 function createPrice($name)
 { // fonction qui retourne le prix d'un item en fonction de son nom
 
@@ -289,6 +297,8 @@ function createPrice($name)
     // Default price
     return 1;
 }
+=======
+>>>>>>> a89f5db (New CreatePric + PRBLM DoliIsEmpty)
 
 <<<<<<< HEAD
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -307,7 +317,7 @@ function read1Products()
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
     $headers = array(
         "Accept: application/json",
-        "DOLAPIKEY: 0jTMui5CO7nf0ma59XEf0sdF91lTQ4ZA" // clef à changer
+        "DOLAPIKEY: fcfvx5j1ptLP80I01U2xAZ520yrMQQES" // clef à changer
     );
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -320,9 +330,9 @@ function isDolibarrProductListEmpty()
 {
     $data = read1Products();
     if (empty($data)) {
-        return true;
+        return false;
     }
-    return false;
+    return true;
 }
 
 if (isDolibarrProductListEmpty()) {
