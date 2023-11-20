@@ -145,7 +145,7 @@ services:
     # Volumes de conteneurs pour configurer le vhost
     volumes:
       - ./website/vhosts:/etc/apache2/sites-enabled
-      - ./:/var/www
+      - ./siteSAE:/var/www/siteSAE:cached
 
 # Volumes définis
 volumes:
