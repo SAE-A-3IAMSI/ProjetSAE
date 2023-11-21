@@ -39,6 +39,7 @@ function createNewProduct($name, $label)
 
 function initAllProducts($productList)
 {
+    echo "initAllProducts\n";
     $dataTranslate = file_get_contents('productsEN-FR.json');
     $allProductsTranslate = json_decode($dataTranslate, true); // Le deuxième argument permet de retourner un tableau associatif
     foreach ($productList as $entry) {
@@ -323,16 +324,20 @@ function read1Products()
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $dataList = curl_exec($ch);
     curl_close($ch);
+    echo "dataList :\n" . $dataList . "\n";
     return json_decode($dataList);
 }
 
 function isDolibarrProductListEmpty()
 {
     $data = read1Products();
-    if (empty($data)) {
-        return false;
+    
+    // Vérifier si la réponse contient le message "No product found"
+    if (isset($data->error) && $data->error->code == 404 && $data->error->message == "Not Found: No product found") {
+        return true; // La liste est vide
     }
-    return true;
+
+    return false; // La liste n'est pas vide
 }
 
 if (isDolibarrProductListEmpty()) {
