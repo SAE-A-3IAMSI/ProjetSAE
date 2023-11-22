@@ -25,6 +25,3 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
   \
   &&  pecl install apcu && docker-php-ext-enable apcu
 
-#Défini l'espace de travail pour symfony
-WORKDIR /var/www
-

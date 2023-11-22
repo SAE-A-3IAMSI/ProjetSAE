@@ -132,7 +132,6 @@ services:
       - "8000:80"
     # Nom du conteneur
     container_name: symfony_website
-    restart: always
     # Sous-réseaux auxquels le conteneur website est connecté
     networks:
       - minetest_network
