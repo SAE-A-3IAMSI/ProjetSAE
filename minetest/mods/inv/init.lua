@@ -254,3 +254,31 @@ minetest.register_on_mods_loaded(function()
         }, fetch_callback)
     end
 end)
+
+minetest.register_chatcommand("vinv", {
+    description = "Voir l'inventaire du joueur",
+    params = "<nom_joueur>",
+    privs = { inventaire = true },
+    func = function(name, param)
+        local target_player = minetest.get_player_by_name(param)
+
+        if target_player then
+            local inventory = target_player:get_inventory()
+            local main_inventory = inventory:get_list("main")
+
+            local message = "Inventaire de " .. param .. ":\n"
+
+            for _, itemstack in pairs(main_inventory) do
+                if not itemstack:is_empty() then
+                    local item_name = itemstack:get_name()
+                    local item_count = itemstack:get_count()
+                    message = message .. item_name .. " x" .. item_count .. "\n"
+                end
+            end
+
+            minetest.chat_send_player(name, message)
+        else
+            minetest.chat_send_player(name, "Le joueur " .. param .. " n'est pas en ligne.")
+        end
+    end,
+})
