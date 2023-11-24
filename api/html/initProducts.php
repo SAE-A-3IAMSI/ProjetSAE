@@ -31,8 +31,8 @@ function createNewProduct($name, $label)
         'ref' => $name,
         'label' => $label['french'],
         'price' => $label['price'],
-        'status' => 1,
-        'status_buy' => 1
+        'status' => $label['status'],
+        'status_buy' => $label['status_buy']
     );
     createObject("products", $data);
 }
@@ -74,6 +74,9 @@ function separateWord($product)
     $words_after_colon = $words_temp[1];
     $words_after_colon_without_ = str_replace('_', ' ', $words_after_colon);
 
+    if ($words_temp[0] === 'dye' || $words_temp[0] === 'wool') {
+        $words_after_colon_without_ = $words_temp[0] . " " . $words_after_colon_without_;
+    }
     return $words_after_colon_without_;
 }
 
@@ -85,11 +88,22 @@ function frenchNameAndPrice($searchString, $allProductsTranslate)
         if (isset($item['english']) && $item['english'] === $separateWord) {
             // Correspondance trouvée, retourner le nom en français et le prix
             echo "La chaîne '$searchString' a été trouvée dans le tableau.\n";
-            echo "Le prix est : " . $item['price'] . "\n";
-            return [
-                'french' => $item['french'],
-                'price' => $item['price'],
-            ];
+            // echo "Le prix est : " . $item['price'] . "\n";
+            if (isset($item['status']) && isset($item['status_buy']) && isset($item['price'])) {
+                return [
+                    'french' => $item['french'],
+                    'price' => $item['price'],
+                    'status' => $item['status'],
+                    'status_buy' => $item['status_buy']
+                ];
+            } else {
+                return [
+                    'french' => $item['french'],
+                    'price' => 0,
+                    'status' => 0,
+                    'status_buy' => 0
+                ];
+            }
         }
     }
 
@@ -98,8 +112,10 @@ function frenchNameAndPrice($searchString, $allProductsTranslate)
 
     // Retourner le mot en anglais et le prix par défaut
     return [
-        'french' => $searchString, // Retourne le mot en anglais en l'absence de traduction française
-        'price' => 1,
+        'french' => $separateWord, // Retourne le mot en anglais en l'absence de traduction française
+        'price' => 0,
+        'status' => 0,
+        'status_buy' => 0
     ];
 }
 
@@ -138,7 +154,7 @@ function read1Products()
 function isDolibarrProductListEmpty()
 {
     $data = read1Products();
-    
+
     // Vérifier si la réponse contient le message "No product found"
     if (isset($data->error) && $data->error->code == 404 && $data->error->message == "Not Found: No product found") {
         return true; // La liste est vide
@@ -150,7 +166,6 @@ function isDolibarrProductListEmpty()
 if (isDolibarrProductListEmpty()) {
     echo "Dolibarr product list is empty\n";
     initAllProducts($allProducts);
-}
-else {
+} else {
     echo "Dolibarr product list is not empty\n";
 }
