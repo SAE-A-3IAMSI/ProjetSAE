@@ -379,7 +379,7 @@
   },
   {
     "english": "cobble",
-    "french": "Pavé",
+    "french": "Mur de pierre",
     "price": 1,
     "status": 1,
     "status_buy": 1
@@ -449,7 +449,7 @@
   },
   {
     "english": "desert cobble",
-    "french": "Pavé du désert",
+    "french": "Mur de pierre du désert",
     "price": 1,
     "status": 1,
     "status_buy": 1
@@ -849,7 +849,7 @@
 
   {
     "english": "mossycobble",
-    "french": "Pavé moussu",
+    "french": "Mur de pierre moussue",
     "price": 1,
     "status": 1,
     "status_buy": 1
