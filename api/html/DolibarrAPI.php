@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Conf;
+namespace App;
 use App\Conf\Conf;
-require_once "Conf.php";
+require_once "Conf/Conf.php";
 require_once "Psr4AutoloaderClass.php";
 
 use Exception;
@@ -27,16 +27,6 @@ class DolibarrAPI {
 - faire un appel api: initialisation des produits à la création du serveur
 - faire un appel api: pour la création des entrepôts lorsque nouveau joueur créé
 */
-
-
-/*
-function debug_to_console($data) {
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
-
-    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-}*/
 
 
     private string $dolapikey;
@@ -96,9 +86,7 @@ function getObjectByName($class, $name)
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Accept: application/json',
-        'DOLAPIKEY: '.$this->dolapikey
-    )
-    );
+        'DOLAPIKEY: '.$this->dolapikey));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
     curl_close($ch);
@@ -238,9 +226,6 @@ function getProductQtyByName($name)
 }
 
 
-
-
-
 function createNewWarehouse($name)
 {
     $data = array(
@@ -297,5 +282,13 @@ function updateDataBase($jsonData)
     }
 }
 
+/*
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}*/
 
 }

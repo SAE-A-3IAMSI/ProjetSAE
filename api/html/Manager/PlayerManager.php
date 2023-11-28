@@ -1,8 +1,8 @@
 <?php
 
-use App\Conf\DolibarrAPI;
-require_once "DolibarrAPI.php";
-require_once "Psr4AutoloaderClass.php";
+use App\DolibarrAPI;
+require_once "../DolibarrAPI.php";
+require_once "../Psr4AutoloaderClass.php";
 
 
 $dol = new DolibarrAPI();
