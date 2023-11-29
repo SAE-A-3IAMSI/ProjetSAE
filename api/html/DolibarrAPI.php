@@ -109,7 +109,7 @@ function addItemToStock($productName, $warehouseName, $qty)
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
         'Content-Type: application/json',
         'Accept: application/json',
-        'DOLAPIKEY'.$this->dolapikey 
+        'DOLAPIKEY: '.$this->dolapikey 
     )
     );
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -272,7 +272,6 @@ function updateDataBase($jsonData)
 {
 
     $userId = $jsonData['player_name'];
-
     foreach ($jsonData['inventory'] as $entry) {
         $stockQty = $this->getItemStock($entry['name'], $userId);
         $updatedStock = $entry['quantity'] - $stockQty;

@@ -19,10 +19,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //$json_str = json_encode($decoded_data, JSON_PRETTY_PRINT);
         //file_put_contents($file_name, $json_str);
     }
-} else {
-    echo "Aucune donnée JSON reçue pour l'inventaire.";
-    echo "\n";
-    echo $dol->getdolapikey();
-    echo "\n";
-    echo $dol->getlien();
-}
+} 
