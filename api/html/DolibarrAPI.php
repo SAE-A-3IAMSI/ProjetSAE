@@ -235,16 +235,17 @@ function createNewWarehouse($name)
     $this->createObject("warehouses", $data);
 }
 
-function createNewProduct($name)
-{
-    $data = array(
-        'ref' => $name,
-        'label' => $name,
-        'status' => 1,
-        'status_buy' => 1
-    );
-    $this->createObject("products", $data);
-}
+function createNewProduct($name, $label)
+    {
+        $data = array(
+            'ref' => $name,
+            'label' => $label['french'],
+            'price' => $label['price'],
+            'status' => $label['status'],
+            'status_buy' => $label['status_buy']
+        );
+        $this->createObject("products", $data);
+    }
 
 
 function deleteAllProducts()
@@ -280,6 +281,24 @@ function updateDataBase($jsonData)
         }
     }
 }
+
+function read1Products()
+    {
+        $ch = curl_init();
+        $url = $this->lien."/products?sortfield=t.ref&sortorder=ASC&limit=1&ids_only=true";
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        $headers = array(
+            "Accept: application/json",
+            "DOLAPIKEY: ".$this->dolapikey // clef à changer
+        );
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $dataList = curl_exec($ch);
+        curl_close($ch);
+        echo "dataList :\n" . $dataList . "\n";
+        return json_decode($dataList);
+    }
 
 /*
 function debug_to_console($data) {

@@ -7,7 +7,7 @@ class Conf {
 
 static private array $infodoli = array(
     'clefAPI' => 'SRh3NH7f32d0oUa7XfyYUA22Lhsq4o7T',
-    'lien' => 'http://localhost/api/index.php', // localhost à la place de localhost pour le faire fonctionner sur Docker
+    'lien' => 'http://dolibarr/api/index.php', // localhost à la place de localhost pour le faire fonctionner sur Docker
 );
 
 static public function getClefAPI() : string {
