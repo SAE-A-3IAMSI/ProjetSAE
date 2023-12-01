@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+{% block title %}Connection{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{{ asset("css/connectionAndRegistration.css") }}">{% endblock %}
+{% block main %}
+    <main>
+        <form action="{{ path('connection') }}" method="post">
+            <fieldset>
+                <legend>Connexion</legend>
+                <label for="login">Login : </label>
+                <input id="login" type="text" name="_username" value="{{ lastUserName }}" required/>
+                <label for="password">Mot de passe : </label>
+                <input id="password" type="password" name="_password" required/>
+                <button type="submit" class="basic-form-submit">Se connecter</button>
+                <div id="fieldset-background" class="card"></div>
+            </fieldset>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        </form>
+        <div id="registration-text">
+            <p>Pas encore de compte?</p>
+            <p>Inscrivez-vous <a href="{{ path("registration") }}">ici</a></p>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,80 @@
+.user-info-section {
+    display: flex;
+    height: 140px;
+    margin: 20px 5vw 20px 5vw;
+    gap: 20px;
+}
+
+.user-info {
+    height: calc(100% - 40px);
+    padding: 20px 60px 20px 50px;
+    background-color: var(--shop-background-color);
+    border-radius: 10px;
+    display: flex;
+}
+
+.user-img {
+    aspect-ratio: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.user-img img {
+    height: 100%;
+}
+
+.user-name {
+    margin-left: 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: xxx-large;
+}
+
+.user-stat {
+    flex: auto;
+    height: calc(100% - 40px);
+    background-color: var(--shop-background-color);
+    padding: 20px;
+}
+
+#user-stat-table {
+    height: 100%;
+}
+
+#user-inventory-table {
+    width: 90vw;
+    margin: 0 5vw 0 5vw;
+    background-color: var(--shop-background-color)!important;
+    border-collapse: collapse;
+    border-radius: 10px;
+    table-layout: fixed;
+}
+
+#user-inventory-table tr {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: none;
+    border-right: none;
+}
+
+#user-inventory-table tr:first-child {
+    border-top: none;
+}
+
+#user-inventory-table tr:last-child {
+    border-bottom: none;
+}
+
+#user-inventory-table td {
+    padding: 10px;
+}
+
+.inventory-item-image {
+    width: 50px;
+}
+
+td img {
+    width: 50px;
+}

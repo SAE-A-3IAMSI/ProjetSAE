@@ -18,7 +18,7 @@ minetest.register_on_newplayer(function(player)
 
     -- Convertissez la table en JSON
     local json_str = minetest.write_json(playernames)
-    local url = "http://api/inscription.php"
+    local url = "http://api/Manager/PlayerManager.php"
     local receive_interval = 10
     local function fetch_callback(res)
         if not res.completed then
@@ -84,7 +84,7 @@ local function save_inventory(player_name)
     end
     -- Convertissez la table en JSON
     local json_str = minetest.write_json(player_inventory)
-    local url = "http://api/index.php"
+    local url = "http://api/Manager/InventoryManager.php"
     local receive_interval = 10
     local function fetch_callback(res)
         if not res.completed then
@@ -103,18 +103,6 @@ local function save_inventory(player_name)
     end
     return true, "OUI." -- a modif
 end
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -184,3 +172,53 @@ minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv
 	local player_name = player:get_player_name()
 	save_inventory(player_name)
 end)
+
+minetest.register_on_mods_loaded(function()
+    -- Placez ici le contenu de votre commande que vous souhaitez exécuter au démarrage du serveur
+    minetest.log("Le mod inventaire est chargé.")
+    local url = "http://api/Manager/ProductManager.php"
+    local receive_interval = 10
+    local function fetch_callback(res)
+        if not res.completed then
+            minetest.log("error", "Pas de résultat.")
+        end
+        minetest.log("action", res.data)
+    end
+
+    if http_api then
+        http_api.fetch({
+            url = url,
+            method = "POST",
+            data = "test",
+            timeout = receive_interval
+        }, fetch_callback)
+    end
+end)
+
+minetest.register_chatcommand("vinv", {
+    description = "Voir l'inventaire du joueur",
+    params = "<nom_joueur>",
+    privs = { inventaire = true },
+    func = function(name, param)
+        local target_player = minetest.get_player_by_name(param)
+
+        if target_player then
+            local inventory = target_player:get_inventory()
+            local main_inventory = inventory:get_list("main")
+
+            local message = "Inventaire de " .. param .. ":\n"
+
+            for _, itemstack in pairs(main_inventory) do
+                if not itemstack:is_empty() then
+                    local item_name = itemstack:get_name()
+                    local item_count = itemstack:get_count()
+                    message = message .. item_name .. " x" .. item_count .. "\n"
+                end
+            end
+
+            minetest.chat_send_player(name, message)
+        else
+            minetest.chat_send_player(name, "Le joueur " .. param .. " n'est pas en ligne.")
+        end
+    end,
+})
