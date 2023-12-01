@@ -693,14 +693,14 @@
     "status_buy": 1
   },
   {
-    "english": "gold_ingot",
+    "english": "gold ingot",
     "french": "Lingot d'or",
     "price": 12,
     "status": 1,
     "status_buy": 1
   },
   {
-    "english": "gold_lump",
+    "english": "gold lump",
     "french": "Morceau d'or",
     "price": 8,
     "status": 1,
@@ -890,7 +890,7 @@
     "status_buy": 1
   },
   {
-    "english": "mese post light ",
+    "english": "mese post light",
     "french": "Lampe de Mese en bois de pommier",
     "price": 101,
     "status": 1,
