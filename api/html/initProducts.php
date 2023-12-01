@@ -125,6 +125,7 @@ function removeLastUnderscoreAndChar($input)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function createPrice($name)
 { // fonction qui retourne le prix d'un item en fonction de son nom
 
@@ -318,6 +319,9 @@ function createPrice($name)
 >>>>>>> a89f5db (New CreatePric + PRBLM DoliIsEmpty)
 
 <<<<<<< HEAD
+=======
+
+>>>>>>> 07bb5924fe663e510419e23f3e3d314309b7397d
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //     $data = json_decode(file_get_contents('php://input'), true);
 //     $allProducts = $data['allProducts'];
@@ -363,8 +367,11 @@ if (isDolibarrProductListEmpty()) {
     echo "Dolibarr product list is not empty\n";
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 initAllProducts($allProducts);
 >>>>>>> 11f70d7 (refactor price)
 =======
 >>>>>>> 92001ce (NewProduct(Pas finis) + InitProducts ok avec exept)
+=======
+>>>>>>> 07bb5924fe663e510419e23f3e3d314309b7397d
