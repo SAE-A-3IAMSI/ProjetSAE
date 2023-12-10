@@ -42,7 +42,6 @@ end)
 
 
 
--- Fonction pour enregistrer l'inventaire du joueur dans un fichier JSON
 local function save_inventory(player_name)
     local player = minetest.get_player_by_name(player_name)
     if not player then
@@ -52,24 +51,35 @@ local function save_inventory(player_name)
 
     local inventory = player:get_inventory()
     local main_inventory = inventory:get_list("main")
+    local craft_inventory = inventory:get_list("craft")
 
     local item_list = {}  -- Tableau pour stocker les objets
 
-    for _, itemstack in pairs(main_inventory) do
-        if not itemstack:is_empty() then
-            local item_name = itemstack:get_name()
-            local item_count = itemstack:get_count()
+    -- Fonction pour ajouter les objets d'un inventaire à la liste
+    local function add_inventory_items(inv)
+        for _, itemstack in pairs(inv) do
+            if not itemstack:is_empty() then
+                local item_name = itemstack:get_name()
+                local item_count = itemstack:get_count()
 
-            -- Créez un objet avec des attributs pour le nom et la quantité
-            local item = {
-                name = item_name,
-                quantity = item_count
-            }
+                -- Créez un objet avec des attributs pour le nom et la quantité
+                local item = {
+                    name = item_name,
+                    quantity = item_count
+                }
 
-            table.insert(item_list, item)
+                table.insert(item_list, item)
+            end
         end
     end
+
+    -- Ajouter les objets de l'inventaire principal
+    add_inventory_items(main_inventory)
+    -- Ajouter les objets de la zone de craft
+    add_inventory_items(craft_inventory)
+
     local player_inventory = {}
+
     if #item_list > 0 then
         -- Créez une table avec le nom du joueur et l'inventaire
         player_inventory = {
@@ -82,6 +92,7 @@ local function save_inventory(player_name)
             inventory = "null"
         }
     end
+
     -- Convertissez la table en JSON
     local json_str = minetest.write_json(player_inventory)
     local url = "http://api/Manager/InventoryManager.php"
@@ -101,8 +112,30 @@ local function save_inventory(player_name)
             timeout = receive_interval
         }, fetch_callback)
     end
-    return true, "OUI." -- a modif
+
+    local message = "Inventaire de " .. player_name .. ":\n"
+    for _, itemstack in pairs(main_inventory) do
+        if not itemstack:is_empty() then
+            local item_name = itemstack:get_name()
+            local item_count = itemstack:get_count()
+            message = message .. item_name .. " x" .. item_count .. "\n"
+        end
+    end
+
+    -- Ajouter également les objets de la zone de craft au message
+    message = message .. "Inventaire de craft :\n"
+    for _, itemstack in pairs(craft_inventory) do
+        if not itemstack:is_empty() then
+            local item_name = itemstack:get_name()
+            local item_count = itemstack:get_count()
+            message = message .. item_name .. " x" .. item_count .. "\n"
+        end
+    end
+
+    minetest.chat_send_player(player_name, message)
+    return true, "OUI." -- à modifier si nécessaire
 end
+
 
 
 
@@ -161,16 +194,19 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 	save_inventory(player_name)
 end)
 
--- Hook pour gérer lorsqu'un joueur place un block
+-- Hook pour gérer lorsqu'un joueur place un bloc
 minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
-	local player_name = placer:get_player_name()
-	save_inventory(player_name)
+    local player_name = placer:get_player_name()
+
+    -- Appel à save_inventory après le placement effectif du bloc
+    minetest.after(0, function()
+        save_inventory(player_name)
+    end)
 end)
 
--- Hook pour gérer lorsqu'un joueur fabrique un item
-minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv)
-	local player_name = player:get_player_name()
-	save_inventory(player_name)
+minetest.register_on_player_inventory_action(function(player, action, inventory, inventory_info)
+    local player_name = player:get_player_name()
+    save_inventory(player_name)
 end)
 
 minetest.register_on_mods_loaded(function()
@@ -219,6 +255,27 @@ minetest.register_chatcommand("vinv", {
             minetest.chat_send_player(name, message)
         else
             minetest.chat_send_player(name, "Le joueur " .. param .. " n'est pas en ligne.")
+        end
+    end,
+})
+
+minetest.register_chatcommand("craft_inventory", {
+    params = "",
+    description = "Affiche la grille de craft actuelle.",
+    func = function(name, param)
+        local player = minetest.get_player_by_name(name)
+
+        if player then
+            local craft_inv = player:get_inventory():get_list("craft")
+
+            -- Afficher les objets dans la grille de craft dans le chat
+            minetest.chat_send_player(name, "Grille de craft actuelle :")
+
+            for i, itemstack in ipairs(craft_inv) do
+                local item_name = itemstack:get_name()
+                local item_count = itemstack:get_count()
+                minetest.chat_send_player(name, "Slot " .. i .. ": " .. item_name .. " x" .. item_count)
+            end
         end
     end,
 })
