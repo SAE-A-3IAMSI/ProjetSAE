@@ -575,7 +575,7 @@
   },
   {
     "english": "dry grass",
-    "french": "Herbe sèche ",
+    "french": "Herbe sèche",
     "price": 1,
     "status": 1,
     "status_buy": 1
@@ -616,8 +616,8 @@
     "status_buy": 1
   },
   {
-    "english": "fern ",
-    "french": "Fougère ",
+    "english": "fern",
+    "french": "Fougère",
     "price": 1,
     "status": 1,
     "status_buy": 1
@@ -812,8 +812,8 @@
     "status_buy": 1
   },
   {
-    "english": "marram grass ",
-    "french": "Herbe marram ",
+    "english": "marram grass",
+    "french": "Herbe marram",
     "price": 1,
     "status": 1,
     "status_buy": 1
@@ -889,7 +889,7 @@
     "status_buy": 1
   },
   {
-    "english": "mese post light ",
+    "english": "mese post light",
     "french": "Lampe de Mese en bois de pommier",
     "price": 101,
     "status": 1,
