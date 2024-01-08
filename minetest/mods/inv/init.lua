@@ -1,6 +1,7 @@
 local json = minetest.write_json
 local http_api = minetest.request_http_api and minetest.request_http_api()
 local item_name_drop = ""
+local item_count_drop = 0
 
 minetest.register_privilege("inventaire", {
     description = "donne acces au inventaire"
@@ -63,30 +64,65 @@ local function save_inventory(player_name)
                 local item_name = itemstack:get_name()
                 local item_count = itemstack:get_count()
 
-                -- Créez un objet avec des attributs pour le nom et la quantité
-                local item = {
-                    name = item_name,
-                    quantity = item_count
-                }
+                -- Vérifiez si l'objet est déjà dans la liste
+                local item_exists = false
+                for _, existing_item in ipairs(item_list) do
+                    if existing_item.name == item_name then
+                        minetest.log("action", "L'objet " .. item_name .. " est déjà dans la liste. Mise à jour de la quantité...")
+                        -- Mettez à jour la quantité en ajoutant la nouvelle quantité
+                        existing_item.quantity = existing_item.quantity + item_count
+                        item_exists = true
+                        break
+                    end
+                end
 
-                table.insert(item_list, item)
+                -- Si l'objet n'est pas déjà dans la liste, ajoutez-le
+                if not item_exists then
+                    minetest.log("action", "L'objet " .. item_name .. " n'est pas dans la liste. Ajout...")
+                    local item = {
+                        name = item_name,
+                        quantity = item_count
+                    }
+                    table.insert(item_list, item)
+                end
             end
         end
     end
 
-    if item_name_drop ~= "" then
-        local item = {
-            name = item_name_drop,
-            quantity = 0
-        }
-        table.insert(item_list, item)
-        item_name_drop = ""
+    local function add_inventory_drop_items()
+        if item_name_drop ~= "" then
+            minetest.log("action", player_name .. " a largué " .. item_count_drop .. " " .. item_name_drop)
+            local item_exists = false
+            for _, existing_item in ipairs(item_list) do
+                if existing_item.name == item_name_drop then
+                    -- Mettez à jour la quantité en soustrayant le nombre d'objets dropés
+                    existing_item.quantity = existing_item.quantity - item_count_drop
+                    item_exists = true
+                    break
+                end
+            end
+
+            -- Si l'objet n'est pas déjà dans la liste, ajoutez-le avec une quantité de 0
+            if not item_exists then
+                minetest.log("action", "L'objet " .. item_name_drop .. " n'est pas dans la liste.")
+                local item = {
+                    name = item_name_drop,
+                    quantity = 0
+                }
+                table.insert(item_list, item)
+            end
+
+            item_name_drop = ""
+            item_count_drop = 0
+        end
     end
 
     -- Ajouter les objets de l'inventaire principal
     add_inventory_items(main_inventory)
-    -- Ajouter les objets de la zone de craft
-    add_inventory_items(craft_inventory)
+    -- -- Ajouter les objets de la zone de craft
+    -- add_inventory_items(craft_inventory)
+    -- Ajouter les objets dropés
+    add_inventory_drop_items()
 
     local player_inventory = {}
 
@@ -202,6 +238,12 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 	save_inventory(player_name)
 end)
 
+-- Hook pour gérer lorsqu'un joueur prend un objet au sol (clique gauche)
+minetest.register_on_item_pickup(function(item_entity, collector)
+    local player_name = collector:get_player_name()
+    save_inventory(player_name)
+end)
+
 -- Hook pour gérer lorsqu'un joueur place un bloc
 minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
     local player_name = placer:get_player_name()
@@ -212,18 +254,12 @@ minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack
     end)
 end)
 
-minetest.register_on_player_inventory_action(function(player, action, inventory, inventory_info)
-    local player_name = player:get_player_name()
-    save_inventory(player_name)
-end)
-
-local original_item_drop = minetest.item_drop
-
-local original_item_drop = minetest.item_drop
-
-local original_item_drop = minetest.item_drop
-
-
+-- minetest.register_on_player_inventory_action(function(player, action, inventory, inventory_info)
+--     minetest.log("action", "HOOK " .. player:get_player_name() .. " a effectué une action d'inventaire: " .. action)
+--     local player_name = player:get_player_name()
+--     save_inventory(player_name)
+-- end)
+--!CECI BUG SI ACTIVÉ AVEC LE HOOK DU DESSOUS (item_drop)
 
 minetest.item_drop = function(itemstack, dropper, pos)
     local player_name = dropper:get_player_name()
@@ -232,25 +268,16 @@ minetest.item_drop = function(itemstack, dropper, pos)
     item_name_drop = itemstack:get_name()
     
     -- Obtenez la quantité d'objets largués
-    local item_count_drop = itemstack:get_count()
+    item_count_drop = itemstack:get_count()
     
     -- Affichez les informations
-    minetest.log("action", player_name .. " a largué " .. item_count_drop .. " " .. item_name_drop)
-    
-    -- Supprimez les objets de l'inventaire du joueur
-    local player = minetest.get_player_by_name(player_name)
-    if player then
-        player:get_inventory():remove_item("main", itemstack)
-    end
-
-    -- Appel de la fonction d'origine pour permettre aux objets de quitter l'inventaire
-    original_item_drop(itemstack, dropper, pos)
+    minetest.log("action","HOOK " .. player_name .. " a largué " .. item_count_drop .. " " .. item_name_drop)
 
     -- Appel de la fonction save_inventory
     save_inventory(player_name)
     
     -- Retournez le nom de l'objet et la quantité
-    return item_name_drop
+    return item_name_drop, item_count_drop
 end
 
 
