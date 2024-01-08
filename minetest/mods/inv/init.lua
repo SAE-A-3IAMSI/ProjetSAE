@@ -209,6 +209,32 @@ minetest.register_on_player_inventory_action(function(player, action, inventory,
     save_inventory(player_name)
 end)
 
+local original_item_drop = minetest.item_drop
+
+minetest.item_drop = function(itemstack, dropper, pos)
+    local player_name = dropper:get_player_name()
+    
+    -- Obtenez le nom de l'objet largué
+    local item_name = itemstack:get_name()
+    
+    -- Obtenez la quantité d'objets largués
+    local item_count = itemstack:get_count()
+    
+    -- Affichez les informations
+    minetest.log("action", player_name .. " a largué " .. item_count .. " " .. item_name)
+    
+    -- Supprimez les objets de l'inventaire du joueur
+    local player = minetest.get_player_by_name(player_name)
+    if player then
+        player:get_inventory():remove_item("main", itemstack)
+    end
+
+    -- Appel de la fonction d'origine pour permettre aux objets de quitter l'inventaire
+    original_item_drop(itemstack, dropper, pos)
+end
+
+
+
 minetest.register_on_mods_loaded(function()
     -- Placez ici le contenu de votre commande que vous souhaitez exécuter au démarrage du serveur
     minetest.log("Le mod inventaire est chargé.")
