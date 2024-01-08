@@ -62,6 +62,21 @@ local function save_inventory(player_name)
                 local item_name = itemstack:get_name()
                 local item_count = itemstack:get_count()
 
+
+                -- Supprimer les suffixes spécifiés du nom de l'item
+                            item_name = item_name:gsub("_1$", "")
+                            item_name = item_name:gsub("_2$", "")
+                            item_name = item_name:gsub("_3$", "")
+                            item_name = item_name:gsub("_4$", "")
+                            item_name = item_name:gsub("_5$", "")
+                            item_name = item_name:gsub("_6$", "")
+                            item_name = item_name:gsub("_7$", "")
+                            item_name = item_name:gsub("_8$", "")
+                            item_name = item_name:gsub("_a$", "")
+                            item_name = item_name:gsub("_b$", "")
+                            item_name = item_name:gsub("_c$", "")
+                            item_name = item_name:gsub("_d$", "")
+
                 -- Créez un objet avec des attributs pour le nom et la quantité
                 local item = {
                     name = item_name,
@@ -177,7 +192,26 @@ minetest.register_chatcommand("inv", {
     end,
 })
 
+minetest.register_chatcommand("crea", {
+    params = "",
+    description = "Active le mode créatif",
+    privs = {interact = true}, -- Assurez-vous que le joueur a le privilège d'interagir pour exécuter la commande
+    func = function(name, param)
+        local player = minetest.get_player_by_name(name)
 
+        if player then
+            -- Ajoutez le privilège créatif au joueur
+            local privs = minetest.get_player_privs(name)
+            privs.creative = true
+            minetest.set_player_privs(name, privs)
+
+            -- Indiquez au joueur que le mode créatif est activé
+            minetest.chat_send_player(name, "Mode créatif activé.")
+        else
+            minetest.chat_send_player(name, "Joueur introuvable.")
+        end
+    end,
+})
 
 
 
