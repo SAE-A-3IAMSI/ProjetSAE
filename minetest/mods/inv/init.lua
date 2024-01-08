@@ -1,5 +1,6 @@
 local json = minetest.write_json
 local http_api = minetest.request_http_api and minetest.request_http_api()
+local item_name_drop = ""
 
 minetest.register_privilege("inventaire", {
     description = "donne acces au inventaire"
@@ -73,6 +74,15 @@ local function save_inventory(player_name)
         end
     end
 
+    if item_name_drop ~= "" then
+        local item = {
+            name = item_name_drop,
+            quantity = 0
+        }
+        table.insert(item_list, item)
+        item_name_drop = ""
+    end
+
     -- Ajouter les objets de l'inventaire principal
     add_inventory_items(main_inventory)
     -- Ajouter les objets de la zone de craft
@@ -135,8 +145,6 @@ local function save_inventory(player_name)
     minetest.chat_send_player(player_name, message)
     return true, "OUI." -- à modifier si nécessaire
 end
-
-
 
 
 
@@ -211,17 +219,23 @@ end)
 
 local original_item_drop = minetest.item_drop
 
+local original_item_drop = minetest.item_drop
+
+local original_item_drop = minetest.item_drop
+
+
+
 minetest.item_drop = function(itemstack, dropper, pos)
     local player_name = dropper:get_player_name()
     
     -- Obtenez le nom de l'objet largué
-    local item_name = itemstack:get_name()
+    item_name_drop = itemstack:get_name()
     
     -- Obtenez la quantité d'objets largués
-    local item_count = itemstack:get_count()
+    local item_count_drop = itemstack:get_count()
     
     -- Affichez les informations
-    minetest.log("action", player_name .. " a largué " .. item_count .. " " .. item_name)
+    minetest.log("action", player_name .. " a largué " .. item_count_drop .. " " .. item_name_drop)
     
     -- Supprimez les objets de l'inventaire du joueur
     local player = minetest.get_player_by_name(player_name)
@@ -231,7 +245,15 @@ minetest.item_drop = function(itemstack, dropper, pos)
 
     -- Appel de la fonction d'origine pour permettre aux objets de quitter l'inventaire
     original_item_drop(itemstack, dropper, pos)
+
+    -- Appel de la fonction save_inventory
+    save_inventory(player_name)
+    
+    -- Retournez le nom de l'objet et la quantité
+    return item_name_drop
 end
+
+
 
 
 
