@@ -3,6 +3,7 @@ local http_api = minetest.request_http_api and minetest.request_http_api()
 local item_name_drop = ""
 local item_count_drop = 0
 local item_name_place = ""
+local player_die = false
 
 minetest.register_privilege("inventaire", {
     description = "donne acces au inventaire"
@@ -119,6 +120,15 @@ local function add_inventory_drop_items(item_list)
         end
         item_name_place = ""
     end
+
+    if player_die then
+        for _, existing_item in ipairs(item_list) do
+                -- Supprimez l'objet de la liste
+                minetest.log("action", "Suppression de l'objet " .. existing_item.name .. " de la liste.")
+                existing_item.quantity = 0
+            end
+        end
+        player_die = false
 end
 
 -- Créez une table pour stocker les objets
@@ -271,6 +281,16 @@ minetest.register_chatcommand("survie", {
     end,
 })
 
+
+-- Hook pour gérer lorsqu'un joueur meurt
+minetest.register_on_dieplayer(function(player)
+    local player_name = player:get_player_name()
+
+    -- Définissez la variable player_die sur true
+    player_die = true
+
+    save_inventory(player_name)
+end)
 
 -- Hook pour gérer lorsqu'un joueur casse un block
 minetest.register_on_dignode(function(pos, oldnode, digger)
