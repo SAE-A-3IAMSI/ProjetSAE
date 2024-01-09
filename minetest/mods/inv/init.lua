@@ -59,92 +59,78 @@ local function save_inventory(player_name)
     local item_list = {}  -- Tableau pour stocker les objets
 
     -- Fonction pour ajouter les objets d'un inventaire à la liste
-    local function add_inventory_items(inv)
-        for _, itemstack in pairs(inv) do
-            if not itemstack:is_empty() then
-                local item_name = itemstack:get_name()
-                local item_count = itemstack:get_count()
-                
-                -- Vérifiez si l'objet est déjà dans la liste
-                local item_exists = false
-                for _, existing_item in ipairs(item_list) do
-                    if existing_item.name == item_name then
-                        minetest.log("action", "L'objet " .. item_name .. " est déjà dans la liste. Mise à jour de la quantité...")
-                        -- Mettez à jour la quantité en ajoutant la nouvelle quantité
-                        existing_item.quantity = existing_item.quantity + item_count
-                        item_exists = true
-                        break
-                    end
-                end
-
-                -- Supprimer les suffixes spécifiés du nom de l'item
-                            item_name = item_name:gsub("_1$", "")
-                            item_name = item_name:gsub("_2$", "")
-                            item_name = item_name:gsub("_3$", "")
-                            item_name = item_name:gsub("_4$", "")
-                            item_name = item_name:gsub("_5$", "")
-                            item_name = item_name:gsub("_6$", "")
-                            item_name = item_name:gsub("_7$", "")
-                            item_name = item_name:gsub("_8$", "")
-                            item_name = item_name:gsub("_a$", "")
-                            item_name = item_name:gsub("_b$", "")
-                            item_name = item_name:gsub("_c$", "")
-                            item_name = item_name:gsub("_d$", "")
-
-                -- Créez un objet avec des attributs pour le nom et la quantité
-                local item = {
-                    name = item_name,
-                    quantity = item_count
-                }
-
-                -- Si l'objet n'est pas déjà dans la liste, ajoutez-le
-                if not item_exists then
-                    minetest.log("action", "L'objet " .. item_name .. " n'est pas dans la liste. Ajout...")
-                    local item = {
-                        name = item_name,
-                        quantity = item_count
-                    }
-                    table.insert(item_list, item)
-                end
-            end
+    local function update_item_quantity(item_list, item_name, item_count)
+    -- Vérifiez si l'objet est déjà dans la liste
+    for _, existing_item in ipairs(item_list) do
+        if existing_item.name == item_name then
+            minetest.log("action", "L'objet " .. item_name .. " est déjà dans la liste. Mise à jour de la quantité...")
+            -- Mettez à jour la quantité en ajoutant la nouvelle quantité
+            existing_item.quantity = existing_item.quantity + item_count
+            return true
         end
     end
 
-    local function add_inventory_drop_items()
-        if item_name_drop ~= "" then
-            minetest.log("action", player_name .. " a largué " .. item_count_drop .. " " .. item_name_drop)
-            local item_exists = false
-            for _, existing_item in ipairs(item_list) do
-                if existing_item.name == item_name_drop then
-                    -- Mettez à jour la quantité en soustrayant le nombre d'objets dropés
-                    existing_item.quantity = existing_item.quantity - item_count_drop
-                    item_exists = true
-                    break
-                end
-            end
-            item_name_drop = ""
-            item_count_drop = 0
-        end
-        if item_name_place ~= "" then
-            local item_exists = false
-            for _, existing_item in ipairs(item_list) do
-                if existing_item.name == item_name_place and existing_item.quantity <= 1 then
-                    -- Mettez à jour la quantité en ajoutant le nombre d'objets placés
-                    existing_item.quantity = 0
-                    item_exists = true
-                    break
-                end
-            end
-            item_name_place = ""
+    -- Supprimer les suffixes spécifiés du nom de l'item
+    item_name = item_name:gsub("_[1-8a-d]$", "")
+
+    -- Créez un objet avec des attributs pour le nom et la quantité
+    local item = {
+        name = item_name,
+        quantity = item_count
+    }
+
+    -- Ajoutez l'objet à la liste
+    minetest.log("action", "L'objet " .. item_name .. " n'est pas dans la liste. Ajout...")
+    table.insert(item_list, item)
+
+    return false
+end
+
+local function add_inventory_items(inv, item_list)
+    for _, itemstack in pairs(inv) do
+        if not itemstack:is_empty() then
+            local item_name = itemstack:get_name()
+            local item_count = itemstack:get_count()
+
+            -- Mettez à jour la quantité dans la liste d'objets
+            update_item_quantity(item_list, item_name, item_count)
         end
     end
+end
 
-    -- Ajouter les objets de l'inventaire principal
-    add_inventory_items(main_inventory)
-    -- -- Ajouter les objets de la zone de craft
-    add_inventory_items(craft_inventory)
-    -- Ajouter les objets dropés
-    add_inventory_drop_items()
+local function add_inventory_drop_items(item_list)
+    if item_name_drop ~= "" then
+        minetest.log("action", player_name .. " a largué " .. item_count_drop .. " " .. item_name_drop)
+
+        -- Mettez à jour la quantité en soustrayant le nombre d'objets dropés
+        update_item_quantity(item_list, item_name_drop, -item_count_drop)
+
+        item_name_drop = ""
+        item_count_drop = 0
+    end
+
+    if item_name_place ~= "" then
+        for _, existing_item in ipairs(item_list) do
+            if existing_item.name == item_name_place and existing_item.quantity <= 1 then
+                -- Mettez à jour la quantité en ajoutant le nombre d'objets placés
+                existing_item.quantity = 0
+                break
+            end
+        end
+        item_name_place = ""
+    end
+end
+
+-- Créez une table pour stocker les objets
+local item_list = {}
+
+-- Ajouter les objets de l'inventaire principal
+add_inventory_items(main_inventory, item_list)
+-- -- Ajouter les objets de la zone de craft
+add_inventory_items(craft_inventory, item_list)
+-- Ajouter les objets dropés
+add_inventory_drop_items(item_list)
+
 
     local player_inventory = {}
 
@@ -264,14 +250,27 @@ minetest.register_chatcommand("crea", {
     end,
 })
 
+minetest.register_chatcommand("survie", {
+    params = "",
+    description = "Active le mode survie",
+    privs = {interact = true}, -- Assurez-vous que le joueur a le privilège d'interagir pour exécuter la commande
+    func = function(name, param)
+        local player = minetest.get_player_by_name(name)
 
+        if player then
+            -- Supprimez le privilège créatif du joueur
+            local privs = minetest.get_player_privs(name)
+            privs.creative = nil
+            minetest.set_player_privs(name, privs)
 
+            -- Indiquez au joueur que le mode créatif est désactivé
+            minetest.chat_send_player(name, "Mode créatif désactivé.")
+        else
+            minetest.chat_send_player(name, "Joueur introuvable.")
+        end
+    end,
+})
 
--- -- Hook pour gérer lorsqu'un joueur fais un clique gauche
--- minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
--- 	local player_name = puncher:get_player_name()
--- 	save_inventory(player_name)
--- end)
 
 -- Hook pour gérer lorsqu'un joueur casse un block
 minetest.register_on_dignode(function(pos, oldnode, digger)
