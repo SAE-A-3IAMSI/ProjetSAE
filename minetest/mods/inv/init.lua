@@ -280,6 +280,15 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 end)
 
 
+-- Hook pour gérer lorsqu'un joueur mange un item
+minetest.register_on_item_eat(function(hp_change, replace_with_item, itemstack, user, pointed_thing)
+    local player_name = user:get_player_name()
+
+    item_name_place = itemstack:get_name()
+
+    save_inventory(player_name)
+end)
+
 
 -- Hook pour gérer lorsqu'un joueur place un bloc
 minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
