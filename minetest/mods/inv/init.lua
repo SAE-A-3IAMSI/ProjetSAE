@@ -1,5 +1,7 @@
 local json = minetest.write_json
 local http_api = minetest.request_http_api and minetest.request_http_api()
+local item_name_drop = ""
+local item_count_drop = 0
 
 minetest.register_privilege("inventaire", {
     description = "donne acces au inventaire"
@@ -62,21 +64,65 @@ local function save_inventory(player_name)
                 local item_name = itemstack:get_name()
                 local item_count = itemstack:get_count()
 
-                -- Créez un objet avec des attributs pour le nom et la quantité
-                local item = {
-                    name = item_name,
-                    quantity = item_count
-                }
+                -- Vérifiez si l'objet est déjà dans la liste
+                local item_exists = false
+                for _, existing_item in ipairs(item_list) do
+                    if existing_item.name == item_name then
+                        minetest.log("action", "L'objet " .. item_name .. " est déjà dans la liste. Mise à jour de la quantité...")
+                        -- Mettez à jour la quantité en ajoutant la nouvelle quantité
+                        existing_item.quantity = existing_item.quantity + item_count
+                        item_exists = true
+                        break
+                    end
+                end
 
+                -- Si l'objet n'est pas déjà dans la liste, ajoutez-le
+                if not item_exists then
+                    minetest.log("action", "L'objet " .. item_name .. " n'est pas dans la liste. Ajout...")
+                    local item = {
+                        name = item_name,
+                        quantity = item_count
+                    }
+                    table.insert(item_list, item)
+                end
+            end
+        end
+    end
+
+    local function add_inventory_drop_items()
+        if item_name_drop ~= "" then
+            minetest.log("action", player_name .. " a largué " .. item_count_drop .. " " .. item_name_drop)
+            local item_exists = false
+            for _, existing_item in ipairs(item_list) do
+                if existing_item.name == item_name_drop then
+                    -- Mettez à jour la quantité en soustrayant le nombre d'objets dropés
+                    existing_item.quantity = existing_item.quantity - item_count_drop
+                    item_exists = true
+                    break
+                end
+            end
+
+            -- Si l'objet n'est pas déjà dans la liste, ajoutez-le avec une quantité de 0
+            if not item_exists then
+                minetest.log("action", "L'objet " .. item_name_drop .. " n'est pas dans la liste.")
+                local item = {
+                    name = item_name_drop,
+                    quantity = 0
+                }
                 table.insert(item_list, item)
             end
+
+            item_name_drop = ""
+            item_count_drop = 0
         end
     end
 
     -- Ajouter les objets de l'inventaire principal
     add_inventory_items(main_inventory)
-    -- Ajouter les objets de la zone de craft
-    add_inventory_items(craft_inventory)
+    -- -- Ajouter les objets de la zone de craft
+    -- add_inventory_items(craft_inventory)
+    -- Ajouter les objets dropés
+    add_inventory_drop_items()
 
     local player_inventory = {}
 
@@ -138,8 +184,6 @@ end
 
 
 
-
-
 minetest.register_chatcommand("invt", {
     description = "enregistre les inventaire des joueurs connecté",
     params = "",
@@ -194,6 +238,12 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 	save_inventory(player_name)
 end)
 
+-- Hook pour gérer lorsqu'un joueur prend un objet (punch a 0 damage sur l'item)
+minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
+    local player_name = puncher:get_player_name()
+    save_inventory(player_name)
+end)
+
 -- Hook pour gérer lorsqu'un joueur place un bloc
 minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
     local player_name = placer:get_player_name()
@@ -205,9 +255,40 @@ minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack
 end)
 
 minetest.register_on_player_inventory_action(function(player, action, inventory, inventory_info)
-    local player_name = player:get_player_name()
-    save_inventory(player_name)
+    minetest.log("action", "HOOK " .. player:get_player_name() .. " a effectué une action d'inventaire: " .. action)
+    if action ~= "take" then
+        local player_name = player:get_player_name()
+        save_inventory(player_name)
+    end
 end)
+
+local old_item_drop = minetest.item_drop
+
+minetest.item_drop = function(itemstack, dropper, pos)
+    local player_name = dropper:get_player_name()
+    
+    -- Obtenez le nom de l'objet largué
+    item_name_drop = itemstack:get_name()
+    
+    -- Obtenez la quantité d'objets largués
+    item_count_drop = itemstack:get_count()
+    
+    -- Affichez les informations
+    minetest.log("action","HOOK " .. player_name .. " a largué " .. item_count_drop .. " " .. item_name_drop)
+
+    -- Appel de la fonction save_inventory
+    save_inventory(player_name)
+
+    -- Appelez la fonction originale item_drop
+    old_item_drop(itemstack, dropper, pos)
+    
+    -- Retournez le nom de l'objet et la quantité
+    return item_name_drop, item_count_drop
+end
+
+
+
+
 
 minetest.register_on_mods_loaded(function()
     -- Placez ici le contenu de votre commande que vous souhaitez exécuter au démarrage du serveur
