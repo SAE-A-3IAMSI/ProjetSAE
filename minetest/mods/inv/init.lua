@@ -2,6 +2,7 @@ local json = minetest.write_json
 local http_api = minetest.request_http_api and minetest.request_http_api()
 local item_name_drop = ""
 local item_count_drop = 0
+local item_name_place = ""
 
 minetest.register_privilege("inventaire", {
     description = "donne acces au inventaire"
@@ -63,7 +64,18 @@ local function save_inventory(player_name)
             if not itemstack:is_empty() then
                 local item_name = itemstack:get_name()
                 local item_count = itemstack:get_count()
-
+                
+                -- Vérifiez si l'objet est déjà dans la liste
+                local item_exists = false
+                for _, existing_item in ipairs(item_list) do
+                    if existing_item.name == item_name then
+                        minetest.log("action", "L'objet " .. item_name .. " est déjà dans la liste. Mise à jour de la quantité...")
+                        -- Mettez à jour la quantité en ajoutant la nouvelle quantité
+                        existing_item.quantity = existing_item.quantity + item_count
+                        item_exists = true
+                        break
+                    end
+                end
 
                 -- Supprimer les suffixes spécifiés du nom de l'item
                             item_name = item_name:gsub("_1$", "")
@@ -110,26 +122,29 @@ local function save_inventory(player_name)
                     break
                 end
             end
-
-            -- Si l'objet n'est pas déjà dans la liste, ajoutez-le avec une quantité de 0
-            if not item_exists then
-                minetest.log("action", "L'objet " .. item_name_drop .. " n'est pas dans la liste.")
-                local item = {
-                    name = item_name_drop,
-                    quantity = 0
-                }
-                table.insert(item_list, item)
-            end
-
             item_name_drop = ""
             item_count_drop = 0
+        end
+        if item_name_place ~= "" then
+            minetest.log("action", player_name .. " a placé " .. item_count_place .. " " .. item_name_place)
+            local item_exists = false
+            for _, existing_item in ipairs(item_list) do
+                if existing_item.name == item_name_place and existing_item.quantity <= 1 then
+                    -- Mettez à jour la quantité en ajoutant le nombre d'objets placés
+                    existing_item.quantity = 0
+                    item_exists = true
+                    break
+                end
+            end
+            item_name_place = ""
+            item_count_place = 0
         end
     end
 
     -- Ajouter les objets de l'inventaire principal
     add_inventory_items(main_inventory)
     -- -- Ajouter les objets de la zone de craft
-    -- add_inventory_items(craft_inventory)
+    add_inventory_items(craft_inventory)
     -- Ajouter les objets dropés
     add_inventory_drop_items()
 
@@ -266,15 +281,14 @@ minetest.register_on_dignode(function(pos, oldnode, digger)
 	save_inventory(player_name)
 end)
 
--- Hook pour gérer lorsqu'un joueur prend un objet (punch a 0 damage sur l'item)
-minetest.register_on_punchnode(function(pos, node, puncher, pointed_thing)
-    local player_name = puncher:get_player_name()
-    save_inventory(player_name)
-end)
+
 
 -- Hook pour gérer lorsqu'un joueur place un bloc
 minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
     local player_name = placer:get_player_name()
+
+    -- Obtenez le nom de l'objet placé
+    item_name_place = itemstack:get_name()
 
     -- Appel à save_inventory après le placement effectif du bloc
     minetest.after(0, function()
@@ -314,8 +328,13 @@ minetest.item_drop = function(itemstack, dropper, pos)
     return item_name_drop, item_count_drop
 end
 
-
-
+minetest.register_on_item_pickup(function(itemstack, picker, pointed_thing, time_from_last_punch)
+    minetest.log("action", "HOOK " .. picker:get_player_name() .. " a ramassé " .. itemstack:get_name() .. " x" .. itemstack:get_count())
+    local player_name = picker:get_player_name()
+    minetest.after(0, function()
+        save_inventory(player_name)
+    end)
+end)
 
 
 minetest.register_on_mods_loaded(function()
