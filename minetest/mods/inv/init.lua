@@ -126,7 +126,6 @@ local function save_inventory(player_name)
             item_count_drop = 0
         end
         if item_name_place ~= "" then
-            minetest.log("action", player_name .. " a placé " .. item_count_place .. " " .. item_name_place)
             local item_exists = false
             for _, existing_item in ipairs(item_list) do
                 if existing_item.name == item_name_place and existing_item.quantity <= 1 then
@@ -137,7 +136,6 @@ local function save_inventory(player_name)
                 end
             end
             item_name_place = ""
-            item_count_place = 0
         end
     end
 
