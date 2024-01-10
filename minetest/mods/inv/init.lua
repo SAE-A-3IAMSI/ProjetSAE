@@ -4,6 +4,10 @@ local item_name_drop = ""
 local item_count_drop = 0
 local item_name_place = ""
 local player_die = false
+local craft_inventory_craft = {}
+local old_inventory = {}
+local new_inventory = {}
+local craft_success = false
 
 minetest.register_privilege("inventaire", {
     description = "donne acces au inventaire"
@@ -99,6 +103,17 @@ local function add_inventory_items(inv, item_list)
     end
 end
 
+-- Fonction pour vérifier si un élément est dans une liste
+local function is_item_in_list(item_list, item_name)
+    for _, existing_item in ipairs(item_list) do
+        if existing_item.name == item_name then
+            return true
+        end
+    end
+    return false
+end
+
+
 local function add_inventory_drop_items(item_list)
     if item_name_drop ~= "" then
         minetest.log("action", player_name .. " a largué " .. item_count_drop .. " " .. item_name_drop)
@@ -111,15 +126,12 @@ local function add_inventory_drop_items(item_list)
     end
 
     if item_name_place ~= "" then
-        for _, existing_item in ipairs(item_list) do
-            if existing_item.name == item_name_place and existing_item.quantity <= 1 then
-                -- Mettez à jour la quantité en ajoutant le nombre d'objets placés
-                existing_item.quantity = 0
-                break
-            end
+        if not is_item_in_list(item_list, item_name_place) then
+            -- Si item_name_place n'est pas dans item_list, ajoutez-le avec une quantité de 0
+            table.insert(item_list, {name = item_name_place, quantity = 0})
         end
-        item_name_place = ""
     end
+
 
     if player_die then
         for _, existing_item in ipairs(item_list) do
@@ -129,18 +141,98 @@ local function add_inventory_drop_items(item_list)
             end
         end
         player_die = false
+        
 end
+
+function add_inventory_items_craft(inv, item_list)
+    minetest.log("action", "add_craft_inventory_craft : ------------------------------------------------------------------")
+    for _, item in pairs(inv) do
+        local item_name = item.name
+        local item_count = item.quantity
+
+        minetest.log("action", "add_craft_inventory_craft : " .. item_name .. " x" .. item_count)
+
+        -- Mettez à jour la quantité dans la liste d'objets
+        update_item_quantity(item_list, item_name, item_count)
+    end
+end
+
+
+-- Fonction pour comparer deux listes old_craft_inventory_craft et new_craft_inventory_craft
+-- et ajouter les items disparus avec une quantité à 0 dans une nouvelle liste
+local function find_disappeared_items(old_list, new_list)
+    local disappeared_items = {}
+
+    -- Créer une copie de la nouvelle liste pour marquer les éléments présents
+    local new_list_copy = {}
+    for _, item in pairs(new_list) do
+        new_list_copy[item.name] = item.quantity
+    end
+
+    -- Parcourir l'ancienne liste pour identifier les items disparus
+    for _, old_item in pairs(old_list) do
+        local old_name = old_item.name
+        local old_quantity = old_item.quantity
+        local new_quantity = new_list_copy[old_name]
+
+        if new_quantity == nil or new_quantity == 0 then
+            -- Si l'élément est présent dans l'ancienne liste mais pas dans la nouvelle
+            -- ou si la quantité est devenue nulle dans la nouvelle liste
+            -- Ajouter l'élément à la liste des disparus avec une quantité à 0
+            table.insert(disappeared_items, {
+                name = old_name,
+                quantity = 0
+            })
+        else
+            -- Retirer l'élément de la copie de la nouvelle liste pour marquer qu'il a été traité
+            new_list_copy[old_name] = nil
+        end
+    end
+
+    return disappeared_items
+end
+
 
 -- Créez une table pour stocker les objets
 local item_list = {}
+local old_craft_inventory_craft = {}
+local new_craft_inventory_craft = {}
 
+add_inventory_items(old_inventory, old_craft_inventory_craft)
+add_inventory_items(new_inventory, new_craft_inventory_craft)
+
+craft_inventory_craft = find_disappeared_items(old_craft_inventory_craft, new_craft_inventory_craft)
+
+-- afficher craft_inventory_craft
+minetest.log("action", "craft_inventory_craft :")
+for _, item in pairs(craft_inventory_craft) do
+    minetest.log("action", item.name .. " x" .. item.quantity)
+end
+
+-- afficher old_craft_inventory_craft
+minetest.log("action", "old_craft_inventory_craft :")
+for _, item in pairs(old_craft_inventory_craft) do
+    minetest.log("action", item.name .. " x" .. item.quantity)
+end
+
+-- afficher new_craft_inventory_craft
+minetest.log("action", "new_craft_inventory_craft :")
+for _, item in pairs(new_craft_inventory_craft) do
+    minetest.log("action", item.name .. " x" .. item.quantity)
+end
+
+-- Ajouter les objets de l'inventaire de craft si aucun craft n'a été fait
+add_inventory_items_craft(craft_inventory_craft, item_list)
+add_inventory_items(craft_inventory, item_list)
 -- Ajouter les objets de l'inventaire principal
 add_inventory_items(main_inventory, item_list)
--- -- Ajouter les objets de la zone de craft
-add_inventory_items(craft_inventory, item_list)
--- Ajouter les objets dropés
 add_inventory_drop_items(item_list)
 
+
+minetest.log("action", "Inventaire de " .. player_name .. " :")
+for _, item in pairs(item_list) do
+    minetest.log("action", item.name .. " x" .. item.quantity)
+end 
 
     local player_inventory = {}
 
@@ -309,6 +401,19 @@ minetest.register_on_item_eat(function(hp_change, replace_with_item, itemstack, 
 end)
 
 
+
+
+minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv)
+    craft_success = true
+    local player_name = player:get_player_name()
+    local inventory = player:get_inventory()
+
+    old_inventory = new_inventory
+
+    craft_success = false
+end)
+
+
 -- Hook pour gérer lorsqu'un joueur place un bloc
 minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
     local player_name = placer:get_player_name()
@@ -324,7 +429,11 @@ end)
 
 minetest.register_on_player_inventory_action(function(player, action, inventory, inventory_info)
     minetest.log("action", "HOOK " .. player:get_player_name() .. " a effectué une action d'inventaire: " .. action)
-    if action ~= "take" then
+    if action == "move" then
+        local player_name = player:get_player_name()
+        new_inventory = inventory:get_list("craft")
+        save_inventory(player_name)
+    elseif action ~= "take" then
         local player_name = player:get_player_name()
         save_inventory(player_name)
     end
@@ -384,6 +493,7 @@ minetest.register_on_mods_loaded(function()
         }, fetch_callback)
     end
 end)
+
 
 minetest.register_chatcommand("vinv", {
     description = "Voir l'inventaire du joueur",
