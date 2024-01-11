@@ -47,6 +47,68 @@ minetest.register_on_newplayer(function(player)
 end)
 
 
+minetest.register_on_joinplayer(function(ObjectRef, last_login)
+        minetest.log("action", "Le joueur " .. ObjectRef:get_player_name() .. " a rejoint le serveur.")
+    local playername = ObjectRef:get_player_name()
+
+    -- Créez une table avec les données que vous souhaitez envoyer
+    local data_to_send = {
+        playername = playername,
+    }
+
+    -- Convertissez la table en JSON
+    local json_str = minetest.write_json(data_to_send)
+    local url = "http://api/Manager/PlayerOnLogManager.php"
+    local receive_interval = 10
+
+    local function fetch_callback(res)
+        if not res.completed then
+            minetest.log("error", "Pas de résultat.")
+            return
+        end
+
+        -- Traitez le fichier JSON renvoyé
+        local json_data = minetest.parse_json(res.data)
+        if json_data then
+            -- Faites quelque chose avec les données JSON
+            minetest.log("action", "Données JSON reçues : " .. dump(json_data))
+
+            -- Exemple de suppression et de remplacement de l'inventaire du joueur
+            local player = minetest.get_player_by_name(playername)
+            if player then
+                -- Supprimez l'inventaire actuel du joueur
+                player:get_inventory():clear()
+
+                -- Vérifiez si la clé "inventory" existe dans les données JSON
+                if json_data.inventory then
+                    -- Ajoutez les nouveaux éléments à l'inventaire du joueur
+                    for _, item in ipairs(json_data.inventory) do
+                        player:get_inventory():add_item("main", ItemStack(item))
+                    end
+                else
+                    minetest.log("warning", "La clé 'inventory' est manquante dans les données JSON.")
+                end
+            else
+                minetest.log("error", "Joueur introuvable : " .. playername)
+            end
+
+        else
+            minetest.log("error", "Erreur lors de l'analyse JSON.")
+        end
+    end
+
+    if http_api then
+        http_api.fetch({
+            url = url,
+            method = "POST",
+            data = json_str,
+            timeout = receive_interval
+        }, fetch_callback)
+    end
+end)
+
+
+
 
 
 
