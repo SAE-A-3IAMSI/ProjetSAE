@@ -46,6 +46,77 @@ minetest.register_on_newplayer(function(player)
 
 end)
 
+-- Fonction pour afficher le message d'alerte au joueur
+-- local function afficherMessageAlerte(joueur, message)
+--     minetest.chat_send_player(joueur:get_player_name(), message)
+-- end
+
+-- -- Fonction pour désactiver les actions du joueur
+-- local function desactiverActionsJoueur(joueur)
+--     -- Désactiver le déplacement et la casse
+--     joueur:set_physics_override({
+--         speed = 0,
+--         jump = 0,
+--         gravity = 0
+--     })
+--     joueur:hud_add({
+--         hud_elem_type = "text",
+--         position = {x=0.5, y=0.5},
+--         name = "delai_message",
+--         text = "Vous devez attendre 20 secondes avant de pouvoir vous déplacer.",
+--         scale = {x=100, y=100},
+--         alignment = {x=0, y=0},
+--         number = 0xFFFFFF,
+--     })
+-- end
+
+-- -- Fonction pour réactiver les actions du joueur
+-- local function reactiverActionsJoueur(joueur)
+--     -- Réactiver le déplacement et la casse
+--     joueur:set_physics_override({
+--         speed = 1,
+--         jump = 1,
+--         gravity = 1
+--     })
+
+--     -- Supprimer le message à l'écran s'il existe
+--     if hud and #hud > 0 then
+--         joueur:hud_remove(hud[1].id)
+--     end
+-- end
+
+-- -- Fonction pour gérer le délai
+-- local function gererDelai(joueur)
+
+--     -- Désactiver les actions du joueur et afficher le message initial
+--     desactiverActionsJoueur(joueur)
+
+--     -- Compter à rebours
+--     minetest.after(1, function()
+--         tempsRestant = tempsRestant - 1
+
+--         -- Afficher le message de délai restant
+--         afficherMessageAlerte(joueur, "Temps restant : " .. tempsRestant .. " secondes.")
+
+--         -- Vérifier si le délai est écoulé
+--         if tempsRestant > 0 then
+--             -- Continuer le compte à rebours
+--             gererDelai(joueur)
+--         else
+--             -- Le délai est écoulé, réactiver les actions du joueur
+--             reactiverActionsJoueur(joueur)
+--             afficherMessageAlerte(joueur, "Vous pouvez maintenant vous déplacer.")
+--         end
+--     end)
+-- end
+
+-- -- Événement appelé lorsqu'un joueur rejoint le serveur
+-- minetest.register_on_joinplayer(function(player)
+--     -- Démarrer le délai pour le joueur qui vient de se connecter
+--     tempsRestant = 3
+--     gererDelai(player)
+-- end)
+
 
 -- minetest.register_on_joinplayer(function(ObjectRef, last_login)
 --     minetest.log("action", "Le joueur " .. ObjectRef:get_player_name() .. " a rejoint le serveur.")
