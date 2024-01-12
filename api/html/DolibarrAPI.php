@@ -202,8 +202,10 @@ class DolibarrAPI
         }
     }
 
-    public function getItemStockById($productId, $warehouseId)
-    {
+    public function getItemStockById(
+        $productId,
+        $warehouseId
+    ) {
         $url = $this->lien . "/products/" . $productId . "/stock?selected_warehouse_id=" . $warehouseId;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -215,14 +217,23 @@ class DolibarrAPI
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         curl_close($ch);
+
+        // Essayez de décoder la réponse JSON
         $responseData = json_decode($response, true);
-        if ($responseData !== null) {
-            if (isset($responseData['stock_warehouses'])) {
-                $real = $responseData['stock_warehouses'][$warehouseId]['real'];
-                return $real;
-            } else {
-                echo "La réponse JSON est invalide.";
-            }
+
+        // Lancez une exception si la réponse JSON est invalide
+        if ($responseData === null) {
+            throw new Exception("La réponse JSON est invalide.");
+        }
+
+        // Vérifiez si la clé 'stock_warehouses' est présente dans la réponse
+        if (isset($responseData['stock_warehouses'])) {
+            $real = $responseData['stock_warehouses'][$warehouseId]['real'];
+            return $real;
+        } else {
+            // Ne faites rien si la clé 'stock_warehouses' est absente
+            // ou lancez une exception personnalisée si nécessaire
+            return null;
         }
     }
 
@@ -378,7 +389,7 @@ class DolibarrAPI
             $stock = $this->getItemStockById($productId, $warehouseId);
 
             // Ajoutez le stock dans la liste seulement si la quantité est > 0 ou non nulle
-            if ($stock > 0 || $stock === 0) {
+            if ($stock !== null && ($stock > 0 || $stock === 0)) {
                 $stockList[] = ['item' => $productName, 'quantity' => $stock];
             }
 
