@@ -356,6 +356,7 @@ class DolibarrAPI
         return json_decode($dataList);
     }
 
+    //Fonction permettant de récupérer le stock des produits dans un entrepôt
     public function getWarehouseStock($warehouseName)
     {
         // Récupérez la liste de tous les produits
@@ -363,21 +364,35 @@ class DolibarrAPI
 
         // Récupérez le stock de chaque produit dans l'entrepôt
         $stockList = array();
+        $totalProducts = count($products);
+        $processedProducts = 0;
+
         foreach ($products as $productId) {
             $warehouseId = $this->getWarehouseIdByName($warehouseName);
+
+            $productName = $this->getNameProductById($productId);
+            //Supprime le premier _ et le premier mot pour avoir le nom du produit (seulement le premier, pas les autres)
+            $productName = preg_replace('/_/', ':', $productName, 1);
 
             // Appelez la fonction getItemStockById avec l'ID du produit et l'ID de l'entrepôt
             $stock = $this->getItemStockById($productId, $warehouseId);
 
             // Ajoutez le stock dans la liste seulement si la quantité est > 0 ou non nulle
-            if (
-                $stock > 0 || $stock === 0
-            ) {
-                $stockList[] = [
-                    'item' => $productId, 'quantity' => $stock
-                ];
+            if ($stock > 0 || $stock === 0) {
+                $stockList[] = ['item' => $productName, 'quantity' => $stock];
             }
+
+            // Affichez la barre de chargement
+            $processedProducts++;
+            $progress = ($processedProducts / $totalProducts) * 100;
+            error_log("Progress: " . number_format($progress, 2) . "%");
+
+            // Utilisez un flush pour forcer l'affichage dans la console
+            flush();
         }
+
+        // Ajoutez une nouvelle ligne pour éviter d'écraser la barre de chargement
+        echo PHP_EOL;
 
         return $stockList;
     }
@@ -390,6 +405,37 @@ class DolibarrAPI
         echo "Stock de l'entrepôt " . $warehouseName . " :\n";
         foreach ($stockList as $entry) {
             echo $entry['item'] . " : " . $entry['quantity'] . "\n";
+        }
+    }
+
+    function getNameProductById($id)
+    {
+        $url = $this->lien . "/products/" . $id;
+        $ch = curl_init();
+        curl_setopt(
+            $ch,
+            CURLOPT_URL,
+            $url
+        );
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Accept: application/json',
+                "DOLAPIKEY: " . $this->dolapikey
+            )
+        );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $responseData = json_decode($response, true);
+        if ($responseData !== null) {
+            if (isset($responseData['ref'])) {
+                return $responseData['ref'];
+            } else {
+                echo "La réponse JSON est invalide.";
+            }
         }
     }
 
