@@ -1,5 +1,12 @@
 [
   {
+    "english": "coins",
+    "french": "piece",
+    "price": 1,
+    "status": 0,
+    "status_buy": 0
+  },
+  {
     "english": "bed bottom",
     "french": "Lit basique",
     "price": 6,
