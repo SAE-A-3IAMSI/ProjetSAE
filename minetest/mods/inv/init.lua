@@ -13,6 +13,16 @@ minetest.register_privilege("inventaire", {
     description = "donne acces au inventaire"
 })
 
+
+
+minetest.register_craftitem("inventaire:coins", {
+	description = "Coins",
+	inventory_image = "coin.png",
+	stack_max = 9999,
+	groups = { coinvalue=1 },
+})
+
+
 minetest.register_on_newplayer(function(player)
     local playername = player:get_player_name()
     local privs = minetest.get_player_privs(playername)
