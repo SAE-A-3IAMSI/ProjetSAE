@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Api\DolibarrAPI;
 
 class ShoppingCartController extends AbstractController
 {
@@ -24,8 +23,6 @@ class ShoppingCartController extends AbstractController
                 $shoppingCart[$idProduct] = 1;
             }
             $session->getSession()->set('shoppingCart', $shoppingCart);
-            $dol = new DolibarrAPI();
-            $this->addFlash("success", $dol->getdolapikey());
         }
         else {
             $this->addFlash("error","Le produit que vous avez essayé d'ajouter à votre panier n'existe pas");
