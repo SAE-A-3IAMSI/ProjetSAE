@@ -398,7 +398,7 @@ class DolibarrAPI
     }
 
 
-    // afficher le résultat de la fonction getWarehouseStock(JoraxTV2)
+    // afficher le résultat de la fonction getWarehouseStock()
     function displayWarehouseStock($warehouseName)
     {
         $stockList = $this->getWarehouseStock($warehouseName);
