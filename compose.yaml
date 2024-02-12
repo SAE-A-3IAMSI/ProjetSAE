@@ -46,8 +46,10 @@ services:
 
   # Conteneur de Dolibarr
   dolibarr:
-    # Image de Dolibarr
-    image: tuxgasy/dolibarr
+    # Construction du l'image Dolibarr à partir d'un DockerFile
+    build:
+      context: ./dolibarr
+      dockerfile: ./Dockerfile
     # Nom du conteneur
     container_name: dolibarr
     # Variables d'environnement du conteneur
@@ -60,7 +62,7 @@ services:
       DOLI_DB_PASSWORD: minetest1234=+
       # Nom de la base de données que Dolibarr utilise
       DOLI_DB_NAME: dolibarrSAE
-      # Url surlaquelle Dolibarr est accessible
+      # Url sur laquelle Dolibarr est accessible
       DOLI_URL_ROOT: 'http://localhost'
       # Secret Salt for Encryption
       DOLI_INSTANCE_UNIQUE_ID: 'Mg2zBK2Yj5B528mOlz74Hdvi14GZCemA'
