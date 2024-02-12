@@ -46,7 +46,8 @@ minetest.register_on_newplayer(function(player)
 
 end)
 
--- Fonction pour afficher le message d'alerte au joueur
+
+--! Fonction pour afficher le message d'alerte au joueur
 -- local function afficherMessageAlerte(joueur, message)
 --     minetest.chat_send_player(joueur:get_player_name(), message)
 -- end
