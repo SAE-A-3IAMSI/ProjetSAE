@@ -48,6 +48,34 @@ end)
 
 
 
+-- Fonction pour supprimer l'inventaire du joueur
+local function clear_inventory(player)
+    local inv = player:get_inventory()
+    inv:set_list("main", {})
+end
+
+-- Fonction pour mapper les noms d'objets entre Dolibarr et Minetest
+local function map_item_name(dolibarr_name)
+    local first, rest = dolibarr_name:match("([^_]+)_(.*)")
+    if first and rest then
+        return first .. ":" .. rest
+    else
+        return dolibarr_name
+    end
+end
+
+-- Fonction pour donner des objets à un joueur
+local function give_items(player, items)
+    local inv = player:get_inventory()
+
+    for item_id, item_data in pairs(items) do
+        local mapped_name = map_item_name(item_data.name)
+        local stack = ItemStack(mapped_name .. " " .. item_data.reel)
+        inv:add_item("main", stack)
+    end
+end
+
+
 minetest.register_on_joinplayer(function(ObjectRef, last_login)
     minetest.log("action", "Le joueur " .. ObjectRef:get_player_name() .. " a rejoint le serveur.")
     local playername = ObjectRef:get_player_name()
@@ -81,10 +109,11 @@ minetest.register_on_joinplayer(function(ObjectRef, last_login)
         -- Traitement de la réponse JSON
         local decoded_response = minetest.parse_json(res.data)
         if decoded_response then
-            -- Affichez chaque élément de la réponse dans le chat Minetest
-            for item_id, item_data in pairs(decoded_response) do
-                minetest.chat_send_player(playername, "Item: " .. item_data.name .. " | Quantity: " .. item_data.reel)
-            end
+            -- Effacer l'inventaire existant du joueur
+            clear_inventory(ObjectRef)
+
+            -- Donner les nouveaux objets au joueur
+            give_items(ObjectRef, decoded_response)
         else
             minetest.log("error", "Réponse JSON invalide.")
         end
@@ -99,6 +128,7 @@ minetest.register_on_joinplayer(function(ObjectRef, last_login)
         }, fetch_callback)
     end
 end)
+
 
 
 
