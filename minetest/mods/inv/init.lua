@@ -74,88 +74,51 @@ local function is_not_stackable(stack)
     return stack:get_stack_max() == 1
 end
 
--- Fonction pour donner des objets à un joueur
+
 local function give_items(player, items)
+    local inv = player:get_inventory()
 
     for item_id, item_data in pairs(items) do
         local mapped_name = map_item_name(item_data.name)
         local total_quantity = tonumber(item_data.reel)
-        local stack = ItemStack(mapped_name)
+        local stack_size = 99
 
-        if is_not_stackable(stack) then
+        if is_not_stackable(ItemStack(mapped_name)) then
             minetest.log("warning", "item pas stackable")
-            if total_quantity ~= 1 then
-                --TODO: faire ajout 1 par 1 des items
-                while total_quantity ~= 0 do
-                    if inv:room_for_item("main", stack) then
-                        inv:add_item("main", stack)
-                        total_quantity = total_quantity - 1
-                    elseif inv:room_for_item("craft", stack) then
-                        inv:add_item("craft", stack)
-                        total_quantity = total_quantity - 1
-                    else
+            local target_inventory = inv:room_for_item("main", ItemStack(mapped_name)) and "main" or
+                                     inv:room_for_item("craft", ItemStack(mapped_name)) and "craft"
+
+            if target_inventory then
+                for _ = 1, total_quantity do
+                    if not inv:room_for_item(target_inventory, ItemStack(mapped_name)) then
                         minetest.log("warning", "L'inventaire du joueur est plein, certains objets n'ont pas pu être ajoutés.")
                         return
                     end
-                end
-            else
-                --ajouter l'item unique
-                if inv:room_for_item("main", stack) then
-                    inv:add_item("main", stack)
-                elseif inv:room_for_item("craft", stack) then
-                    inv:add_item("craft", stack)
-                else
-                    minetest.log("warning", "L'inventaire du joueur est plein, certains objets n'ont pas pu être ajoutés.")
-                    return
+                    inv:add_item(target_inventory, ItemStack(mapped_name))
                 end
             end
         else
             minetest.log("warning", "item stackable")
-            if total_quantity >= 99 then
-                local restant = total_quantity
-                while restant >= 99 do
-                    -- Créer un nouveau stack de 99
-                    local stack_size = 99
-                    -- Ajouter ce stack à l'inventaire
-                    local stack = ItemStack(mapped_name .. " " .. stack_size)
-                    if inv:room_for_item("main", stack) then
-                        inv:add_item("main", stack)
-                    elseif inv:room_for_item("craft", stack) then
-                        inv:add_item("craft", stack)
-                    else
-                        minetest.log("warning", "L'inventaire du joueur est plein, certains objets n'ont pas pu être ajoutés.")
-                        return
-                    end
-                    -- Mettre à jour la quantité restante
-                    restant = restant - 99
-                end
-                -- Si restant est supérieur à 0, ajouter le reste
-                if restant > 0 then
-                    local stack = ItemStack(mapped_name .. " " .. restant)
-                    if inv:room_for_item("main", stack) then
-                        inv:add_item("main", stack)
-                    elseif inv:room_for_item("craft", stack) then
-                        inv:add_item("craft", stack)
-                    else
-                        minetest.log("warning", "L'inventaire du joueur est plein, certains objets n'ont pas pu être ajoutés.")
-                        return
-                    end
-                end
-            else
-                --ajouter le stack de moins de 99
-                local stack = ItemStack(mapped_name .. " " .. total_quantity)
-                if inv:room_for_item("main", stack) then
-                    inv:add_item("main", stack)
-                elseif inv:room_for_item("craft", stack) then
-                    inv:add_item("craft", stack)
+
+            while total_quantity > 0 do
+                local stack = ItemStack(mapped_name .. " " .. math.min(total_quantity, stack_size))
+
+                local target_inventory = inv:room_for_item("main", stack) and "main" or
+                                         inv:room_for_item("craft", stack) and "craft"
+
+                if target_inventory then
+                    inv:add_item(target_inventory, stack)
                 else
                     minetest.log("warning", "L'inventaire du joueur est plein, certains objets n'ont pas pu être ajoutés.")
                     return
                 end
+
+                total_quantity = total_quantity - stack_size
             end
         end
     end
 end
+
 
 
 minetest.register_on_joinplayer(function(ObjectRef, last_login)
