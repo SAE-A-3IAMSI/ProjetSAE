@@ -54,6 +54,12 @@ local function clear_inventory(player)
     inv:set_list("main", {})
 end
 
+-- Fonction pour supprimer l'inventaire de craft du joueur
+local function clear_craft_inventory(player)
+    local inv = player:get_inventory()
+    inv:set_list("craft", {})
+end
+
 -- Fonction pour mapper les noms d'objets entre Dolibarr et Minetest
 local function map_item_name(dolibarr_name)
     local first, rest = dolibarr_name:match("([^_]+)_(.*)")
@@ -119,6 +125,9 @@ minetest.register_on_joinplayer(function(ObjectRef, last_login)
         if decoded_response then
             -- Effacer l'inventaire existant du joueur
             clear_inventory(ObjectRef)
+
+            -- Effacer l'inventaire de craft existant du joueur
+            clear_craft_inventory(ObjectRef)
 
             -- Donner les nouveaux objets au joueur
             give_items(ObjectRef, decoded_response)
