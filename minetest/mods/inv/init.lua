@@ -77,7 +77,6 @@ end
 -- Fonction pour donner des objets à un joueur
 local function give_items(player, items)
 
-
     for item_id, item_data in pairs(items) do
         local mapped_name = map_item_name(item_data.name)
         local total_quantity = tonumber(item_data.reel)
@@ -87,7 +86,7 @@ local function give_items(player, items)
             minetest.log("warning", "item pas stackable")
             if total_quantity ~= 1 then
                 --TODO: faire ajout 1 par 1 des items
-                while total_quantity ~= 1 do
+                while total_quantity ~= 0 do
                     if inv:room_for_item("main", stack) then
                         inv:add_item("main", stack)
                         total_quantity = total_quantity - 1
