@@ -112,7 +112,7 @@ local function give_items(player, items)
                     inv:add_item(target_inventory, stack)
                 else
                     minetest.log("warning", "L'inventaire du joueur est plein, certains objets n'ont pas pu être ajoutés.")
-                    minetest.kick_player(player:get_player_name(), "L'inventaire est plein, certains objets n'ont pas pu être ajoutés.\nVeuillez supprimer des objets avant de vouloir rejoindre le serveur")
+                    minetest.kick_player(player:get_player_name(), " \nL'inventaire est plein, certains objets n'ont pas pu être ajoutés.\nVeuillez supprimer des objets avant de pouvoir rejoindre le serveur")
                     return
                 end
 
