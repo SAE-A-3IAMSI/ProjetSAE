@@ -70,10 +70,18 @@ local function give_items(player, items)
 
     for item_id, item_data in pairs(items) do
         local mapped_name = map_item_name(item_data.name)
-        local stack = ItemStack(mapped_name .. " " .. item_data.reel)
-        inv:add_item("main", stack)
+        local total_quantity = tonumber(item_data.reel)
+
+        while total_quantity > 0 do
+            local stack_size = math.min(total_quantity, 99) -- maximum de 99 par stack
+            local stack = ItemStack(mapped_name .. " " .. stack_size)
+            inv:add_item("main", stack)
+            
+            total_quantity = total_quantity - stack_size
+        end
     end
 end
+
 
 
 minetest.register_on_joinplayer(function(ObjectRef, last_login)
