@@ -80,13 +80,29 @@ local function give_items(player, items)
 
         while total_quantity > 0 do
             local stack_size = math.min(total_quantity, 99) -- maximum de 99 par stack
-            local stack = ItemStack(mapped_name .. " " .. stack_size)
-            inv:add_item("main", stack)
-            
+            local stack
+
+            -- Ajouter à l'inventaire principal s'il y a de la place
+            if inv:room_for_item("main", ItemStack(mapped_name .. " " .. stack_size)) then
+                stack = ItemStack(mapped_name .. " " .. stack_size)
+                inv:add_item("main", stack)
+            else
+                -- Ajouter à l'inventaire de craft s'il n'y a pas de place dans l'inventaire principal
+                if inv:room_for_item("craft", ItemStack(mapped_name .. " " .. stack_size)) then
+                    stack = ItemStack(mapped_name .. " " .. stack_size)
+                    inv:add_item("craft", stack)
+                else
+                    -- Peut ajouter des gestionnaires d'erreurs supplémentaires ici si nécessaire
+                    minetest.log("warning", "L'inventaire du joueur est plein, certains objets n'ont pas pu être ajoutés.")
+                    return
+                end
+            end
+
             total_quantity = total_quantity - stack_size
         end
     end
 end
+
 
 
 
