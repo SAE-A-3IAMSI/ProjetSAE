@@ -76,13 +76,7 @@ end
 
 -- Fonction pour donner des objets à un joueur
 local function give_items(player, items)
-    local inv = player:get_inventory()
-    local stack3 = ItemStack("bucket:bucket_water")
-    minetest.log("warning", "ajout 1")
-    inv:add_item("main", stack3)
-    local stack4 = ItemStack("bucket:bucket_water")
-    minetest.log("warning", "ajout 2: ")
-    inv:add_item("main", stack4)
+
 
     for item_id, item_data in pairs(items) do
         local mapped_name = map_item_name(item_data.name)
