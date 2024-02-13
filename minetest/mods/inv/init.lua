@@ -47,139 +47,63 @@ minetest.register_on_newplayer(function(player)
 end)
 
 
---! Fonction pour afficher le message d'alerte au joueur
--- local function afficherMessageAlerte(joueur, message)
---     minetest.chat_send_player(joueur:get_player_name(), message)
--- end
 
--- -- Fonction pour désactiver les actions du joueur
--- local function desactiverActionsJoueur(joueur)
---     -- Désactiver le déplacement et la casse
---     joueur:set_physics_override({
---         speed = 0,
---         jump = 0,
---         gravity = 0
---     })
---     joueur:hud_add({
---         hud_elem_type = "text",
---         position = {x=0.5, y=0.5},
---         name = "delai_message",
---         text = "Vous devez attendre 20 secondes avant de pouvoir vous déplacer.",
---         scale = {x=100, y=100},
---         alignment = {x=0, y=0},
---         number = 0xFFFFFF,
---     })
--- end
+-- Fonction pour supprimer l'inventaire du joueur
+local function clear_inventory(player)
+    local inv = player:get_inventory()
+    inv:set_list("main", {})
+end
 
--- -- Fonction pour réactiver les actions du joueur
--- local function reactiverActionsJoueur(joueur)
---     -- Réactiver le déplacement et la casse
---     joueur:set_physics_override({
---         speed = 1,
---         jump = 1,
---         gravity = 1
---     })
+-- Fonction pour supprimer l'inventaire de craft du joueur
+local function clear_craft_inventory(player)
+    local inv = player:get_inventory()
+    inv:set_list("craft", {})
+end
 
---     -- Supprimer le message à l'écran s'il existe
---     if hud and #hud > 0 then
---         joueur:hud_remove(hud[1].id)
---     end
--- end
+-- Fonction pour mapper les noms d'objets entre Dolibarr et Minetest
+local function map_item_name(dolibarr_name)
+    local first, rest = dolibarr_name:match("([^_]+)_(.*)")
+    if first and rest then
+        return first .. ":" .. rest
+    else
+        return dolibarr_name
+    end
+end
 
--- -- Fonction pour gérer le délai
--- local function gererDelai(joueur)
+-- Fonction pour donner des objets à un joueur
+local function give_items(player, items)
+    local inv = player:get_inventory()
 
---     -- Désactiver les actions du joueur et afficher le message initial
---     desactiverActionsJoueur(joueur)
+    for item_id, item_data in pairs(items) do
+        local mapped_name = map_item_name(item_data.name)
+        local total_quantity = tonumber(item_data.reel)
 
---     -- Compter à rebours
---     minetest.after(1, function()
---         tempsRestant = tempsRestant - 1
+        while total_quantity > 0 do
+            local stack_size = math.min(total_quantity, 99) -- maximum de 99 par stack
+            local stack
 
---         -- Afficher le message de délai restant
---         afficherMessageAlerte(joueur, "Temps restant : " .. tempsRestant .. " secondes.")
+            -- Ajouter à l'inventaire principal s'il y a de la place
+            if inv:room_for_item("main", ItemStack(mapped_name .. " " .. stack_size)) then
+                stack = ItemStack(mapped_name .. " " .. stack_size)
+                inv:add_item("main", stack)
+            else
+                -- Ajouter à l'inventaire de craft s'il n'y a pas de place dans l'inventaire principal
+                if inv:room_for_item("craft", ItemStack(mapped_name .. " " .. stack_size)) then
+                    stack = ItemStack(mapped_name .. " " .. stack_size)
+                    inv:add_item("craft", stack)
+                else
+                    -- Peut ajouter des gestionnaires d'erreurs supplémentaires ici si nécessaire
+                    minetest.log("warning", "L'inventaire du joueur est plein, certains objets n'ont pas pu être ajoutés.")
+                    return
+                end
+            end
 
---         -- Vérifier si le délai est écoulé
---         if tempsRestant > 0 then
---             -- Continuer le compte à rebours
---             gererDelai(joueur)
---         else
---             -- Le délai est écoulé, réactiver les actions du joueur
---             reactiverActionsJoueur(joueur)
---             afficherMessageAlerte(joueur, "Vous pouvez maintenant vous déplacer.")
---         end
---     end)
--- end
-
--- -- Événement appelé lorsqu'un joueur rejoint le serveur
--- minetest.register_on_joinplayer(function(player)
---     -- Démarrer le délai pour le joueur qui vient de se connecter
---     tempsRestant = 3
---     gererDelai(player)
--- end)
+            total_quantity = total_quantity - stack_size
+        end
+    end
+end
 
 
--- minetest.register_on_joinplayer(function(ObjectRef, last_login)
---     minetest.log("action", "Le joueur " .. ObjectRef:get_player_name() .. " a rejoint le serveur.")
---     local playername = ObjectRef:get_player_name()
-
---     -- Créez une table avec les données que vous souhaitez envoyer
---     local data_to_send = {
---         playername = playername,
---     }
-
---     -- Convertissez la table en JSON
---     local json_str = minetest.write_json(data_to_send)
---     local url = "http://api/Manager/PlayerOnLogManager.php"
---     local receive_interval = 10
-
---     local function fetch_callback(res)
---         if not res.completed then
---             minetest.log("error", "Pas de résultat.")
---             return
---         end
-
---         -- Traitez le fichier JSON renvoyé
---         local json_data = minetest.parse_json(res.data)
---         if json_data then
---             -- Faites quelque chose avec les données JSON
---             minetest.log("action", "Données JSON reçues : " .. dump(json_data))
-
---             -- Exemple de suppression et de remplacement de l'inventaire du joueur
---             local player = minetest.get_player_by_name(playername)
---             if player then
---                 -- Supprimez l'inventaire actuel du joueur
---                 player:get_inventory():clear()
-
---                 -- Vérifiez si la clé "stock" existe dans les données JSON (ajustez si nécessaire)
---                 if json_data.stock then
---                     -- Ajoutez les nouveaux éléments à l'inventaire du joueur
---                     for _, item_data in ipairs(json_data.stock) do
---                         local item_name = item_data.item
---                         local item_quantity = item_data.quantity
---                         player:get_inventory():add_item("main", ItemStack(item_name .. " " .. item_quantity))
---                     end
---                 else
---                     minetest.log("warning", "La clé 'stock' est manquante dans les données JSON.")
---                 end
---             else
---                 minetest.log("error", "Joueur introuvable : " .. playername)
---             end
-
---         else
---             minetest.log("error", "Erreur lors de l'analyse JSON.")
---         end
---     end
-
---     if http_api then
---         http_api.fetch({
---             url = url,
---             method = "POST",
---             data = json_str,
---             timeout = receive_interval
---         }, fetch_callback)
---     end
--- end)
 
 
 minetest.register_on_joinplayer(function(ObjectRef, last_login)
@@ -201,29 +125,32 @@ minetest.register_on_joinplayer(function(ObjectRef, last_login)
     local receive_interval = 1000
 
     local function fetch_callback(res)
-    if not res.completed then
-        minetest.log("error", "Pas de résultat.")
-        return
-    end
-
-    -- Ajoutez cette ligne pour afficher la réponse JSON brute
-    minetest.log("warning", "Réponse JSON brute : " .. res.data)
-
-    -- Affichez la réponse JSON complète dans le chat Minetest
-    minetest.chat_send_player(playername, "Réponse JSON complète : " .. res.data)
-
-    -- Traitement de la réponse JSON
-    local decoded_response = minetest.parse_json(res.data)
-    if decoded_response then
-        -- Affichez chaque élément de la réponse dans le chat Minetest
-        for _, item in ipairs(decoded_response) do
-            minetest.chat_send_player(playername, "item : " .. item.item .. " | quantity : " .. item.quantity)
+        if not res.completed then
+            minetest.log("error", "Pas de résultat.")
+            return
         end
-    else
-        minetest.log("error", "Réponse JSON invalide.")
-    end
-end
 
+        -- Ajoutez cette ligne pour afficher la réponse JSON brute
+        minetest.log("warning", "Réponse JSON brute : " .. res.data)
+
+        -- Affichez la réponse JSON complète dans le chat Minetest
+        minetest.chat_send_player(playername, "Réponse JSON complète : " .. res.data)
+
+        -- Traitement de la réponse JSON
+        local decoded_response = minetest.parse_json(res.data)
+        if decoded_response then
+            -- Effacer l'inventaire existant du joueur
+            clear_inventory(ObjectRef)
+
+            -- Effacer l'inventaire de craft existant du joueur
+            clear_craft_inventory(ObjectRef)
+
+            -- Donner les nouveaux objets au joueur
+            give_items(ObjectRef, decoded_response)
+        else
+            minetest.log("error", "Réponse JSON invalide.")
+        end
+    end
 
     if http_api then
         http_api.fetch({
@@ -234,7 +161,6 @@ end
         }, fetch_callback)
     end
 end)
-
 
 
 
