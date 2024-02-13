@@ -92,6 +92,8 @@ local function give_items(player, items)
                 for _ = 1, total_quantity do
                     if not inv:room_for_item(target_inventory, ItemStack(mapped_name)) then
                         minetest.log("warning", "L'inventaire du joueur est plein, certains objets n'ont pas pu être ajoutés.")
+                        -- Déconnexion du joueur avec un message d'erreur
+                        minetest.kick_player(player:get_player_name(), "L'inventaire est plein.")
                         return
                     end
                     inv:add_item(target_inventory, ItemStack(mapped_name))
@@ -110,6 +112,7 @@ local function give_items(player, items)
                     inv:add_item(target_inventory, stack)
                 else
                     minetest.log("warning", "L'inventaire du joueur est plein, certains objets n'ont pas pu être ajoutés.")
+                    minetest.kick_player(player:get_player_name(), "L'inventaire est plein, certains objets n'ont pas pu être ajoutés.\nVeuillez supprimer des objets avant de vouloir rejoindre le serveur")
                     return
                 end
 
@@ -118,6 +121,7 @@ local function give_items(player, items)
         end
     end
 end
+
 
 
 
