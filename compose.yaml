@@ -23,6 +23,9 @@ services:
     # Sous-réseaux auxquels le conteneur est connecté
     networks:
       - mariadb_network
+    # Port surlequel MariaDB écoute
+    ports:
+      - '3306:3306'
 
   # Conteneur de PHPMyAdmin
   phpmyadmin:
@@ -80,6 +83,7 @@ services:
       - dolibarr_instlock:/var/www/documents
       - dolibarr_html:/var/www/html
       - dolibarr_custom:/var/www/html/custom
+    # command: ["/bin/sh", "-c", "while ! php -r '@mysqli_connect(\"mariadb\", \"Admin1\", \"minetest1234=+\", \"dolibarrSAE\");' > /dev/null 2>&1; do echo 'En attente de la base de données...'; sleep 1; done; echo 'MariaDB est prêt - exécution du script post-init'; php /var/www/html/post-init.php; apache2-foreground"]
 
   # Conteneur Minetest
   minetest:
