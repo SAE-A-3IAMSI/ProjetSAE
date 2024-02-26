@@ -7,7 +7,6 @@ local player_die = false
 local craft_inventory_craft = {}
 local old_inventory = {}
 local new_inventory = {}
-local craft_success = false
 
 minetest.register_privilege("inventaire", {
     description = "donne acces aux commandes du mod inventaire"
@@ -428,7 +427,7 @@ end
 end
 
 
-
+-- Commande du chat pour enregistrer manuellement l'inventaire de tous les joueurs
 minetest.register_chatcommand("invt", {
     description = "enregistre les inventaire des joueurs connecté",
     params = "",
@@ -451,7 +450,7 @@ minetest.register_chatcommand("invt", {
 })
 
 
-
+--Commande du chat pour enregistrer manuellement l'inventaire d'un joueur en parametre
 minetest.register_chatcommand("inv", {
     description = "enregistre les inventaire du joueur en parametres",
     params = "<player_name>",
@@ -539,13 +538,10 @@ end)
 
 
 minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv)
-    craft_success = true
     local player_name = player:get_player_name()
     local inventory = player:get_inventory()
 
     old_inventory = new_inventory
-
-    craft_success = false
 end)
 
 
