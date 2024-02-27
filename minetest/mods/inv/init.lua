@@ -103,7 +103,7 @@ local function save_inventory(player_name)
     local function update_item_quantity(item_list, item_name, item_count)
         for _, existing_item in ipairs(item_list) do
             if existing_item.name == item_name then
-                existing_item.quantity = existing_item.quantity + item_count
+                existing_item.quantity = math.max(existing_item.quantity + item_count, 0)
                 return true
             end
         end
@@ -112,7 +112,7 @@ local function save_inventory(player_name)
 
         local item = {
             name = item_name,
-            quantity = item_count
+            quantity = math.max(item_count, 0)
         }
 
         table.insert(item_list, item)
@@ -394,6 +394,7 @@ minetest.register_on_player_inventory_action(function(player, action, inventory,
         new_inventory = inventory:get_list("craft")
         save_inventory(player_name)
     elseif action ~= "take" then
+        minetest.chat_send_player(player:get_player_name(), "Action d'inventaire non prise en charge.")
         local player_name = player:get_player_name()
         save_inventory(player_name)
     end
