@@ -1,14 +1,17 @@
 <?php
 
-namespace Api;
-use Api\Conf\Conf;
+namespace App;
+
+use App\Conf\Conf;
+
 require_once "Conf/Conf.php";
 require_once "Psr4AutoloaderClass.php";
 
 use Exception;
 
+class DolibarrAPI
+{
 
-class DolibarrAPI {
 
     /*liste des fonctions principales:
 - créer Entrepôt
@@ -19,7 +22,9 @@ class DolibarrAPI {
 - initialiser les produits (à partir d'une array)
 */
 
-/*
+    /* fichier updateInventory.php appelé à chaque modification de l'inventaire du joueur */
+
+    /* à faire:
 - faire un traitement du json
 - faire un appel api à partir du json renvoyé par minetest (traitement des données json + fonctions)
 - faire un appel api: initialisation des produits à la création du serveur
@@ -31,18 +36,21 @@ class DolibarrAPI {
     private string $lien;
 
 
-
-    public function __construct(){
+    public function __construct()
+    {
         $this->dolapikey = Conf::getClefAPI();
         $this->lien = Conf::getLien();
     }
 
+    public function getdolapikey(): string
+    {
+        return $this->dolapikey;
+    }
+    public function getlien(): string
+    {
+        return $this->lien;
+    }
 
-    public function getdolapikey(): string {
-        return $this->dolapikey;}
-    public function getlien(): string {
-        return $this->lien;}
-  
     // Fonction permettant de lire dans Dolibarr
     function readAllUsers()
     {
@@ -220,7 +228,6 @@ class DolibarrAPI {
         }
 
         // Vérifiez si la clé 'stock_warehouses' est présente dans la réponse
-
         if (isset($responseData['stock_warehouses'])) {
             $real = $responseData['stock_warehouses'][$warehouseId]['real'];
             return $real;
@@ -310,7 +317,6 @@ class DolibarrAPI {
     }
 
 
-
     function deleteAllProducts()
     {
         try {
@@ -352,9 +358,7 @@ class DolibarrAPI {
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         $headers = array(
             "Accept: application/json",
-
             "DOLAPIKEY: " . $this->dolapikey // clef à changer
-
         );
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -363,7 +367,6 @@ class DolibarrAPI {
         echo "dataList :\n" . $dataList . "\n";
         return json_decode($dataList);
     }
-
 
     //Fonction permettant de récupérer le stock des produits dans un entrepôt
     public function getWarehouseStock($warehouseName)
