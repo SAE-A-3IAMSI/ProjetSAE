@@ -1,6 +1,6 @@
 <?php
 
-use Api\DolibarrAPI;
+use App\DolibarrAPI;
 require_once "../DolibarrAPI.php";
 require_once "../Psr4AutoloaderClass.php";
 
@@ -133,6 +133,4 @@ if (isDolibarrProductListEmpty()) {
     initAllProducts($allProducts);
 } else {
     echo "Dolibarr product list is not empty\n";
-
 }
-

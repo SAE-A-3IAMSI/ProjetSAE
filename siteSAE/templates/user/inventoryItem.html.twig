@@ -1,7 +1,0 @@
-<tr class="card">
-    <td><a href="{{ path("readProduct", {'idProduct': ligne.product.id}) }}"><img src="{{ ligne.product.imageProduct ? asset("img/products/uploads/" ~ ligne.product.imageProduct ~ "" ) : asset("img/products/undefined.png") }}" alt="product picture"></a></td>
-    <td>{{ ligne.product.name }}</td>
-    <td>{{ ligne.product.ref }}</td>
-    <td>{{ ligne.product.type }}</td>
-    <td>{{ ligne.quantity }}</td>
-</tr>
