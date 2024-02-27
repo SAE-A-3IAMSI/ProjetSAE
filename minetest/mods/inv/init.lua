@@ -375,10 +375,9 @@ end)
 minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
     local player_name = placer:get_player_name()
 
-   
-    item_name_place = itemstack:get_name()
+    -- Extraire le nom de l'item sans le numéro
+    item_name_place = itemstack:get_name():gsub("_[1-8a-d]$", "")
 
- 
     minetest.after(0, function()
         save_inventory(player_name)
     end)
