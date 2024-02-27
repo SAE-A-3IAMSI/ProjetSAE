@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($decoded_data === null) {
         echo "Le fichier JSON n'est pas valide pour l'inscription.";
     } else {
-        // Créez un fichier texte sur le serveur avec les données JSON
         $dol->createNewWarehouse($decoded_data->player_name);
         
     }
