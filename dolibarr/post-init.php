@@ -5,12 +5,13 @@ $password = "minetest1234=+";
 $dbname = "dolibarrSAE";
 $apiKey = "SRh3NH7f32d0oUa7XfyYUA22Lhsq4o7T";
 
+$userId = 1;
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-// Préparation de la requête SQL pour activer les modules
+
 $modulesToUpdate = [
     'MAIN_MODULE_API',
     'MAIN_MODULE_PRODUCT',
@@ -26,7 +27,6 @@ foreach ($modulesToUpdate as $module) {
         echo "Module $module activated successfully\n";
     }
 }
-
 $apiProductionModeSql = "INSERT INTO llx_const (name, value, type, visible, note) VALUES ('API_PRODUCTION_MODE', '1', 'chaine', '0', '') ON DUPLICATE KEY UPDATE value = '1'";
 
 if ($conn->query($apiProductionModeSql) !== TRUE) {
@@ -35,7 +35,6 @@ if ($conn->query($apiProductionModeSql) !== TRUE) {
     echo "API production mode set successfully\n";
 }
 
-$userId = 1;
 $updateApiKeySql = "UPDATE llx_user SET api_key='$apiKey' WHERE rowid=$userId";
 
 if ($conn->query($updateApiKeySql) === TRUE) {
