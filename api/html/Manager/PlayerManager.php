@@ -1,6 +1,7 @@
 <?php
 
-use App\DolibarrAPI;
+
+use Api\DolibarrAPI;
 require_once "../DolibarrAPI.php";
 require_once "../Psr4AutoloaderClass.php";
 
@@ -19,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } else {
     echo "Aucune donnée JSON reçue pour l'inscription.";
+
 }
 
 

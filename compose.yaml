@@ -20,6 +20,9 @@ services:
     # Volume pour stocker les données du conteneur MariaDB
     volumes:
       - mariadb_data:/var/lib/mysql
+      
+    ports:
+      - "3306:3306"
     # Sous-réseaux auxquels le conteneur est connecté
     networks:
       - mariadb_network
@@ -68,7 +71,7 @@ services:
       DOLI_INSTANCE_UNIQUE_ID: 'Mg2zBK2Yj5B528mOlz74Hdvi14GZCemA'
       # Timezone utilisée par PHP
       PHP_INI_DATE_TIMEZONE: 'Europe/Paris'
-    # Port surlequel Dolibarr écoute
+    # Port sur lequel Dolibarr écoute
     ports:
       - '80:80'
     # Sous-réseaux auxquels Dolibarr est connecté
@@ -110,9 +113,9 @@ services:
   # Conteneur de l'API sour Apache
   api:
     # Construction de l'image à partir d'un DockerFile
-    build:
-      context: ./api
-      dockerfile: ./Dockerfile
+    build: 
+     context: ./api
+     dockerfile: ./Dockerfile
     # Nom du conteneur
     container_name: api
     # Sous-réseaux auxquels le conteneur API est connecté
@@ -122,6 +125,28 @@ services:
     # Volumes du conteneur
     volumes:
       - api_data:/var/www/html
+
+  #Conteneur du site Symfony
+  website:
+  # Construction de l'image à partir d'un DockerFile
+    build : website
+    ports:
+      - "8000:80"
+    # Nom du conteneur
+    container_name: symfony_website
+    # Sous-réseaux auxquels le conteneur website est connecté
+    networks:
+      - minetest_network
+      - dolibarr_network
+    # Dépendances du conteneur - Il attend que que le conteneur "dolibarr" soit lancé pour se lancer.
+    depends_on:
+      - dolibarr
+    # On set le user id à 1000 et le group ID à 1000 (variables d'environnement du conteneur)
+    user: 1000:1000
+    # Volumes de conteneurs pour configurer le vhost
+    volumes:
+      - ./website/vhosts:/etc/apache2/sites-enabled
+      - ./siteSAE:/var/www/siteSAE:cached
 
 # Volumes définis
 volumes:

@@ -1,6 +1,7 @@
 <?php
 
-use App\DolibarrAPI;
+
+use Api\DolibarrAPI;
 require_once "../DolibarrAPI.php";
 require_once "../Psr4AutoloaderClass.php";
 
@@ -21,3 +22,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //file_put_contents($file_name, $json_str);
     }
 } 
+

@@ -5,7 +5,8 @@ PSR-4 autoloader example implementations given by
 https://www.php-fig.org/psr/psr-4/
 */
 
-namespace App;
+
+namespace Api;
 
 /**
  * An example of a general-purpose implementation that includes the optional
@@ -190,4 +191,6 @@ class Psr4AutoloaderClass
         }
         return false;
     }
+
 }
+

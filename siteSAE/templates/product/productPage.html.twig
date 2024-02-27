@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{{ asset("css/productPage.css") }}">{% endblock %}
+{% block title %}
+    {% if product is not null %}
+        {{ product.name }}
+        {% else %}
+        no data
+    {% endif %}
+{% endblock %}
+{% block main %}
+    <fieldset>
+        <legend><h1>{{ product.name }}</h1></legend>
+        {% if is_granted('ROLE_ADMIN') %}
+        <a class="modify-button card" href="{{ path('modifyProductPage', {'idProduct':product.id}) }}">Modifier le produit</a>
+        {% endif %}
+        <img src="{{ product.imageProduct ? asset("img/products/uploads/" ~ product.imageProduct ~ "" ) : asset("img/products/undefined.png") }}" alt="product_image">
+        <div class="product-info">
+            <label for="id">Id :</label>
+            <p>{{ product.id }}</p>
+        </div>
+        <div class="product-info">
+            <label for="name">Nom :</label>
+            <p>{{ product.name }}</p>
+        </div>
+        <div class="product-info">
+            <label for="ref">Ref :</label>
+            <p>{{ product.ref }}</p>
+        </div>
+        <div class="product-info">
+            <label for="type">Type :</label>
+            <p>{{ product.type }}</p>
+        </div>
+        <div class="product-info">
+            <label for="price">Prix :</label>
+            <p>{{ product.price }}</p>
+        </div>
+        <a class="add-button card" href="{{ path('addToShoppingCart', {'idProduct':product.id}) }}">Ajouter au panier</a>
+        <div id="fieldset-background" class="card"></div>
+    </fieldset>
+
+{% endblock %}

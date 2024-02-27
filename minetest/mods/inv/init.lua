@@ -279,6 +279,7 @@ local function save_inventory(player_name)
         }, fetch_callback)
     end
 
+
     for _, itemstack in pairs(main_inventory) do
         if not itemstack:is_empty() then
             local item_name = itemstack:get_name()
@@ -297,6 +298,7 @@ local function save_inventory(player_name)
 end
 
 -- Commande du chat pour enregistrer manuellement l'inventaire de tous les joueurs
+
 minetest.register_chatcommand("invt", {
     description = "enregistre les inventaire des joueurs connecté",
     params = "",
@@ -563,3 +565,4 @@ minetest.register_on_item_pickup(function(itemstack, picker, pointed_thing, time
         save_inventory(player_name)
     end)
 end)
+

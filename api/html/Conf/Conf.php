@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Conf;
+
+namespace Api\Conf;
 require_once "../Psr4AutoloaderClass.php";
 
 class Conf {
@@ -17,4 +18,6 @@ static public function getLien() : string {
     return static::$infodoli['lien'];
 }
 }
+
 ?>
+

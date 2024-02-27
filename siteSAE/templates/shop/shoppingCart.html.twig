@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+{% block title %}Shopping Cart{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{{ asset("css/shoppingCart.css") }}">{% endblock %}
+{% block main %}
+<main>
+    <div id="shopping-cart">
+        <fieldset>
+            <legend>Panier :</legend>
+            <div id="shopping-cart-content">
+
+                    {% if items | length <= 0 %}
+                        <p> Aucun produit dans le panier :'(</p>
+                    {% else %}
+                <table>
+                    <tr class="card">
+                        <td></td>
+                        <td>Nom</td>
+                        <td>Description</td>
+                        <td>Prix</td>
+                        <td>Qtte</td>
+                        <td></td>
+                    </tr>
+                    {% for item in items %}
+                        <tr class="card">
+                            <td><a href="{{ path("readProduct", {'idProduct': item.product.id}) }}"><img src="{{ item.product.imageProduct ? asset("img/products/uploads/" ~ item.product.imageProduct ~ "" ) : asset("img/products/undefined.png") }}" alt="product picture"></a></td>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.product.ref }}</td>
+                            <td>{{ item.product.price }}</td>
+                            <td><label>
+                                    <input type="number" max="999" min="1" value={{ item.quantity }} >
+                                </label></td>
+                            <td><a class="delete-product-panier" href="{{ path('removeShoppingCartItem', {'idProduct': item.product.id}) }}">  X  </a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                    {% endif %}
+
+            </div>
+            <div id="fieldset-background"></div>
+        </fieldset><fieldset>
+            <legend>Récapitulatif de la commande :</legend>
+            <div id="shopping-cart-receipt">
+                <p style="margin-bottom: 10px">Articles:</p>
+                {% if items | length <= 0 %}
+                    <p> Aucun produit dans le panier :(</p>
+
+                {% else %}
+
+                {% for item in items %}
+                    {{ include('shop/shoppingCartProduct.html.twig', {'item' : item}) }}
+                {% endfor %}
+
+                {% endif %}
+
+                <div class="line"></div>
+                <div class="receipt-item">
+                    {% if items | length > 0 %}
+
+                    {% set i = 0 %}
+                    {% for item in items %}
+                        {%  set i = item.quantity*item.product.price+i %}
+                    {% endfor %}
+                    <div style="white-space: nowrap">Montant total:</div>
+                    <div class="dot"></div>
+                    <div class="price">{{ i }} €</div>
+
+                    </div>
+                    <p style="font-size: x-small">Le total de la commande inclut la TVA</p>
+                    {% endif %}
+
+            </div>
+            <div id="fieldset-background" class="card"></div>
+        </fieldset>
+    </div>
+
+</main>
+{% endblock %}
