@@ -299,8 +299,6 @@ minetest.register_on_joinplayer(function(ObjectRef, last_login)
 
     local json_str = minetest.write_json(data_to_send)
 
-    minetest.chat_send_player(playername, "JSON : " .. json_str)
-
     local url = "http://api/Manager/PlayerOnLogManager.php"
     local receive_interval = 1000
 
@@ -310,7 +308,6 @@ minetest.register_on_joinplayer(function(ObjectRef, last_login)
             minetest.log("error", "Pas de résultat.")
             return
         end
-        minetest.chat_send_player(playername, "Réponse JSON complète : " .. res.data)
 
         local decoded_response = minetest.parse_json(res.data)
         if decoded_response then
@@ -394,7 +391,6 @@ minetest.register_on_player_inventory_action(function(player, action, inventory,
         new_inventory = inventory:get_list("craft")
         save_inventory(player_name)
     elseif action ~= "take" then
-        minetest.chat_send_player(player:get_player_name(), "Action d'inventaire non prise en charge.")
         local player_name = player:get_player_name()
         save_inventory(player_name)
     end
