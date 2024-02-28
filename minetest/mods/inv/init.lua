@@ -297,31 +297,10 @@ add_inventory_items(new_inventory, new_craft_inventory_craft)
 
 craft_inventory_craft = find_disappeared_items(old_craft_inventory_craft, new_craft_inventory_craft)
 
-minetest.log("action", "craft_inventory_craft :")
-for _, item in pairs(craft_inventory_craft) do
-    minetest.log("action", item.name .. " x" .. item.quantity)
-end
-
-minetest.log("action", "old_craft_inventory_craft :")
-for _, item in pairs(old_craft_inventory_craft) do
-    minetest.log("action", item.name .. " x" .. item.quantity)
-end
-
-minetest.log("action", "new_craft_inventory_craft :")
-for _, item in pairs(new_craft_inventory_craft) do
-    minetest.log("action", item.name .. " x" .. item.quantity)
-end
-
 add_inventory_items_craft(craft_inventory_craft, item_list)
 add_inventory_items(craft_inventory, item_list)
 add_inventory_items(main_inventory, item_list)
 add_inventory_drop_items(item_list)
-
-
-minetest.log("action", "Inventaire de " .. player_name .. " :")
-for _, item in pairs(item_list) do
-    minetest.log("action", item.name .. " x" .. item.quantity)
-end 
 
     local player_inventory = {}
 
