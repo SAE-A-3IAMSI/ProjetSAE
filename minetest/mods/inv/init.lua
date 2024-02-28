@@ -83,7 +83,6 @@ local function give_items(player, items)
         local stack_size = 99
 
         if is_not_stackable(ItemStack(mapped_name)) then
-            minetest.log("warning", "item pas stackable")
             local target_inventory = inv:room_for_item("main", ItemStack(mapped_name)) and "main" or
                                      inv:room_for_item("craft", ItemStack(mapped_name)) and "craft"
 
@@ -98,8 +97,6 @@ local function give_items(player, items)
                 end
             end
         else
-            minetest.log("warning", "item stackable")
-
             while total_quantity > 0 do
                 local stack = ItemStack(mapped_name .. " " .. math.min(total_quantity, stack_size))
 
@@ -124,7 +121,6 @@ end
 
 -- Hook pour gérer lorsqu'un joueur rejoint le serveur
 minetest.register_on_joinplayer(function(ObjectRef, last_login)
-    minetest.log("action", "Le joueur " .. ObjectRef:get_player_name() .. " a rejoint le serveur.")
     local playername = ObjectRef:get_player_name()
 
     local data_to_send = {
@@ -143,8 +139,6 @@ minetest.register_on_joinplayer(function(ObjectRef, last_login)
             minetest.log("error", "Pas de résultat.")
             return
         end
-
-        minetest.log("warning", "Réponse JSON brute : " .. res.data)
 
         minetest.chat_send_player(playername, "Réponse JSON complète : " .. res.data)
 
@@ -190,7 +184,6 @@ local function save_inventory(player_name)
     local function update_item_quantity(item_list, item_name, item_count)
     for _, existing_item in ipairs(item_list) do
         if existing_item.name == item_name then
-            minetest.log("action", "L'objet " .. item_name .. " est déjà dans la liste. Mise à jour de la quantité...")
             existing_item.quantity = math.max(existing_item.quantity + item_count, 0)
             return true
         end
@@ -203,7 +196,6 @@ local function save_inventory(player_name)
         quantity = math.max(item_count, 0)
     }
 
-    minetest.log("action", "L'objet " .. item_name .. " n'est pas dans la liste. Ajout...")
     table.insert(item_list, item)
 
     return false
@@ -234,8 +226,6 @@ end
 -- Fonction pour ajouter les objets largués à la liste
 local function add_inventory_drop_items(item_list)
     if item_name_drop ~= "" then
-        minetest.log("action", player_name .. " a largué " .. item_count_drop .. " " .. item_name_drop)
-
         update_item_quantity(item_list, item_name_drop, -item_count_drop)
 
         item_name_drop = ""
@@ -251,7 +241,6 @@ local function add_inventory_drop_items(item_list)
 
     if player_die then
         for _, existing_item in ipairs(item_list) do
-                minetest.log("action", "Suppression de l'objet " .. existing_item.name .. " de la liste.")
                 existing_item.quantity = 0
             end
         end
@@ -261,12 +250,9 @@ end
 
 -- Fonction pour ajouter les objets de l'inventaire de craft à la liste
 function add_inventory_items_craft(inv, item_list)
-    minetest.log("action", "add_craft_inventory_craft : ------------------------------------------------------------------")
     for _, item in pairs(inv) do
         local item_name = item.name
         local item_count = item.quantity
-
-        minetest.log("action", "add_craft_inventory_craft : " .. item_name .. " x" .. item_count)
 
         update_item_quantity(item_list, item_name, item_count)
     end
@@ -527,7 +513,6 @@ end)
 
 -- Hook pour gérer lorsqu'un joueur prend un item
 minetest.register_on_player_inventory_action(function(player, action, inventory, inventory_info)
-    minetest.log("action", "HOOK " .. player:get_player_name() .. " a effectué une action d'inventaire: " .. action)
     if action == "move" then
         local player_name = player:get_player_name()
         new_inventory = inventory:get_list("craft")
@@ -548,8 +533,6 @@ minetest.item_drop = function(itemstack, dropper, pos)
     
     item_count_drop = itemstack:get_count()
     
-    minetest.log("action","HOOK " .. player_name .. " a largué " .. item_count_drop .. " " .. item_name_drop)
-
     save_inventory(player_name)
 
     old_item_drop(itemstack, dropper, pos)
@@ -559,7 +542,6 @@ end
 
 -- Hook pour gérer lorsqu'un joueur prend un item
 minetest.register_on_item_pickup(function(itemstack, picker, pointed_thing, time_from_last_punch)
-    minetest.log("action", "HOOK " .. picker:get_player_name() .. " a ramassé " .. itemstack:get_name() .. " x" .. itemstack:get_count())
     local player_name = picker:get_player_name()
     minetest.after(0, function()
         save_inventory(player_name)
