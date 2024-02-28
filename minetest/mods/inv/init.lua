@@ -129,7 +129,6 @@ minetest.register_on_joinplayer(function(ObjectRef, last_login)
 
     local json_str = minetest.write_json(data_to_send)
 
-    minetest.chat_send_player(playername, "JSON : " .. json_str)
 
     local url = "http://api/Manager/PlayerOnLogManager.php"
     local receive_interval = 1000
@@ -140,7 +139,6 @@ minetest.register_on_joinplayer(function(ObjectRef, last_login)
             return
         end
 
-        minetest.chat_send_player(playername, "Réponse JSON complète : " .. res.data)
 
         local decoded_response = minetest.parse_json(res.data)
         if decoded_response then
@@ -353,7 +351,6 @@ add_inventory_drop_items(item_list)
         end
     end
 
-    minetest.chat_send_player(player_name, message)
     return true, "OUI."
 end
 
