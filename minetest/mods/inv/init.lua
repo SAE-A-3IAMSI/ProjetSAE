@@ -205,7 +205,7 @@ local function save_inventory(player_name)
         if existing_item.name == item_name then
             minetest.log("action", "L'objet " .. item_name .. " est déjà dans la liste. Mise à jour de la quantité...")
             -- Mettez à jour la quantité en ajoutant la nouvelle quantité
-            existing_item.quantity = existing_item.quantity + item_count
+            existing_item.quantity = math.max(existing_item.quantity + item_count, 0)
             return true
         end
     end
@@ -216,7 +216,7 @@ local function save_inventory(player_name)
     -- Créez un objet avec des attributs pour le nom et la quantité
     local item = {
         name = item_name,
-        quantity = item_count
+        quantity = math.max(item_count, 0)
     }
 
     -- Ajoutez l'objet à la liste
@@ -553,10 +553,12 @@ end)
 minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack, pointed_thing)
     local player_name = placer:get_player_name()
 
-    -- Obtenez le nom de l'objet placé
-    item_name_place = itemstack:get_name()
 
-    -- Appel à save_inventory après le placement effectif du bloc
+    item_name_place = itemstack:get_name()
+    -- Extraire le nom de l'item sans le numéro
+    item_name_place = itemstack:get_name():gsub("_[1-8a-d]$", "")
+
+
     minetest.after(0, function()
         save_inventory(player_name)
     end)
