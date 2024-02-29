@@ -14,6 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($decoded_data === null) {
         echo "Le fichier JSON n'est pas valide pour l'inventaire.";
     } else {
+        // Créez un fichier texte sur le serveur avec les données JSON
         $dol->updateDataBase($decoded_data);
+        //$file_name = 'donnees2.json'; // Nom du fichier de destination
+        //$json_str = json_encode($decoded_data, JSON_PRETTY_PRINT);
+        //file_put_contents($file_name, $json_str);
     }
 } 

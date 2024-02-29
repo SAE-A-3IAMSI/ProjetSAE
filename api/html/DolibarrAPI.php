@@ -12,6 +12,26 @@ use Exception;
 class DolibarrAPI
 {
 
+
+    /*liste des fonctions principales:
+- créer Entrepôt
+- créer Produit
+- supprimer Produit
+- Modification (ajout/retrait) Entrepôt
+- supprimer tous les produits
+- initialiser les produits (à partir d'une array)
+*/
+
+    /* fichier updateInventory.php appelé à chaque modification de l'inventaire du joueur */
+
+    /* à faire:
+- faire un traitement du json
+- faire un appel api à partir du json renvoyé par minetest (traitement des données json + fonctions)
+- faire un appel api: initialisation des produits à la création du serveur
+- faire un appel api: pour la création des entrepôts lorsque nouveau joueur créé
+*/
+
+
     private string $dolapikey;
     private string $lien;
 
@@ -82,6 +102,7 @@ class DolibarrAPI
         return $response;
     }
 
+    // Fonction permettant de modifier l'inventaire dans Dolibarr
     function addItemToStock($productName, $warehouseName, $qty)
     {
         $url = $this->lien . "/stockmovements";
@@ -198,17 +219,22 @@ class DolibarrAPI
         $response = curl_exec($ch);
         curl_close($ch);
 
+        // Essayez de décoder la réponse JSON
         $responseData = json_decode($response, true);
 
 
+        // Lancez une exception si la réponse JSON est invalide
         if ($responseData === null) {
             throw new Exception("La réponse JSON est invalide.");
         }
 
+        // Vérifiez si la clé 'stock_warehouses' est présente dans la réponse
         if (isset($responseData['stock_warehouses'])) {
             $real = $responseData['stock_warehouses'][$warehouseId]['real'];
             return $real;
         } else {
+            // Ne faites rien si la clé 'stock_warehouses' est absente
+            // ou lancez une exception personnalisée si nécessaire
             return null;
         }
     }
@@ -305,14 +331,6 @@ class DolibarrAPI
         }
     }
 
-    function initAllProducts($productList)
-    {
-        foreach ($productList as $entry) {
-            $this->createNewProduct($entry['name'], $entry['label']);
-            echo "product: " . $entry . " has been created\n";
-        }
-    }
-
     function updateDataBase($jsonData)
     {
         $userId = $jsonData['player_name'];
@@ -325,6 +343,7 @@ class DolibarrAPI
         }
     }
 
+    // Fonction permettant de lire dans Dolibarr
     function read1Products()
     {
         $ch = curl_init();
@@ -333,7 +352,7 @@ class DolibarrAPI
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         $headers = array(
             "Accept: application/json",
-            "DOLAPIKEY: " . $this->dolapikey
+            "DOLAPIKEY: " . $this->dolapikey // clef à changer
         );
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -373,7 +392,7 @@ class DolibarrAPI
     }
 
 
-    // Afficher le résultat de la fonction getWarehouseStock()
+    // afficher le résultat de la fonction getWarehouseStock()
     function displayWarehouseStock($warehouseName)
     {
         $stockList = $this->getWarehouseStock($warehouseName);
@@ -413,7 +432,4 @@ class DolibarrAPI
             }
         }
     }
-
-
- 
 }
