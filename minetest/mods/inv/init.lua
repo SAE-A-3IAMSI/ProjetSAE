@@ -532,7 +532,7 @@ minetest.register_on_item_pickup(function(itemstack, picker, pointed_thing, time
     end)
 end)
 
--- Hook pour gérer lorsqu'un joueur meurt
+-- Hook pour gérer lorsque le mod est chargé
 minetest.register_on_mods_loaded(function()
     minetest.log("Le mod inventaire est chargé.")
     local url = "http://api/Manager/ProductManager.php"
