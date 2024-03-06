@@ -13,6 +13,13 @@ minetest.register_privilege("inventaire", {
     description = "donne acces aux commandes du mod inventaire"
 })
 
+minetest.register_craftitem("inventaire:coins", {
+	description = "Coins",
+	inventory_image = "coin.png",
+	stack_max = 9999,
+	groups = { coinvalue=1 },
+})
+
 minetest.register_on_newplayer(function(player)
     local playername = player:get_player_name()
     local privs = minetest.get_player_privs(playername)
@@ -179,6 +186,74 @@ local function save_inventory(player_name)
 
     local item_list = {} 
 
+local item_list = {}
+local old_craft_inventory_craft = {}
+local new_craft_inventory_craft = {}
+
+add_inventory_items(old_inventory, old_craft_inventory_craft)
+add_inventory_items(new_inventory, new_craft_inventory_craft)
+
+craft_inventory_craft = find_disappeared_items(old_craft_inventory_craft, new_craft_inventory_craft)
+
+add_inventory_items_craft(craft_inventory_craft, item_list)
+add_inventory_items(craft_inventory, item_list)
+add_inventory_items(main_inventory, item_list)
+add_inventory_drop_items(item_list)
+
+    local player_inventory = {}
+
+    if #item_list > 0 then
+        player_inventory = {
+            player_name = player_name,
+            inventory = item_list
+        }
+    else
+        player_inventory = {
+            player_name = player_name,
+            inventory = "null"
+        }
+    end
+
+    local json_str = minetest.write_json(player_inventory)
+    local url = "http://api/Manager/InventoryManager.php"
+    local receive_interval = 10
+    local function fetch_callback(res)
+        if not res.completed then
+            minetest.log("error", "Pas de résultat.")
+        end
+        minetest.log("action", res.data)
+    end
+
+    if http_api then
+        http_api.fetch({
+            url = url,
+            method = "POST",
+            data = json_str,
+            timeout = receive_interval
+        }, fetch_callback)
+    end
+
+    local message = "Inventaire de " .. player_name .. ":\n"
+    for _, itemstack in pairs(main_inventory) do
+        if not itemstack:is_empty() then
+            local item_name = itemstack:get_name()
+            local item_count = itemstack:get_count()
+            message = message .. item_name .. " x" .. item_count .. "\n"
+        end
+    end
+
+    message = message .. "Inventaire de craft :\n"
+    for _, itemstack in pairs(craft_inventory) do
+        if not itemstack:is_empty() then
+            local item_name = itemstack:get_name()
+            local item_count = itemstack:get_count()
+            message = message .. item_name .. " x" .. item_count .. "\n"
+        end
+    end
+
+    return true, "OUI."
+end
+
     local function update_item_quantity(item_list, item_name, item_count)
     for _, existing_item in ipairs(item_list) do
         if existing_item.name == item_name then
@@ -286,73 +361,6 @@ local function find_disappeared_items(old_list, new_list)
 end
 
 
-local item_list = {}
-local old_craft_inventory_craft = {}
-local new_craft_inventory_craft = {}
-
-add_inventory_items(old_inventory, old_craft_inventory_craft)
-add_inventory_items(new_inventory, new_craft_inventory_craft)
-
-craft_inventory_craft = find_disappeared_items(old_craft_inventory_craft, new_craft_inventory_craft)
-
-add_inventory_items_craft(craft_inventory_craft, item_list)
-add_inventory_items(craft_inventory, item_list)
-add_inventory_items(main_inventory, item_list)
-add_inventory_drop_items(item_list)
-
-    local player_inventory = {}
-
-    if #item_list > 0 then
-        player_inventory = {
-            player_name = player_name,
-            inventory = item_list
-        }
-    else
-        player_inventory = {
-            player_name = player_name,
-            inventory = "null"
-        }
-    end
-
-    local json_str = minetest.write_json(player_inventory)
-    local url = "http://api/Manager/InventoryManager.php"
-    local receive_interval = 10
-    local function fetch_callback(res)
-        if not res.completed then
-            minetest.log("error", "Pas de résultat.")
-        end
-        minetest.log("action", res.data)
-    end
-
-    if http_api then
-        http_api.fetch({
-            url = url,
-            method = "POST",
-            data = json_str,
-            timeout = receive_interval
-        }, fetch_callback)
-    end
-
-    local message = "Inventaire de " .. player_name .. ":\n"
-    for _, itemstack in pairs(main_inventory) do
-        if not itemstack:is_empty() then
-            local item_name = itemstack:get_name()
-            local item_count = itemstack:get_count()
-            message = message .. item_name .. " x" .. item_count .. "\n"
-        end
-    end
-
-    message = message .. "Inventaire de craft :\n"
-    for _, itemstack in pairs(craft_inventory) do
-        if not itemstack:is_empty() then
-            local item_name = itemstack:get_name()
-            local item_count = itemstack:get_count()
-            message = message .. item_name .. " x" .. item_count .. "\n"
-        end
-    end
-
-    return true, "OUI."
-end
 
 -- Commande pour enregistrer l'inventaire de tous les joueurs connectés
 minetest.register_chatcommand("invt", {
